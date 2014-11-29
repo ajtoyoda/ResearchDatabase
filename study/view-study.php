@@ -1,8 +1,10 @@
 <?php
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
-  require_once("../php/view-study.php");
+  require_once("../php/view-study-functions.php");
+  require_once("../php/index-functions.php");
   verifyLoggedIn();
+  verifyStudy();
 ?>
 
 <!DOCTYPE html>
@@ -49,28 +51,32 @@
         <div id="content-inner">
           <div class="padding">
             <?php
-              if(isset($_GET['studyname'])){
-                $studyName = $_GET['studyname'];
-                showAllStudyInfo($studyName);
-              }
-			  else{
-				header("Location: /");
-			  }
+               $studyName = $_GET['studyname'];
+               showAllStudyInfo($studyName);
             ?>
             <div class="clearfix"></div>
             
-            <h2>Results</h2>
+            <div class="add-header">
+              <ul>
+                <li><h2>Results</h2></li>
+                <li><input type="button" name="addResult" value="New" onclick="window.location = 'add-study.php';" /></li>
+              </ul>
+            </div>
+            <div class="clearfix"></div>
             <table>
               <tr id="header">
                 <th><p>Patient</p></th>
                 <th><p>Date</p></th>
                 <th><p>Description</p></th>
+                <th></th>
               </tr>
-              <tr>
-                <td><p>John Doe</p></td>
-                <td><p>January 1, 1900</p></td>
-                <td><p>Patient has gone crazy</p></td>
-              </tr>
+				<?php
+					$studyName = $_GET['studyname'];
+					$result = getResults($studyName);
+					for($count = 0; $count < count($result); $count++){
+						showAllResultInfo($result[$count]);
+					}
+				?>
             </table>
           </div>
         </div>

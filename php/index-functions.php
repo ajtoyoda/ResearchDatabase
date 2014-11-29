@@ -29,6 +29,7 @@ function getStudies(){
 	}
 	return $studyNames;
 }
+
 //This function displays the html code for each study given its name
 //sqli is included for ease
 function showStudy($study_name){
