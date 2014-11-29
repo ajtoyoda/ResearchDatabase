@@ -28,6 +28,40 @@
               </ul>
             </div>";
     }
+	//This function displays the result info of the passed in result ID
+	function showAllResultInfo($resultID){
+		$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
+		$query = "select p.name AS name, date, description from results AS r INNER JOIN person AS p ON p.id = r.patient_number WHERE r.id = $resultID";
+		$result = $mysqli->query($query);
+        if(!$result){
+            die("Query 1 failed");
+        }
+		$data = $result->fetch_assoc();
+		echo " <tr>
+				<td><p>".$data['name']."</p></td>
+                <td><p>".$data['date']."</p></td>
+                <td><p>".$data['description']."</p></td>
+                <td><a href=\"edit-result.php?id=".$resultID."\">Edit</a><a href=\"delete-result.php?id=".$resultID."\">Delete</a></p></td> 
+				</tr>";
+	}
+	//This function returns an array of results associated with the study(PK aka study_name) which is passed in
+	function getResults($study){
+	$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
+	if(!$mysqli->query("USE researchdatabase")){
+		die("Failed to use database");
+	}
+	$query = 	"SELECT id FROM results WHERE study_name = '$study'";
+	$result = $mysqli->query($query);
+	if(!$result){
+		die("Query 1 failed");
+	}
+	$resultID = array();
+		for($count = 0; $count < $result->num_rows; $count++){
+		$result_vd = $result->fetch_assoc();
+		array_push($resultID, $result_vd['id']);
+	}
+	return $resultID;
+}
 
 
 ?>

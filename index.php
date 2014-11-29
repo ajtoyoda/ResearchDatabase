@@ -43,16 +43,16 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
+			<h1>My studies</h1>
             <div class="info-box">
-              <ul>
-					<h1>My studies</h1>
+				 <ul>
 					<?php
 						$canViewStudies = getStudies();
 						for($count = 0; $count < count($canViewStudies); $count++){
 						  showStudy($canViewStudies[$count]);
 						}
 					?>
-              </ul>
+                 </ul>
               <div class="clearfix" />
             </div>
           </div>

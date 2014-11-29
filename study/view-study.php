@@ -73,12 +73,18 @@
                 <th><p>Description</p></th>
                 <th></th>
               </tr>
-              <tr>
-                <td><p>John Doe</p></td>
-                <td><p>January 1, 1900</p></td>
-                <td><p>Patient has gone crazy</p></td>
-                <td><a href="edit-result.php">Edit</a><a href="delete-result.php">Delete</a></p></td>
-              </tr>
+				<?php
+					if(isset($_GET['studyname'])){
+						$studyName = $_GET['studyname'];
+						echo $studyName;
+						$result = getResults($studyName);
+						for($count = 0; $count < count($result); $count++){
+							showAllResultInfo($result[$count]);
+						}
+					}else{
+						echo "WTF";
+					}
+				?>
             </table>
           </div>
         </div>
