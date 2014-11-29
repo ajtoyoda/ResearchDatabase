@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
     <link rel="stylesheet" href="/css/study.css" />
+    <link rel="stylesheet" href="/css/table.css" />
   </head>
   <body>
     <header>
@@ -61,9 +62,21 @@
                 <li><p>Dr. Soandso</p></li>
               </ul>
             </div>
+            <div class="clearfix"></div>
             
             <h2>Results</h2>
-            
+            <table>
+              <tr id="header">
+                <th><p>Patient</p></th>
+                <th><p>Date</p></th>
+                <th><p>Description</p></th>
+              </tr>
+              <tr>
+                <td><p>John Doe</p></td>
+                <td><p>January 1, 1900</p></td>
+                <td><p>Patient has gone crazy</p></td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
