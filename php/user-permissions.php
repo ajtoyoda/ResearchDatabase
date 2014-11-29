@@ -20,15 +20,24 @@ function isAdministrator()
 //           false if the link should be printed as a main navigation
 //           link.
 //
-function printManageUsers($footer)
+function printManageUsers($footer, $isSelected)
 {
     if (!isAdministrator())
         return;
-
-    if (!$footer)
-        echo "<li><a href=\"/users.php\">Manage users</a></li>\n";
-    else
-        echo "<a href=\"/users.php\">Manage users</a> |\n";
+	if($isSelected){
+		if (!$footer)
+			echo "<li id="current"><a href=\"/users.php\">Manage users</a></li>\n";
+		else
+			echo "<a href=\"/users.php\">Manage users</a> |\n";
+		
+	}	
+	else{
+		if (!$footer)
+			echo "<li><a href=\"/users.php\">Manage users</a></li>\n";
+		else
+			echo "<a href=\"/users.php\">Manage users</a> |\n";
+			
+		}
 }
 
 ?>
