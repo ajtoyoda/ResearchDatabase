@@ -57,7 +57,15 @@ h1 {
     font-family: "Palatino Linotype", serif;
     font-size: 20pt;
     font-weight: bold;
-    color: #4C5952  ;
+    color: #4C5952;
+}
+
+h2 {
+    font-family: "Palatino Linotype", serif;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #4C5952;
+    margin-top: 20px;
 }
 
 header h1 a, header h1 a:visited, header h1 a:focus {

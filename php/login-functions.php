@@ -31,7 +31,6 @@ function logIn()
       header("Location: /");
       
   $mysqli= new mysqli("localhost", "root", "", "researchdatabase");
-  //Check if everything exists in order to queury
   if(!(isset($_POST['username'])&&isset($_POST['password'])))
   {
     return;
@@ -42,7 +41,6 @@ function logIn()
     die("failed to use database");
   }
   echo $password;
-  //Note: real_escape_string checks for sql injection
   $username = $mysqli->real_escape_string($username);
   $query = "SELECT username, password, id, type_flag
             FROM user
@@ -56,7 +54,6 @@ function logIn()
   if($result->num_rows <1){
     header('Location: /login.php?bad-password&username=' . $username);
   }
-  //password verify is the opposite of makepassword
   $userdata = $result->fetch_assoc();
   if(!password_verify($password, $userdata['password'])){
     header('Location: /login.php?bad-password&username=' . $username);

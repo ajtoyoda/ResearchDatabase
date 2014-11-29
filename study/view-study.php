@@ -1,7 +1,7 @@
 <?php
-  require_once("/php/user-permissions.php");
-  require_once("/php/login-functions.php");
-  require_once("/php/index-functions.php");	
+  require_once("../php/user-permissions.php");
+  require_once("../php/login-functions.php");
+  require_once("../php/view-study.php");
   verifyLoggedIn();
 ?>
 
@@ -11,11 +11,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Home :: Medical Research Database</title>
+    <title><?php
+				if(isset($_GET['studyname'])){
+				echo $_GET['studyname'];
+              }
+			  ?></title>
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
-    <link rel="stylesheet" href="/css/info-box.css" />
+    <link rel="stylesheet" href="/css/study.css" />
+    <link rel="stylesheet" href="/css/table.css" />
   </head>
   <body>
     <header>
@@ -43,18 +48,30 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <div class="info-box">
-              <ul>
-					<h1>My studies</h1>
-					<?php
-						$canViewStudies = getStudies();
-						for($count = 0; $count < count($canViewStudies); $count++){
-						  showStudy($canViewStudies[$count]);
-						}
-					?>
-              </ul>
-              <div class="clearfix" />
-            </div>
+            <?php
+              if(isset($_GET['studyname'])){
+                $studyName = $_GET['studyname'];
+                showAllStudyInfo($studyName);
+              }
+			  else{
+				header("Location: /");
+			  }
+            ?>
+            <div class="clearfix"></div>
+            
+            <h2>Results</h2>
+            <table>
+              <tr id="header">
+                <th><p>Patient</p></th>
+                <th><p>Date</p></th>
+                <th><p>Description</p></th>
+              </tr>
+              <tr>
+                <td><p>John Doe</p></td>
+                <td><p>January 1, 1900</p></td>
+                <td><p>Patient has gone crazy</p></td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
