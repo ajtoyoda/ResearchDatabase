@@ -1,0 +1,23 @@
+/* Styles specific to /study/ pages. */
+
+#study-info {
+    margin-top: 10px;
+}
+
+#study-info ul {
+    list-style-type: none;
+    clear: both;
+}
+
+#study-info ul li {
+    float: left;
+}
+
+#study-info ul li:first-child {
+    width: 100px;
+    font-weight: bold;
+}
+
+#study-info p {
+    margin: 0px;
+}
