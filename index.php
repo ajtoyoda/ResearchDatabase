@@ -1,6 +1,7 @@
 <?php
   require_once("/php/user-permissions.php");
   require_once("/php/login-functions.php");
+  require_once("/php/index-functions.php");	
   verifyLoggedIn();
 ?>
 
@@ -42,65 +43,12 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <h1>My studies</h1>
-            <p>You are not currently participating in any studies.</p>
             <div class="info-box">
               <ul>
-                <li class="first">
-                  <div class="view-edit">
-                    <p><a href="/study/view-study.php" class="view">View</a>
-                    <a href="/study/edit-study.php" class="edit">Edit</a></p>
-                  </div>
-                  <div class="padding">
-                    <h1>Respiratory Volumes</h1>
-                    <p>Some information</p>
-                    <p>Some more information</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="view-edit">
-                    <p><a href="/study/view-study.php" class="view">View</a>
-                    <a href="/study/edit-study.php" class="edit">Edit</a></p>
-                  </div>
-                  <div class="padding">
-                    <h1>Respiratory Volumes</h1>
-                    <p>Some information</p>
-                    <p>Some more information</p>
-                  </div>
-                </li>
-                <li class="first">
-                  <div class="view-edit">
-                    <p><a href="/study/view-study.php" class="view">View</a>
-                    <a href="/study/edit-study.php" class="edit">Edit</a></p>
-                  </div>
-                  <div class="padding">
-                    <h1>Respiratory Volumes</h1>
-                    <p>Some information</p>
-                    <p>Some more information</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="view-edit">
-                    <p><a href="/study/view-study.php" class="view">View</a>
-                    <a href="/study/edit-study.php" class="edit">Edit</a></p>
-                  </div>
-                  <div class="padding">
-                    <h1>Respiratory Volumes</h1>
-                    <p>Some information</p>
-                    <p>Some more information</p>
-                  </div>
-                </li>
-                <li class="first">
-                  <div class="view-edit">
-                    <p><a href="/study/edit-study.php" class="view">View</a>
-                    <a href="blahblah.htm" class="edit">Edit</a></p>
-                  </div>
-                  <div class="padding">
-                    <h1>Respiratory Volumes</h1>
-                    <p>Some information</p>
-                    <p>Some more information</p>
-                  </div>
-                </li>
+					<h1>My studies</h1>
+					<?php
+						showStudyInfo();
+					?>
               </ul>
               <div class="clearfix" />
             </div>
