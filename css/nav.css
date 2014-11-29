@@ -1,0 +1,41 @@
+/* Navigation styles. */
+
+nav ul {
+    list-style-type: none;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 7px;
+    float: left;
+}
+
+nav ul li {
+    display: block;
+    float: left;
+    margin-right: 5px;
+}
+
+nav ul li a, nav ul li a:visited, nav ul li a:focus {
+    display: block;
+    padding: 10px 15px 10px 15px;
+    border-bottom: 0px;
+    color: #4C5952;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: background-color 0.25s linear 0s, color 0.25s linear 0s;
+    -webskit-transition: background-color 0.25s linear 0s, color 0.25s linear 0s;
+}
+
+nav ul li a:hover {
+    background-color: #4C5952;
+    color: #EEEEEE;
+}
+
+nav ul li#current a {
+    color: #EEEEEE;
+    background-color: #4C5952;
+}
+
+nav ul li#current a:hover {
+    color: #A69460;
+}
+    
