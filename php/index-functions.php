@@ -29,13 +29,23 @@ function getStudies(){
 	}
 	return $studyNames;
 }
-//This function returns an array of results associated with the study which is passed in
+//This function returns an array of results associated with the study(PK aka study_name) which is passed in
 function getResults($study){
 	$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
 	if(!$mysqli->query("USE researchdatabase")){
 		die("Failed to use database");
 	}
-	$query = 	"
+	$query = 	"SELECT $id FROM results WHERE study_name = $study";
+	$result = $mysqli->query($query);
+	if(!$result){
+		die("Query 1 failed");
+	}
+	$resultID = array();
+		for($count = 0; $count < $result->num_rows; $count++){
+		$resutl_vd = $result->fetch_assoc();
+		array_push($resultID, $result_vd['id']);
+	}
+	return $resultID;
 }
 //This function displays the html code for each study given its name
 //sqli is included for ease
