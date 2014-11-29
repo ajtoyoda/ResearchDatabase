@@ -29,6 +29,7 @@ table tr:hover {
     background-color: #FFFFFF;
 }
 
+<<<<<<< HEAD
 /* Edit link stuff. */
 table td:last-child {
     padding: 0px;
@@ -51,3 +52,5 @@ table td:last-child a:hover {
     color: #4C5952;
     background-color: #EEEEEE;
 }
+=======
+>>>>>>> upstream/master
