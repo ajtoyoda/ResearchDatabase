@@ -49,7 +49,11 @@
 					<?php
 						$canViewStudies = getStudies();
 						for($count = 0; $count < count($canViewStudies); $count++){
+<<<<<<< HEAD
 						  showStudy($canViewStudies[$count]);
+=======
+						  showStudy($canViewStudies[i]);
+>>>>>>> upstream/master
 						}
 					?>
               </ul>

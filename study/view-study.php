@@ -1,7 +1,11 @@
 <?php
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
+<<<<<<< HEAD
   require_once("../php/view-study.php");
+=======
+  require_once("../php/view-study-functions.php");
+>>>>>>> upstream/master
   verifyLoggedIn();
 ?>
 
@@ -11,11 +15,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
+<<<<<<< HEAD
     <title><?php
 				if(isset($_GET['studyname'])){
 				echo $_GET['studyname'];
               }
 			  ?></title>
+=======
+    <title>____TODO: TITLE____ :: Medical Research Database</title>
+>>>>>>> upstream/master
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
@@ -53,9 +61,12 @@
                 $studyName = $_GET['studyname'];
                 showAllStudyInfo($studyName);
               }
+<<<<<<< HEAD
 			  else{
 				header("Location: /");
 			  }
+=======
+>>>>>>> upstream/master
             ?>
             <div class="clearfix"></div>
             
