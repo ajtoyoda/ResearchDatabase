@@ -29,6 +29,14 @@ function getStudies(){
 	}
 	return $studyNames;
 }
+//This function returns an array of results associated with the study which is passed in
+function getResults($study){
+	$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
+	if(!$mysqli->query("USE researchdatabase")){
+		die("Failed to use database");
+	}
+	$query = 	"
+}
 //This function displays the html code for each study given its name
 //sqli is included for ease
 function showStudy($study_name){
