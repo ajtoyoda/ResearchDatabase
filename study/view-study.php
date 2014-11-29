@@ -1,7 +1,6 @@
 <?php
-  require_once("/php/user-permissions.php");
-  require_once("/php/login-functions.php");
-  require_once("/php/indexfunctions.php");	
+  require_once("../php/user-permissions.php");
+  require_once("../php/login-functions.php");
   verifyLoggedIn();
 ?>
 
@@ -11,11 +10,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Home :: Medical Research Database</title>
+    <title>____TODO: TITLE____ :: Medical Research Database</title>
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
-    <link rel="stylesheet" href="/css/info-box.css" />
+    <link rel="stylesheet" href="/css/study.css" />
   </head>
   <body>
     <header>
@@ -43,15 +42,28 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <div class="info-box">
+            <h1>Study name</h1>
+            <div id="study-info">
               <ul>
-					<h1>My studies</h1>
-					<?php
-						showStudyInfo();
-					?>
+                <li><p>Start date:</p></li>
+                <li><p>1/1/1900</p></li>
               </ul>
-              <div class="clearfix" />
+              <ul>
+                <li><p>End date:</p></li>
+                <li><p>1/1/1900</p></li>
+              </ul>
+              <ul>
+                <li><p>Budget:</p></li>
+                <li><p>$100000000</p></li>
+              </ul>
+              <ul>
+                <li><p>Supervisor:</p></li>
+                <li><p>Dr. Soandso</p></li>
+              </ul>
             </div>
+            
+            <h2>Results</h2>
+            
           </div>
         </div>
       </div>
