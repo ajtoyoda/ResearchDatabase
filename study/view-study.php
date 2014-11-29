@@ -59,17 +59,25 @@
             ?>
             <div class="clearfix"></div>
             
-            <h2>Results</h2>
+            <div class="add-header">
+              <ul>
+                <li><h2>Results</h2></li>
+                <li><input type="button" name="addResult" value="New" onclick="window.location = 'add-study.php';" /></li>
+              </ul>
+            </div>
+            <div class="clearfix"></div>
             <table>
               <tr id="header">
                 <th><p>Patient</p></th>
                 <th><p>Date</p></th>
                 <th><p>Description</p></th>
+                <th></th>
               </tr>
               <tr>
                 <td><p>John Doe</p></td>
                 <td><p>January 1, 1900</p></td>
                 <td><p>Patient has gone crazy</p></td>
+                <td><a href="edit-result.php">Edit</a><a href="delete-result.php">Delete</a></p></td>
               </tr>
             </table>
           </div>
