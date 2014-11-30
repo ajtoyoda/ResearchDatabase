@@ -10,6 +10,7 @@
         }
         $data = $result->fetch_assoc();
         echo "<h1>".$studyName."</h1>
+            <p><a href=\"/\">&lt; My studies</a></p>
             <div id=\"study-info\">
               <ul>
                 <li><p>Start date:</p></li>

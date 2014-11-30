@@ -84,7 +84,7 @@ p {
     margin-bottom: 10px;
 }
 
-input {
+input, select {
     padding: 5px;
     border: 1px solid #8FA69B;
     background-color: #EEEEEE;
@@ -94,12 +94,12 @@ input {
     -webkit-transition: background-color 0.25s linear 0s, border-color 0.25s linear 0s, box-shadow 0.25s linear 0s;
 }
 
-input:hover, input:focus {
+input:hover, input:focus, select:hover, select:focus {
     border-color: #4C5952;
     background-color: #FFFFFF;
 }
 
-input:focus {
+input:focus, select:focus{
     box-shadow: 0px 0px 7px #8FA69B;
 }
 
@@ -140,15 +140,15 @@ input[type="submit"]:active, input[type="button"]:active {
 a, a:visited, a:focus {
     font-family: inherit;
     font-size: inherit;
-    color: #EEEEEE;
+    color: #4C5952;
     text-decoration: none;
-    border-bottom: 1px dotted #A69460;
+    border-bottom: 1px dotted #4C5952;
     transition: color 0.25s linear 0s;
     -webkit-tranisition: color 0.25s linear 0s;
 }
 
 a:hover, a:active {
-    color: #4C5952;
+    color: #000000;
     border-bottom: 0px;
 }
 
@@ -219,4 +219,81 @@ footer a:hover {
 
 .add-header h1 {
     margin: 0px;
+}
+
+.form-container {
+    margin-top: 5px;
+}
+
+.form-container ul {
+    list-style-type: none;
+    clear: both;
+    padding-top: 5px;
+}
+
+.form-container ul li {
+    float: left;
+}
+
+.form-container ul li:first-child {
+    width: 150px;
+}
+
+.form-container ul li:last-child {
+    width: 610px;
+}
+
+.form-container ul li p {
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+.form-container ul li input {
+    width: 600px;
+}
+
+.fonr-container ul li input[type="radio"] {
+    width: 16px;
+}
+
+.form-container ul.birthday li:last-child p {
+    float: left;
+    margin-left: 40px;
+    margin-top: 0px;
+    font-weight: normal;
+}
+
+.form-container ul.birthday li:first-child p {
+    margin-top: 7px;
+}
+
+.form-container ul.birthday li:last-child p:first-child {
+    margin-left: 0px;
+}
+
+.form-container ul.birthday li:last-child input[type="text"] {
+    width: 100px;
+}
+
+.form-container ul.gender li:last-child p, .form-container ul.type li:last-child p {
+    font-weight: normal;
+    float: left;
+    margin-left: 40px;
+    margin-top: 0px;
+}
+
+.form-container ul.gender li:last-child p:first-child, .form-container ul.type li:last-child p:first-child {
+    margin-left: 0px;
+}
+
+.form-container ul.gender li:last-child input[type="radio"], .form-container ul.type li:last-child input[type="radio"] {
+    width: 16px;
+}
+
+.form-buttons {
+    text-align: right;
+}
+
+.form-buttons input {
+    width: 100px;
 }
