@@ -1,20 +1,64 @@
 ﻿<?php
 function add_user(){
 	$mysqli= new mysqli("localhost", "root", "", "researchdatabase");
-	if(!(isset($_POST['username'])&&isset($_POST['password']) && isset($_POST['confirm'])&& isset($_POST['type']))){
-		return;
+	if(!(isset($_POST['username'])&&isset($_POST['password']) 
+		&& isset($_POST['confirm'])&& isset($_POST['type'])&& isset($_POST['name']) 
+		&& isset($_POST['birthmonth'])&& isset($_POST['birthday'])&& isset($_POST['birthyear'])
+		&& isset($_POST['gender']) && isset($_POST['addressLine1']) &&isset($_POST['addressLine2'])
+		&&isset($_POST['city'])&&isset($_POST['country'])
+		&&isset($_POST['phone'])&&isset($_POST['email']))){
+		if(isset($_GET['createAttempt'])){
+			header("Location: /user/add-user.php?failure");
+			return;
+		}
+		else{
+			return;
+		}
 	}
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$confirm = $_POST['confirm'];
+	$name = $_POST['name'];
+	$birthmonthString = $_POST['birthmonth'];
+	$birthmonth = 1;
+	if($birthmontString == "january")$birthmonth = 1;
+	elseif($birthmonthString =="february")$birthmonth = 2;
+	elseif($birthmonthString =="march")$birthmonth = 3;
+	elseif($birthmonthString =="april")$birthmonth = 4;
+	elseif($birthmonthString =="may")$birthmonth = 5;
+	elseif($birthmonthString =="june")$birthmonth = 6;
+	elseif($birthmonthString =="july")$birthmonth = 7;
+	elseif($birthmonthString =="august")$birthmonth = 8;
+	elseif($birthmonthString =="september")$birthmonth = 9;
+	elseif($birthmonthString =="october")$birthmonth = 10;
+	elseif($birthmonthString =="november")$birthmonth = 11;
+	else $birthmonth = 12;
+	
+	//Getting birthday into date format
+	$time = mktime(0,0,0, $birthmonth, (int)$_POST['birthday'], (int)$_POST['birthyear']);
+	if($time < mktime(0,0,0,1,1,1900) || $time >time()){
+		die("Invalid birthday magic");
+	}
+	$birthday = date('Y-m-d', $time);
+	
 	$type = $_POST['type'];
+	$gender= $_POST['gender'];
+	$address = $_POST['addressLine1'] . $_POST['addressLine2'] . $_POST['city'] . $_POST['country'];
+	$phone = $_POST['phone'];
+	$email = $_POST['email'];
 	if(!$mysqli->query("USE researchdatabase")){
 		die("failed to use database");
 	}
 	$username = $mysqli->real_escape_string($username);
 	$password = $mysqli->real_escape_string($password);
 	$confirm = $mysqli->real_escape_string($confirm);
+	$name = $mysqli->real_escape_string($name);
+	$address = $mysqli->real_escape_string($address);
+	$phone = $mysqli->real_escape_string($phone);
+	$email = $mysqli->real_escape_string($email);
+	
 	if($confirm != $password){
+		echo "Invalid Password";
 		header('Location: add-user.php?failure');
 		return;
 	}
@@ -22,15 +66,31 @@ function add_user(){
 	$query = "INSERT INTO user
 			  VALUES(DEFAULT,'$username', '$password', '$type')";
 	$result = $mysqli->query($query);
-	if($type == "A"){
-		
-	}
 	if(!$result){
-		die('invalid query');
+		die('invalid query1');
 	}
 	else
 	{
-		header('Location: add-user.php?success');
+		$query = 	"SELECT id FROM user
+					WHERE user.username = '$username'";
+		$result = $mysqli->query($query);
+		if($result->num_rows > 1){
+			echo "Duplicate username";
+			header('Location: add-user.php?failure');
+		}
+		$data = $result->fetch_assoc();
+		$userID = $data['id'];
+		$query = 	"INSERT INTO person
+					VALUES($userID, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
+		$result = $mysqli->query($query);
+		if(!$result){
+			$mysqli->query("DELETE FROM user WHERE user.username = '$username'");
+			die('invalid query2');
+		}
+		else{
+			header('Location: add-user.php?success');
+			return;
+		}
 	}
 }
 ?>
