@@ -44,9 +44,12 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
+            
+            
+           
             <div class="add-header">
               <ul>
-                <li><h1>Manage users</h1></li>
+                <li><h1>Manage Users</h1></li>
                 <li><input type="button" name="addUser" value="New" onclick="window.location = '/user/add-user.php';" /></li>
               </ul>
             </div>
@@ -66,7 +69,13 @@
 			  ?>
             </table>
 			<!-- ============================== Table 2 =================================================== -->
-		        <h1>User permissions</h1>
+			<div class="add-header">
+              <ul>
+                <li><h1>User permissions</h1></li>
+                <li><input type="button" name="addPermission" value="New" onclick="window.location = '/user/add-user-permission.php';" /></li>
+              </ul>
+            </div>
+            <div class="clearfix"></div>
             <table class="edit-only">
               <tr id="header">
                 <th><p>Study</p></th>
@@ -76,8 +85,9 @@
               </tr>
               <tr>
                 <td><p>Cardio Img</p></td>
-                <td><p></p>Name(can Read)<p>Name(Can read)</p></td>
-                <td><p>name(can Write)</p><p>name(can Write)</p></td>
+                <td><p>Username</p><p>Username2</p></td>
+				<td><p>(can Read)</p><p>(Can read)</p></td>
+                <td><p>(can Write)</p><p>(can Write)</p></td>
                 <td><a href="/user/edit-user-permission.php">Edit</a></p></td>
               </tr>
             </table>
