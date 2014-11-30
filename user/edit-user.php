@@ -124,7 +124,7 @@
 					$userID = $_GET['userID'];
 					$person = getPerson($userID);
 					$substrings = explode('|', $person['address'], 4);
-					if(count($substrings != 4)){
+					if(count($substrings) <4){
 					echo "<ul>
 						<li><p>Address line 1:</p></li>
 						<li><input type=\"text\" name=\"addressLine1\" value=\"".$substrings[0]."\" /></li>

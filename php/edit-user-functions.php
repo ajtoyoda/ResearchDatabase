@@ -19,9 +19,11 @@
 		$result = $mysqli->query($query);
 		if(!$result){
 			die("Invalid query 1");
+			return;
 		}
 		if($result->num_rows < 1){
 			die("Invalid page programming error");
+			return;
 		}
 		$data = $result->fetch_assoc();
 		return $data;

@@ -22,7 +22,7 @@ function add_user(){
 	$name = $_POST['name'];
 	$birthmonthString = $_POST['birthmonth'];
 	$birthmonth = 1;
-	if($birthmontString == "january")$birthmonth = 1;
+	if($birthmonthString == "january")$birthmonth = 1;
 	elseif($birthmonthString =="february")$birthmonth = 2;
 	elseif($birthmonthString =="march")$birthmonth = 3;
 	elseif($birthmonthString =="april")$birthmonth = 4;
@@ -64,26 +64,26 @@ function add_user(){
 		return;
 	}
 	$password = password_hash($password, PASSWORD_DEFAULT);
-	$query = "INSERT INTO user
-			  VALUES(DEFAULT,'$username', '$password', '$type')";
-	$result = $mysqli->query($query);
-	if(!$result){
-		die('invalid query1');
+	
+	$query = 	"INSERT INTO person
+				VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
+	if(!$result = $mysqli->query($query)){
+		die("invalid query 1");
 	}
 	else
 	{
-		$query = 	"SELECT id FROM user
-					WHERE user.username = '$username'";
-		$result = $mysqli->query($query);
-		if($result->num_rows > 1){
-			echo "Duplicate username";
-			header('Location: add-user.php?failure');
+		$query = "SELECT max(id) AS id FROM person";
+		if(!($result =$mysqli->query($query))){
+			die("invalid query 3");
 		}
-		$data = $result->fetch_assoc();
-		$userID = $data['id'];
-		$query = 	"INSERT INTO person
-					VALUES($userID, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
+		$userID = (int)$result->fetch_assoc()['id'];
+		$query = "INSERT INTO user
+			VALUES($userID,'$username', '$password', '$type')";
 		$result = $mysqli->query($query);
+		if(!$result){
+			echo $query;
+			die('invalid query1');
+		}
 		if(!$result){
 			$mysqli->query("DELETE FROM user WHERE user.username = '$username'");
 			die('invalid query2');
