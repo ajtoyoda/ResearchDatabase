@@ -73,17 +73,17 @@ WHERE s.name = '$studyName'";
 				array_push($canWriteArray, 0);
 			}
 		}
-		echo "<td>";
+		echo "<td class=\"subtable\">";
 		for($count = 0; $count < count($usernameArray); $count++){
 			echo "<p>".$usernameArray[$count]."</p>";
 		}
 		echo "</td>";
-		echo "<td>";
+		echo "<td class=\"subtable\">";
 		for($count = 0; $count < count($canReadArray); $count++){
 			echo "<p>".$canReadArray[$count]."</p>";
 		}
 		echo "</td>";
-		echo "<td>";
+		echo "<td class=\"subtable\">";
 		for($count = 0; $count < count($canWriteArray); $count++){
 			echo "<p>".$canWriteArray[$count]."</p>";
 		}
