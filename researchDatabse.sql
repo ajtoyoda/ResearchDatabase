@@ -113,7 +113,7 @@ CREATE TABLE `person` (
   PRIMARY KEY (`id`),
   KEY `FK_person_emergency_id` (`Emergency_ID`),
   CONSTRAINT `FK_person_emergency_id` FOREIGN KEY (`Emergency_ID`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'1943-12-01','m','Gregory One','432-123-5363','235 BlahBlooh Lane NW Calgary AB',NULL,4),(2,'1993-11-05','f','Jane Two','352-125-3518','35 Sunset Avenue NE||Calgary|Canada','JaneTwo@gmail.com',NULL),(3,'1976-03-02','M','Philip Three','346-223-8463','28 EagleRidge Way SE Calgary AB','PhilipThree@live.ca',NULL),(4,'1983-09-01','F','Alexandra Four','302-315-1234','3523 Hollyander Road SW Calgary Alberta','AlexandraFour@gmail.com',NULL),(5,'1947-12-03','M','Jose Five','325-345-3424','54 Jefferson Drive NE Calgary AB','JoseFive@gmail.com',3),(6,'2000-12-03','M','Marco Six','327-573-3853','43 Asdf Way NW Calgary AB','MarcoSix@gmail.com',NULL),(7,'1993-10-01','F','Jillian Seven','432-325-1235','180 Newhampton Street NE Calgary AB','JillianSeven@gmail.com',6),(8,'1997-07-08','M','Andrew Eight','423-235-1237','283 Hotcross Lane SE Calgary AB','AndrewEight@gmail.com',NULL),(9,'2013-12-10','f','MinYeun Nine','324-424-8123','234 Holiday Road NE|Unit 1206|Calgary|Canada','MinYeunNine@gmail.com',NULL),(10,'1958-07-16','m','Reshawn Ten','234-629-3842','32 Jasper Way NW||Vancouver|Canada','ReshawnTen@gmail.com',NULL),(18,'1999-10-10','m','Silus Kovats','432-485-4848','123 Hello World|Accessing the double|HOHOHO|Alaska','kvats#@gmail.com',4),(19,'1994-05-04','m','Austin Toyoda','604-765-5911','3820 Brentwood Rd Nw|Unit 1207|Calgary|Canada','jat2980@hotmail.com',NULL);
+INSERT INTO `person` VALUES (1,'1943-12-01','m','Gregory One','432-123-5363','235 BlahBlooh Lane NW Calgary AB',NULL,4),(2,'1993-11-05','f','Jane Two','352-125-3518','35 Sunset Avenue NE|Something|Calgary|Canada','JaneTwo@gmail.com',NULL),(3,'1976-03-02','M','Philip Three','346-223-8463','28 EagleRidge Way SE Calgary AB','PhilipThree@live.ca',NULL),(4,'1983-09-01','F','Alexandra Four','302-315-1234','3523 Hollyander Road SW Calgary Alberta','AlexandraFour@gmail.com',NULL),(5,'1947-12-03','M','Jose Five','325-345-3424','54 Jefferson Drive NE Calgary AB','JoseFive@gmail.com',3),(6,'2000-12-03','M','Marco Six','327-573-3853','43 Asdf Way NW Calgary AB','MarcoSix@gmail.com',NULL),(7,'1993-10-01','F','Jillian Seven','432-325-1235','180 Newhampton Street NE Calgary AB','JillianSeven@gmail.com',6),(8,'1997-07-08','M','Andrew Eight','423-235-1237','283 Hotcross Lane SE Calgary AB','AndrewEight@gmail.com',NULL),(9,'2013-12-10','f','MinYeun Nine','324-424-8123','234 Holiday Road NE|Unit 1206|Calgary|Canada','MinYeunNine@gmail.com',NULL),(10,'1958-07-16','m','Reshawn Ten','234-629-3842','32 Jasper Way NW||Vancouver|Canada','ReshawnTen@gmail.com',NULL),(18,'1999-10-10','m','Silus Kovats','432-485-4848','123 Hello World|Accessing the double|HOHOHO|Alaska','kvats#@gmail.com',4),(19,'1994-05-04','m','Austin Toyoda','604-765-5911','3820 Brentwood Rd Nw|Unit 1207|Calgary|Canada','jat2980@hotmail.com',NULL),(20,'1950-03-03','M','Doctor Who','604 765 5321','British Road|Dr Smith|Britain|Britain','britain@britain.com',NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,10 +169,10 @@ CREATE TABLE `study` (
   `Budget` int(11) DEFAULT NULL,
   `End_Date` date DEFAULT NULL,
   `Start_Date` date NOT NULL,
-  `Supervisor_ID` int(11) DEFAULT NULL,
+  `supervisor_id` int(11) NOT NULL,
   PRIMARY KEY (`Name`),
-  KEY `FK_user_supervisor_id` (`Supervisor_ID`),
-  CONSTRAINT `FK_user_supervisor_id` FOREIGN KEY (`Supervisor_ID`) REFERENCES `user` (`id`)
+  KEY `FK_user_supervisor_id` (`supervisor_id`),
+  CONSTRAINT `FK_user_supervisor_id` FOREIGN KEY (`supervisor_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -182,7 +182,7 @@ CREATE TABLE `study` (
 
 LOCK TABLES `study` WRITE;
 /*!40000 ALTER TABLE `study` DISABLE KEYS */;
-INSERT INTO `study` VALUES ('Cardiovascular Imaging',200000,'2015-01-01','2013-10-02',9),('Respiratory Volumes',100000,'2015-05-07','2014-08-26',9);
+INSERT INTO `study` VALUES ('Cardiovascular Imaging',200001,'2013-01-01','2013-10-02',9),('Jamie Study',10000,'2012-12-06','1970-01-01',9),('Jamie Study2',10000,'2012-12-11','1990-03-04',9),('Respiratory Volumes',100000,'2015-05-07','2014-08-26',9);
 /*!40000 ALTER TABLE `study` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +240,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'Jane2','$2y$10$ZhXk/Mrt66brh7umkLMWseFvRHVuo5baNdznTx7bce4hyP/p5RPMC','A'),(9,'MinYeun9','$2y$10$herjnN7jvHSvOg4U9Hz0PewGTjG4Ly9QWvqI/15G3mgtJJ.q9yqnu','M'),(10,'Reshawn10','$2y$10$nwIwZKY6MN6eWTXcHzj9MOYIuQ3u4Gc0wEe8aQD6Pl.HAt6n1y5hW','R'),(18,'silas','$2y$10$7PV1P7qLF3ncqXXPUcRguuG1YBUpkEeAtTRZROJG5QR6HKZLLD.Vm','A'),(19,'ajtoyoda','$2y$10$z22KcOxAJJSLjIFsXgbj5uRueFvpSxV473b10SsSSALM1GzQlBqdi','A');
+INSERT INTO `user` VALUES (2,'Jane2','$2y$10$cKY1Q35mM7GudE0pahLRGuTjqNpM0LtwrwUgUJSxt4sdka3hk.le.','A'),(9,'MinYeun9','$2y$10$herjnN7jvHSvOg4U9Hz0PewGTjG4Ly9QWvqI/15G3mgtJJ.q9yqnu','M'),(10,'Reshawn10','$2y$10$nwIwZKY6MN6eWTXcHzj9MOYIuQ3u4Gc0wEe8aQD6Pl.HAt6n1y5hW','R'),(18,'silas','$2y$10$7PV1P7qLF3ncqXXPUcRguuG1YBUpkEeAtTRZROJG5QR6HKZLLD.Vm','A'),(19,'ajtoyoda','$2y$10$z22KcOxAJJSLjIFsXgbj5uRueFvpSxV473b10SsSSALM1GzQlBqdi','A'),(20,'drwho','$2y$10$MWd/3MRPtOHB4Q0bnpjsnexKRcJEwMHzm/AUSAkJQIRYzm/QzagL.','M');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `view_edit` (
 
 LOCK TABLES `view_edit` WRITE;
 /*!40000 ALTER TABLE `view_edit` DISABLE KEYS */;
-INSERT INTO `view_edit` VALUES ('Cardiovascular Imaging',2,'\0',''),('Cardiovascular Imaging',9,'',''),('Cardiovascular Imaging',10,'',''),('Cardiovascular Imaging',18,'','\0'),('Cardiovascular Imaging',19,'',''),('Respiratory Volumes',2,'\0',''),('Respiratory Volumes',9,'',''),('Respiratory Volumes',10,'',''),('Respiratory Volumes',18,'','\0'),('Respiratory Volumes',19,'','');
+INSERT INTO `view_edit` VALUES ('Cardiovascular Imaging',2,'\0',''),('Cardiovascular Imaging',9,'',''),('Cardiovascular Imaging',10,'\0','\0'),('Cardiovascular Imaging',18,'',''),('Cardiovascular Imaging',19,'',''),('Jamie Study',2,'\0','\0'),('Jamie Study',9,'\0','\0'),('Jamie Study',10,'\0','\0'),('Jamie Study',18,'\0','\0'),('Jamie Study',19,'',''),('Jamie Study2',2,'\0','\0'),('Jamie Study2',9,'\0','\0'),('Jamie Study2',10,'\0','\0'),('Jamie Study2',18,'\0','\0'),('Jamie Study2',19,'',''),('Respiratory Volumes',2,'\0',''),('Respiratory Volumes',9,'',''),('Respiratory Volumes',10,'\0','\0'),('Respiratory Volumes',18,'',''),('Respiratory Volumes',19,'','');
 /*!40000 ALTER TABLE `view_edit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,4 +309,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-30 11:19:34
+-- Dump completed on 2014-11-30 13:30:17
