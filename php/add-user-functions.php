@@ -1,4 +1,5 @@
 ﻿<?php
+//Add users to database, including person and user. DOES NOT DO EMERGENCY CONTACTS YET
 function add_user(){
 	$mysqli= new mysqli("localhost", "root", "", "researchdatabase");
 	if(!(isset($_POST['username'])&&isset($_POST['password']) 
@@ -43,7 +44,7 @@ function add_user(){
 	
 	$type = $_POST['type'];
 	$gender= $_POST['gender'];
-	$address = $_POST['addressLine1'] . $_POST['addressLine2'] . $_POST['city'] . $_POST['country'];
+	$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
 	$phone = $_POST['phone'];
 	$email = $_POST['email'];
 	if(!$mysqli->query("USE researchdatabase")){

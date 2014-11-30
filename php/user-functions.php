@@ -2,7 +2,10 @@
 	//This function displays all user info given the userID
 	function showAllUserInfo($userID){
         $mysqli = new mysqli("localhost", "root", "", "researchdatabase");
-        $query = "SELECT p.name AS name, u.type_flag AS type FROM person AS p INNER JOIN user AS u ON p.ID = u.ID WHERE u.ID = $userID";
+        if(!$mysqli->query("USE researchdatabase")){
+			die("Failed to use database");
+		}
+		$query = "SELECT p.name AS name, u.type_flag AS type FROM person AS p INNER JOIN user AS u ON p.ID = u.ID WHERE u.ID = $userID";
         $result = $mysqli->query($query);
         if(!$result){
             die("Query 2 failed");
@@ -20,7 +23,7 @@
 			<td><p>".$data['name']."</p></td>
 			<td><p>".$userID."</p></td>
 			<td><p>".$type."</p></td>
-			<td><a href=\"/user/edit-user.php?".$userID."\">Edit</a><a href=\"/user/delete-user.php?".$userID."\">Delete</a></p></td>
+			<td><a href=\"/user/edit-user.php?userID=".$userID."\">Edit</a><a href=\"/user/delete-user.php?".$userID."\">Delete</a></p></td>
 			</tr>";
     }
 	//This function returns all users in an array. To access all of them in a loop use

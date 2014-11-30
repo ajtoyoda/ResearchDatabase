@@ -8,8 +8,6 @@
 	header('Location: /');
   }
   add_user();
-  if (!isAdministrator())
-      header("Location: /");
 ?>
 
 <!DOCTYPE html>
