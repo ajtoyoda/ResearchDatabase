@@ -91,7 +91,7 @@ INNER JOIN person AS p ON u.id=p.id WHERE s.name = '$studyName'";
 			echo "<p>".$canWriteArray[$count]."</p>";
 		}
 		echo "</td>		
-		<td><a href=\"/user/edit-user-permission.php?".$studyName."\">Edit</a></p></td>
+		<td><a href=\"/user/edit-user-permission.php?studyName=".$studyName."\">Edit</a></p></td>
 		</tr>";
 	}
 	//This function returns all studies regardless of view_edit privledges of user(only should be used by admin)

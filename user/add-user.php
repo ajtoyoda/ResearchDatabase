@@ -177,9 +177,9 @@
                 <ul class="type">
                   <li><p>User type:</p></li>
                   <li>
-                    <p><input type="radio" name="type" value="ra" /> Research assistant</p>
-                    <p><input type="radio" name="type" value="md" /> MD</p>
-                    <p><input type="radio" name="type" value="admin" /> Administrator</p>
+                    <p><input type="radio" name="type" value="R" /> Research assistant</p>
+                    <p><input type="radio" name="type" value="M" /> MD</p>
+                    <p><input type="radio" name="type" value="A" /> Administrator</p>
                   </li>
                 </ul>
                 <div class="clearfix"></div>

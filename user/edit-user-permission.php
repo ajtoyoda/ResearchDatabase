@@ -3,10 +3,12 @@
   require_once("../php/login-functions.php");
   require_once("../php/view-study-functions.php");
   require_once("../php/user-functions.php");
+  require_once("../php/edit-user-permission-function.php");
   verifyLoggedIn();
   if(!isAdministrator()){
 	header("Location: /");
   }
+  editUserPermissions();
 ?>
 
 <!DOCTYPE html>
@@ -47,24 +49,39 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <h1>Edit $study permissions</h1>
-            <p><a href="/users.php">&lt; Manage users</a></p>
-            <!-- Jamie: change the form action as needed. -->
-            <form action="/users.php" method="post">
-              <table class="no-modify">
+		  <?php
+            $studyName = $_GET['studyName'];
+			echo "<h1>Edit ".$studyName." permissions</h1>";
+          ?>
+			<p><a href="/users.php">&lt; Manage users</a></p>
+			<?php
+				$studyName = $_GET['studyName'];
+				echo "<form action=\"/user/edit-user-permission.php?attemptEditUserPermissions&studyName=".$studyName."\" method=\"post\">";
+			?>
+			<table class="no-modify">
                 <tr id="header">
                   <th><p>User</p></th>
                   <th><p>Can read</p></th>
                   <th><p>Can write</p></th>
                 </tr>
-                <!-- Jamie: Each user gets one <tr> block as follows. -->
-                <tr>
-                  <td><p>$username</p></td>
-                  <!-- Jamie: add checked="checked" if a user has the permission -->
-                  <td><input type="checkbox" name="canread" value="canread" /></td>
-                  <td><input type="checkbox" name="canwrite" value="canwrite" /></td>
-                </tr>
-                <!-- End of repeated elements. -->
+                <?php
+					$viewEdit = getViewEdit($_GET['studyName']);
+					for($count = 0; $count <count($viewEdit); $count++){
+						echo "<tr>
+							<td><p>".$viewEdit[$count]['name']."</p></td>";
+						if($viewEdit[$count]['canRead'] == 1){
+							echo "<td><input type=\"checkbox\" name=\"canRead".$count."\" value=\"1\" checked=\"checked\"/></td>";
+						}else{
+							echo "<td><input type=\"checkbox\" name=\"canRead".$count."\" value=\"1\"/></td>";
+						}
+						if($viewEdit[$count]['canWrite'] == 1){
+							echo "<td><input type=\"checkbox\" name=\"canWrite".$count."\" value=\"1\" checked=\"checked\"/></td>";
+						}else{
+							echo "<td><input type=\"checkbox\" name=\"canWrite".$count."\" value=\"1\" /></td>";
+						}
+						echo "</tr>";
+					}
+				?>
               </table>
               <div class="form-buttons">
                 <input type="submit" name="submit" value="Update" />

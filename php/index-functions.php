@@ -27,6 +27,11 @@ function getStudies(){
 			array_push($studyNames, $study_vd['study_name']);
 		}
 	}
+	if(count($studyNames)==0){
+		echo " 
+            <p>You are not currently participating in any studies.</p>";
+			return;
+	}
 	return $studyNames;
 }
 

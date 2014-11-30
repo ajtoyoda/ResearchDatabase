@@ -48,8 +48,8 @@
           <div class="padding">
 			<?php
 				$userID = $_GET['userID'];
-				$user = getUser($userID);
-				echo"<h1>Edit ".$user['username']."</h1>";
+				$user = getPerson($userID);
+				echo"<h1>Edit ".$user['name']."</h1>";
 			?>
             <p><a href="/users.php">&lt; Manage users</a></p>
 			<?php
