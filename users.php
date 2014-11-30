@@ -2,6 +2,7 @@
   require_once("php/user-permissions.php");
   require_once("php/login-functions.php");
   require_once("php/view-study-functions.php");
+  require_once("php/user-functions.php");
   verifyLoggedIn();
 ?>
 
@@ -60,12 +61,12 @@
                 <th><p>Type</p></th>
                 <th></th>
               </tr>
-              <tr>
-                <td><p>John Doe</p></td>
-                <td><p>1</p></td>
-                <td><p>Research Assistant</p></td>
-                <td><a href="/user/edit-user.php">Edit</a><a href="/user/delete-user.php">Delete</a></p></td>
-              </tr>
+              <?php
+				$userID = getUsers();
+				for($count = 0; $count < count($userID); $count++){
+					showAllUserInfo($userID[$count]);
+				}
+			  ?>
             </table>
 			<!-- ============================== Table 2 =================================================== -->
 			<div class="add-header">
@@ -84,8 +85,8 @@
               </tr>
               <tr>
                 <td><p>Cardio Img</p></td>
-                <td><p></p>1<p>2</p></td>
-                <td><p>2</p></td>
+                <td><p></p>Name(can Read)<p>Name(Can read)</p></td>
+                <td><p>name(can Write)</p><p>name(can Write)</p></td>
                 <td><a href="/user/edit-user-permission.php">Edit</a></p></td>
               </tr>
             </table>
