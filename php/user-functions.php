@@ -23,7 +23,7 @@
 			<td><p>".$data['name']."</p></td>
 			<td><p>".$userID."</p></td>
 			<td><p>".$type."</p></td>
-			<td><a href=\"/user/edit-user.php?userID=".$userID."\">Edit</a><a href=\"/user/delete-user.php?".$userID."\">Delete</a></p></td>
+			<td><a href=\"/user/edit-user.php?userID=".$userID."\">Edit</a><a href=\"/user/delete-user.php?userID=".$userID."\">Delete</a></p></td>
 			</tr>";
     }
 	//This function returns all users in an array. To access all of them in a loop use
@@ -53,9 +53,9 @@
 		echo"<td><p>".$studyName."</p></td>";
 		$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
 		//This query is correct but outer joins are ugly
-        $query = "SELECT u.ID AS id, s.name, username, canRead, canWrite
+        $query = "SELECT u.ID AS id, s.name, p.name AS username, canRead, canWrite
 FROM user AS u CROSS JOIN study AS s LEFT OUTER JOIN view_edit as ve ON u.id = ve.user_id AND s.name = ve.study_name
-WHERE s.name = '$studyName'";
+INNER JOIN person AS p ON u.id=p.id WHERE s.name = '$studyName'";
         $result = $mysqli->query($query);
         if(!$result){
             die("Query 2 failed");
