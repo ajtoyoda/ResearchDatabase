@@ -36,6 +36,7 @@ table td:last-child {
     padding: 0px;
     width: 120px;
     text-align: center;
+    background-color: #4C5952;
 }
 
 table td:last-child a, table td:last-child a:visited, table td:last-child a:focus {

@@ -44,12 +44,9 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            
-            
-           
             <div class="add-header">
               <ul>
-                <li><h1>Manage Users</h1></li>
+                <li><h1>Manage users</h1></li>
                 <li><input type="button" name="addUser" value="New" onclick="window.location = '/user/add-user.php';" /></li>
               </ul>
             </div>
@@ -69,13 +66,7 @@
 			  ?>
             </table>
 			<!-- ============================== Table 2 =================================================== -->
-			<div class="add-header">
-              <ul>
-                <li><h1>User permissions</h1></li>
-                <li><input type="button" name="addPermission" value="New" onclick="window.location = '/user/add-user-permission.php';" /></li>
-              </ul>
-            </div>
-            <div class="clearfix"></div>
+		        <h1>User permissions</h1>
             <table class="edit-only">
               <tr id="header">
                 <th><p>Study</p></th>
