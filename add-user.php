@@ -1,5 +1,5 @@
 <?php
-	require_once("php/add-userfunctions.php");
+	require_once("php/add-user-functions.php");
 	add_user();
 ?>
 <!DOCTYPE html>
