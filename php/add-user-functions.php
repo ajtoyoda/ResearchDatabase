@@ -22,7 +22,9 @@ function add_user(){
 	$query = "INSERT INTO user
 			  VALUES(DEFAULT,'$username', '$password', '$type')";
 	$result = $mysqli->query($query);
-	echo $result;
+	if($type == "A"){
+		
+	}
 	if(!$result){
 		die('invalid query');
 	}

@@ -31,7 +31,6 @@ function getStudies(){
 }
 
 //This function displays the html code for each study given its name
-//sqli is included for ease
 function showStudy($study_name){
 	static $count = 0;
 	$mysqli = new mysqli("localhost", "root", "", "researchdatabase");

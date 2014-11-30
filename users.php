@@ -4,6 +4,9 @@
   require_once("php/view-study-functions.php");
   require_once("php/user-functions.php");
   verifyLoggedIn();
+  if(!isAdministrator()){
+	header("Location: /");
+  }
 ?>
 
 <!DOCTYPE html>
@@ -81,13 +84,12 @@
                 <th><p>Can write</p></th>
                 <th></th>
               </tr>
-              <tr>
-                <td><p>Cardio Img</p></td>
-                <td><p>Username</p><p>Username2</p></td>
-				<td><p>(can Read)</p><p>(Can read)</p></td>
-                <td><p>(can Write)</p><p>(can Write)</p></td>
-                <td><a href="/user/edit-user-permission.php">Edit</a></p></td>
-              </tr>
+				<?php
+                $studyNames = getAllStudies();
+				for($count = 0; $count < count($studyNames); $count++){
+					showView_EditInfo($studyNames[$count]);
+				}
+				?>
             </table>
 		
           </div>
