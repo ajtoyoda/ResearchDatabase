@@ -26,7 +26,7 @@ function printManageUsers($footer, $isSelected)
         return;
 	if($isSelected){
 		if (!$footer)
-			echo "<li id="current"><a href=\"/users.php\">Manage users</a></li>\n";
+			echo "<li id=\"current\"><a href=\"/users.php\">Manage users</a></li>\n";
 		else
 			echo "<a href=\"/users.php\">Manage users</a> |\n";
 		
