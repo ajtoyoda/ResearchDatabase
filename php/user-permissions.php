@@ -47,7 +47,7 @@ function printNewStudyButton()
     if (!isAdministrator())
         return;
         
-    echo "<input type=\"button\" name=\"newStudy\" value=\"New\" />";
+    echo "<input type=\"button\" name=\"newStudy\" value=\"New\" onclick=\"window.location='/study/add-study.php';\" />";
 }
 
 ?>

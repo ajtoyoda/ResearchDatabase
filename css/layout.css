@@ -297,3 +297,15 @@ footer a:hover {
 .form-buttons input {
     width: 100px;
 }
+
+.form-container ul.budget li:last-child p {
+    font-weight: normal;
+}
+
+.form-container ul.budget li:last-child {
+    text-align: right;
+}
+
+.form-container ul.budget li:last-child input {
+    width: 583px;
+}

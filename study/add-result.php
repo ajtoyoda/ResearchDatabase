@@ -4,6 +4,8 @@
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
   verifyLoggedIn();
+  if (!isAdministrator())
+        header("Location: /");
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +14,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Add a Result :: Medical Research Database</title>
+    <title>Create a Study :: Medical Research Database</title>
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
   </head>
-  <body onload="document.getElementById('patient').focus();">
+  <body onload="document.getElementById('name').focus();">
     <header>
       <div class="container">
         <div id="logout-tab">
@@ -43,24 +45,24 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <h1>Add a result</h1>
-            <!-- Jamie: This link should go back to the study, so it needs the same url args as this page. -->
-            <!--        Replace $whatever-s with actual data. -->
-            <p><a href="/study/view-study?studyname=JAMIE_PUT_SOMETHING_HERE">&lt; $studyname</a></p>
+            <h1>Create a study</h1>
+            <p><a href="/">&lt; My studies</a></p>
             <!-- Jamie: As usual, change the action to fit what you need to do. -->
-            <form action="/study/view-study?studyname=blahblahblah" method="post">
+            <form action="/" method="post">
               <div class="form-container">
                 <ul>
-                  <li><p>Patient name:</p></li>
-                  <!-- TODO: should this be a dropdown? -->
-                  <li><input type="text" name="patient" id="patient" value="$patientname" /></li>
+                  <li><p>Study name:</p></li>
+                  <li><input type="text" name="name" id="name" /></li>
+                </ul>
+                <ul class="budget">
+                  <li><p>Budget:</p></li>
+                  <li><p>$ <input type="text" name="budget" /></p></li>
                 </ul>
                 <ul class="birthday">
-                  <li><p>Result date:</p></li>
+                  <li><p>Start date:</p></li>
                   <li>
-                    <!-- Jamie: Values can be selected from dropdowns by adding selected="selected" to an option. -->
                     <p>Day:
-                      <select name="dateDay">
+                      <select name="startDateDay">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -95,7 +97,7 @@
                       </select>
                     </p>
                     <p>Month:
-                      <select name="dateMonth">
+                      <select name="startDateMonth">
                         <option value="january">January</option>
                         <option value="february">February</option>
                         <option value="march">March</option>
@@ -111,7 +113,7 @@
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="year" value="$year" />
+                      <input type="text" name="year" />
                     </p>
                   </li> 
                 </ul>

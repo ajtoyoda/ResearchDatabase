@@ -59,7 +59,7 @@
             <div class="add-header">
               <ul>
                 <li><h2>Results</h2></li>
-                <li><input type="button" name="addResult" value="New" onclick="window.location = 'add-study.php';" /></li>
+                <li><input type="button" name="addResult" value="New" onclick="window.location = 'add-result.php';" /></li>
               </ul>
             </div>
             <div class="clearfix"></div>

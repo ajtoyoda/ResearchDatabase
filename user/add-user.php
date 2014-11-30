@@ -5,6 +5,8 @@
   require_once("../php/add-user-functions.php");
   verifyLoggedIn();
   add_user();
+  if (!isAdministrator())
+      header("Location: /");
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
   </head>
-  <body>
+  <body onload="document.getElementById('name').focus();">
     <header>
       <div class="container">
         <div id="logout-tab">
@@ -55,7 +57,7 @@
               <div class="form-container">
                 <ul>
                   <li><p>Name:</p></li>
-                  <li><input type="text" name="name" /></li>
+                  <li><input type="text" name="name" id="name" /></li>
                 </ul>
                 <ul class="birthday">
                   <li><p>Birthday:</p></li>
