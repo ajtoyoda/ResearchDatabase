@@ -44,10 +44,7 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            
-            
-           
-            <div class="add-header">
+            <div class="add-header" id="top">
               <ul>
                 <li><h1>Manage Users</h1></li>
                 <li><input type="button" name="addUser" value="New" onclick="window.location = '/user/add-user.php';" /></li>

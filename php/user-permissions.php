@@ -40,4 +40,14 @@ function printManageUsers($footer, $isSelected)
 		}
 }
 
+// Displays the new study button only if the user is an administrator.
+//
+function printNewStudyButton()
+{
+    if (!isAdministrator())
+        return;
+        
+    echo "<input type=\"button\" name=\"newStudy\" value=\"New\" />";
+}
+
 ?>

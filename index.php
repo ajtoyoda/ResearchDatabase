@@ -43,7 +43,13 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-			<h1>My studies</h1>
+            <div class="add-header" id="top">
+              <ul>
+                <li><h1>My studies</h1></li>
+                <li><?php printNewStudyButton(); ?></li>
+              </ul>
+            </div>
+            <div class="clearfix"></div>
             <div class="info-box">
 				 <ul>
 					<?php

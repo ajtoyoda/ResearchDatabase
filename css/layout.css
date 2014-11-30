@@ -193,6 +193,10 @@ footer a:hover {
     margin-top: 20px;
 }
 
+#top {
+    margin-top: 0px !important;
+}
+
 .add-header ul {
     list-style-type: none;
 }
@@ -210,5 +214,9 @@ footer a:hover {
 }
 
 .add-header h2 {
+    margin: 0px;
+}
+
+.add-header h1 {
     margin: 0px;
 }
