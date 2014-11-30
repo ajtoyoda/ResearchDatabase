@@ -3,9 +3,11 @@
   require_once("../php/login-functions.php");
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
+  require_once("../php/add-study-functions.php");
   verifyLoggedIn();
   if (!isAdministrator())
         header("Location: /");
+  addStudy();
 ?>
 
 <!DOCTYPE html>
@@ -48,11 +50,15 @@
             <h1>Create a study</h1>
             <p><a href="/">&lt; My studies</a></p>
             <!-- Jamie: As usual, change the action to fit what you need to do. -->
-            <form action="/" method="post">
+            <form action="/study/add-study.php?addStudyAttempt" method="post">
               <div class="form-container">
                 <ul>
                   <li><p>Study name:</p></li>
                   <li><input type="text" name="name" id="name" /></li>
+                </ul>
+				<ul class="supervisor">
+                  <li><p>Supervisor Name:</p></li>
+                  <li><input type="text" name="supervisorName" /></li>
                 </ul>
                 <ul class="budget">
                   <li><p>Budget:</p></li>
@@ -113,7 +119,7 @@
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="startYear" />
+                      <input type="text" name="startDateYear" />
                     </p>
                   </li> 
                 </ul>
@@ -172,7 +178,7 @@
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="endYear" />
+                      <input type="text" name="endDateYear" />
                     </p>
                   </li> 
                 </ul>

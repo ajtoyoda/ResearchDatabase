@@ -64,8 +64,8 @@ function showStudy($study_name){
 	}else{
 	echo "<li>
                  <div class=\"view-edit\">
-                   <p><a href=\"/study/view-study.php\" class=\"view\">View</a>
-                   <a href=\"/study/edit-study.php\" class=\"edit\">Edit</a></p>
+                   <p><a href=\"/study/view-study.php\?studyname=".$study_name."\" class=\"view\">View</a>
+                   <a href=\"/study/edit-study.php\?studyname=".$study_name."\" class=\"edit\">Edit</a></p>
                  </div>
                  <div class=\"padding\">
                    <h1>".$study_name."</h1>

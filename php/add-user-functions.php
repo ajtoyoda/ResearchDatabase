@@ -2,12 +2,12 @@
 //Add users to database, including person and user. DOES NOT DO EMERGENCY CONTACTS YET
 function add_user(){
 	$mysqli= new mysqli("localhost", "root", "", "researchdatabase");
-	if(!(isset($_POST['username'])&&isset($_POST['password']) 
-		&& isset($_POST['confirm'])&& isset($_POST['type'])&& isset($_POST['name']) 
-		&& isset($_POST['birthmonth'])&& isset($_POST['birthday'])&& isset($_POST['birthyear'])
-		&& isset($_POST['gender']) && isset($_POST['addressLine1']) &&isset($_POST['addressLine2'])
-		&&isset($_POST['city'])&&isset($_POST['country'])
-		&&isset($_POST['phone'])&&isset($_POST['email']))){
+	if(empty($_POST['username'])||empty($_POST['password']) 
+		|| empty($_POST['confirm'])|| empty($_POST['type'])|| empty($_POST['name']) 
+		|| empty($_POST['birthmonth'])|| empty($_POST['birthday'])|| empty($_POST['birthyear'])
+		|| empty($_POST['gender']) || empty($_POST['addressLine1']) ||empty($_POST['addressLine2'])
+		||empty($_POST['city'])||empty($_POST['country'])
+		||empty($_POST['phone'])||empty($_POST['email'])){
 		if(isset($_GET['createAttempt'])){
 			header("Location: /user/add-user.php?failure");
 			return;
@@ -15,6 +15,9 @@ function add_user(){
 		else{
 			return;
 		}
+	}
+	if(!$mysqli->query("USE researchdatabase")){
+		die("failed to use database");
 	}
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -47,9 +50,6 @@ function add_user(){
 	$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
 	$phone = $_POST['phone'];
 	$email = $_POST['email'];
-	if(!$mysqli->query("USE researchdatabase")){
-		die("failed to use database");
-	}
 	$username = $mysqli->real_escape_string($username);
 	$password = $mysqli->real_escape_string($password);
 	$confirm = $mysqli->real_escape_string($confirm);

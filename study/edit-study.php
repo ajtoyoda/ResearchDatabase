@@ -3,9 +3,11 @@
   require_once("../php/login-functions.php");
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
+  require_once("../php/edit-study-functions.php");
   verifyLoggedIn();
   if (!isAdministrator())
         header("Location: /");
+  editStudy();
 ?>
 
 <!DOCTYPE html>
@@ -45,19 +47,50 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <h1>Edit $study</h1>
+			<?php
+			$studyName = $_GET['studyname'];
+            echo "<h1>Edit $studyName</h1>";
+			?>
             <p><a href="/">&lt; My studies</a></p>
-            <!-- Jamie: As usual, change the action to fit what you need to do. -->
-            <!--        Replace all the $whatever-s with their actual value. -->
-            <form action="/" method="post">
-              <div class="form-container">
+            <?php
+				$studyName = $_GET['studyname'];
+				echo "<form action=\"/study/edit-study.php?studyname=".$studyName."&editStudyAttempt\" method=\"post\">";
+			?>
+				<div class="form-container">
                 <ul>
                   <li><p>Study name:</p></li>
-                  <li><input type="text" name="name" id="name" value="$studyname" /></li>
-                </ul>
+				  <?php
+					$studyName = $_GET['studyname'];
+				    echo "<li><input type=\"text\" name=\"name\" id=\"name\" value=\"".$studyName."\" readonly=\"readonly\"/></li>";
+				  ?>
+				  </ul>
+				<ul class="supervisor">
+                  <li><p>Supervisor Name:</p></li>
+				  <?php
+					$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
+					$studyName = $_GET['studyname'];
+					$result = $mysqli->query("SELECT p.name AS name 
+					FROM person AS p INNER JOIN study AS s ON s.supervisor_id = p.id 
+					WHERE s.name = '$studyName'");
+					if(!$result){
+						echo "SELECT p.name AS name FROM person AS p INNER JOIN study AS s ON s.supervisor_id = p.id WHERE s.name = $studyName";
+						die("Invalid Query");
+					}
+					if($result->num_rows >0){
+					$data = $result->fetch_assoc();
+					$supervisorName =$data['name'];
+						echo "<li><input type=\"text\" name=\"supervisorName\" value=\"".$supervisorName."\"/></li>";
+					}else{
+						echo "<li><input type=\"text\" name=\"supervisorName\"/></li>";
+					}
+				  ?>
+				  </ul>
                 <ul class="budget">
                   <li><p>Budget:</p></li>
-                  <li><p>$ <input type="text" name="budget" value="$budget" /></p></li>
+				  <?php
+					$studyInfo = getStudyInfo($_GET['studyname']);
+					echo "<li><p>$ <input type=\"text\" name=\"budget\" value=\"".$studyInfo['budget']."\" /></p></li>";
+				  ?>
                 </ul>
                 <ul class="birthday">
                   <!-- Jamie: As with before, to select a particular option, add selected="selected" to it. -->
@@ -65,57 +98,30 @@
                   <li>
                     <p>Day:
                       <select name="startDateDay">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
+                      <?php
+					  		$study = getStudyInfo($_GET['studyname']);
+							$studyday = (int)substr($study['start_date'], 8,2);
+							outputOptionNumbers(1,$studyday-1);
+							echo "<option value=\"".$studyday."\" selected =\"selected\">".$studyday."</option>";
+							outputOptionNumbers($studyday+1, 31);
+					  ?>
                       </select>
                     </p>
                     <p>Month:
                       <select name="startDateMonth">
-                        <option value="january">January</option>
-                        <option value="february">February</option>
-                        <option value="march">March</option>
-                        <option name="april">April</option>
-                        <option name="may">May</option>
-                        <option name="june">June</option>
-                        <option name="july">July</option>
-                        <option name="august">August</option>
-                        <option name="september">September</option>
-                        <option name="october">October</option>
-                        <option name="november">November</option>
-                        <option name="december">December</option>
+                        <?php
+							$study = getStudyInfo($_GET['studyname']);
+							$studymonth = (int)substr($study['start_date'], 5,2);
+							outputOptionMonths($studymonth);
+						?>
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="startYear" value="$startyear" />
+						<?php
+						$study = getStudyInfo($_GET['studyname']);
+						$studyyear = (int)substr($study['start_date'], 0,4);
+						echo "<input type=\"text\" name=\"startDateYear\" value=\"".$studyyear."\" />";
+						?>
                     </p>
                   </li> 
                 </ul>
@@ -124,57 +130,30 @@
                   <li>
                     <p>Day:
                       <select name="endDateDay">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                      </select>
+					  <?php
+					  		$study = getStudyInfo($_GET['studyname']);
+							$studyday = (int)substr($study['end_date'], 8,2);
+							outputOptionNumbers(1,$studyday-1);
+							echo "<option value=\"".$studyday."\" selected =\"selected\">".$studyday."</option>";
+							outputOptionNumbers($studyday+1, 31);
+						?>
+						</select>
                     </p>
                     <p>Month:
                       <select name="endDateMonth">
-                        <option value="january">January</option>
-                        <option value="february">February</option>
-                        <option value="march">March</option>
-                        <option name="april">April</option>
-                        <option name="may">May</option>
-                        <option name="june">June</option>
-                        <option name="july">July</option>
-                        <option name="august">August</option>
-                        <option name="september">September</option>
-                        <option name="october">October</option>
-                        <option name="november">November</option>
-                        <option name="december">December</option>
+				        <?php
+							$study = getStudyInfo($_GET['studyname']);
+							$studymonth = (int)substr($study['end_date'], 5,2);
+							outputOptionMonths($studymonth);
+						?>
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="endYear" value="$endyear" />
+						<?php
+						$study = getStudyInfo($_GET['studyname']);
+						$studyyear = (int)substr($study['start_date'], 0,4);
+						echo "<input type=\"text\" name=\"endDateYear\" value=\"".$studyyear."\" />";
+						?>
                     </p>
                   </li> 
                 </ul>

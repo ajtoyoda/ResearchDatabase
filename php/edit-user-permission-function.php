@@ -45,7 +45,7 @@
 			if($result->num_rows > 0){
 				$query = "UPDATE view_edit SET canRead = $canRead, canWrite = $canWrite WHERE view_edit.user_id = $userID";
 			}else{
-				$query= "INSERT INTO view_edit VALUES('$studyName', $userID, $canRead, $canWrite)";
+				$query= "INSERT INTO view_edit VALUES('$studyName', $userID, $canWrite, $canRead)";
 			}
 			if(!$mysqli->query($query)){
 				die("Invalid query 1");
