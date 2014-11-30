@@ -4,6 +4,9 @@
   require_once("../php/index-functions.php");	
   require_once("../php/add-user-functions.php");
   verifyLoggedIn();
+  if(!isAdministrator()){
+	header('Location: /');
+  }
   add_user();
 ?>
 
@@ -50,7 +53,7 @@
                   Jamie: Change action to the name of the page containing your code.
                   we probably want to redirect to /users.php once the user is added.
             -->
-            <form action="add-user.php" method="post">
+            <form action="add-user.php?createAttempt" method="post">
               <h2>Personal information</h2>
               <div class="form-container">
                 <ul>
@@ -61,7 +64,9 @@
                   <li><p>Birthday:</p></li>
                   <li>
                     <p>Day:
-                      <select>
+                      <select name="birthday">
+                        <!-- Jamie: set the selected option by adding selected="selected" to the
+                             proper option. -->
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -96,31 +101,33 @@
                       </select>
                     </p>
                     <p>Month:
-                      <select>
+                      <select name="birthmonth">
+                        <!-- Jamie: set the selected option by adding selected="selected" to the
+                             proper option. -->
                         <option value="january">January</option>
                         <option value="february">February</option>
                         <option value="march">March</option>
-                        <option name="april">April</option>
-                        <option name="may">May</option>
-                        <option name="june">June</option>
-                        <option name="july">July</option>
-                        <option name="august">August</option>
-                        <option name="september">September</option>
-                        <option name="october">October</option>
-                        <option name="november">November</option>
-                        <option name="december">December</option>
+                        <option value="april">April</option>
+                        <option value="may">May</option>
+                        <option value="june">June</option>
+                        <option value="july">July</option>
+                        <option value="august">August</option>
+                        <option value="september">September</option>
+                        <option value="october">October</option>
+                        <option value="november">November</option>
+                        <option value="december">December</option>
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="year" />
+                      <input type="text" name="birthyear"/>
                     </p>
                   </li> 
                 </ul>
                 <ul class="gender">
                   <li><p>Gender:</p></li>
                   <li>
-                    <p><input type="radio" name="gender" value="male" /> Male</p>
-                    <p><input type="radio" name="gender" value="female" /> Female</p>
+                    <p><input type="radio" name="gender" value="M" /> Male</p>
+                    <p><input type="radio" name="gender" value="F" /> Female</p>
                   </li>
                 </ul>
                 <!-- 
@@ -142,10 +149,6 @@
                 <ul>
                   <li><p>Country:</p></li>
                   <li><input type="text" name="country" /></li>
-                </ul>
-                <ul>
-                  <li><p>Postal code:</p></li>
-                  <li><input type="text" name="postalCode" /></li>
                 </ul>
                 <ul>
                   <li><p>Phone number:</p></li>
