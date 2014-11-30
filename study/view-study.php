@@ -1,8 +1,10 @@
 <?php
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
-  require_once("../php/view-study.php");
+  require_once("../php/view-study-functions.php");
+  require_once("../php/index-functions.php");
   verifyLoggedIn();
+  verifyStudy();
 ?>
 
 <!DOCTYPE html>
@@ -49,13 +51,8 @@
         <div id="content-inner">
           <div class="padding">
             <?php
-              if(isset($_GET['studyname'])){
-                $studyName = $_GET['studyname'];
-                showAllStudyInfo($studyName);
-              }
-			  else{
-				header("Location: /");
-			  }
+               $studyName = $_GET['studyname'];
+               showAllStudyInfo($studyName);
             ?>
             <div class="clearfix"></div>
             
@@ -74,15 +71,10 @@
                 <th></th>
               </tr>
 				<?php
-					if(isset($_GET['studyname'])){
-						$studyName = $_GET['studyname'];
-						echo $studyName;
-						$result = getResults($studyName);
-						for($count = 0; $count < count($result); $count++){
-							showAllResultInfo($result[$count]);
-						}
-					}else{
-						echo "WTF";
+					$studyName = $_GET['studyname'];
+					$result = getResults($studyName);
+					for($count = 0; $count < count($result); $count++){
+						showAllResultInfo($result[$count]);
 					}
 				?>
             </table>
