@@ -189,7 +189,7 @@
                 <div class="clearfix"></div>
               </div>
               <div class="form-buttons">
-                <input type="submit" name="submit" value="Modify" />
+                <input type="submit" name="submit" value="Update" />
                 <input type="button" name="cancel" value="Cancel" onclick="window.location = '/users.php';" />
               </div>
             </form>

@@ -72,3 +72,20 @@ table td:last-child a:hover {
 table.edit-only td:last-child a, table.edit-only td:last-child a:visited, table.edit-only td:last-child a:focus {
 	width: 110px;
 }
+
+table.no-modify td:last-child {
+    background-color: #EEEEEE;
+    padding: 5px;
+}
+
+table.no-modify tr:hover td:last-child {
+    background-color: #FFFFFF;
+}
+
+table.no-modify td {
+    text-align: center;
+}
+
+table.no-modify td:first-child {
+    text-align: left;
+}
