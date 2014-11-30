@@ -69,8 +69,9 @@
             <table class="edit-only">
               <tr id="header">
                 <th><p>Study</p></th>
-                <th><p>Can Read</p></th>
-                <th><p>Can Write</p></th>
+				<th><p>User</p></th>
+                <th><p>Can read</p></th>
+                <th><p>Can write</p></th>
                 <th></th>
               </tr>
               <tr>
