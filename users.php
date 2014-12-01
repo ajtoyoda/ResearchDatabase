@@ -83,7 +83,7 @@
             </table>
 			<!-- ============================== Table 2 =================================================== -->
             <h1>User permissions</h1>
-            <?php successMessage("Successfully modified the users' permissions.", "successfulEditPermissions"); ?>
+            <?php successMessage("Successfully modified the study's permissions.", "successfulEditPermissions"); ?>
             <table class="edit-only">
               <tr id="header">
                 <th><p>Study</p></th>
