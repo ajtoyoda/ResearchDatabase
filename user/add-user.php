@@ -196,8 +196,8 @@
                 <input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location = '/users.php';\" />
 				<input type=\"button\" style=\"width: 250px\" name=\"addEmergC\" value=\"Add Emergency Contact\" onclick=\"window.location = '/user/add-user.php?emergencyContact';\"/>";
 					}else{
-					echo     "<div id=\"content-outer\">
-              <h2>Emergency contact information</h2>
+					echo     
+              "<h2>Emergency contact information</h2>
               <div class=\"form-container\">
                 <ul>
                   <li><p>Name:</p></li>
