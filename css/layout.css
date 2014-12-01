@@ -312,6 +312,10 @@ footer a:hover {
     width: 583px;
 }
 
+.form-container ul.wide-select select {
+    width: 610px;
+}
+
 #js-banner {
     border: 1px solid #FF4444;
     background-color: #FFDDDD;
