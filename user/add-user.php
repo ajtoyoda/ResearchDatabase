@@ -50,13 +50,16 @@
           <div class="padding">
             <h1>Add a user</h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
-            <?php errorMessage("The new user could not be added.", "failure"); ?>
-            <!--
-                  Jamie: Change action to the name of the page containing your code.
-                  we probably want to redirect to /users.php once the user is added.
-            -->
-            <form action="add-user.php?createAttempt" method="post">
-              <h2>Personal information</h2>
+            <?php errorMessage("The new user could not be added.", "failure");
+			errorMessage("Passwords did not match", "failureInvalidPassword");?>
+			<?php
+			if(isset($_GET['emergencyContact'])){
+				echo"<form action=\"add-user.php?createAttempt&emergencyContact\" method=\"post\">";
+			}else{
+				echo"<form action=\"add-user.php?createAttempt\" method=\"post\">";
+			}
+			?>
+			<h2>Personal information</h2>
               <div class="form-container">
                 <ul>
                   <li><p>Name:</p></li>
