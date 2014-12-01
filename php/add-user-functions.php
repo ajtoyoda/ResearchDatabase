@@ -9,12 +9,20 @@ function add_user(){
 		||empty($_POST['city'])||empty($_POST['country'])
 		||empty($_POST['phone'])||empty($_POST['email'])){
 		if(isset($_GET['createAttempt'])){
+			if(isset($_GET['emergencyContact'])){
+			header("Location: /user/add-user.php?failure&emergencyContact");
+			}
+			else{
 			header("Location: /user/add-user.php?failure");
+			}
 			return;
 		}
 		else{
 			return;
 		}
+	}
+	if(isset($_GET['emergencyContact'])){
+		addEmergencyContact();
 	}
 	if(!$mysqli->query("USE researchdatabase")){
 		die("failed to use database");
@@ -60,7 +68,12 @@ function add_user(){
 	
 	if($confirm != $password){
 		echo "Invalid Password";
-		header('Location: add-user.php?failure');
+		if(isset($_GET['emergencyContact'])){
+			header("Location: /user/add-user.php?failureInvalidPassword&emergencyContact");
+		}
+		else{
+			header("Location: /user/add-user.php?failureInvalidPassword");
+		}
 		return;
 	}
 	$password = password_hash($password, PASSWORD_DEFAULT);

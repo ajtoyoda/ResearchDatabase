@@ -231,7 +231,12 @@
 		||empty($_POST['city'])||empty($_POST['country'])
 		||empty($_POST['phone'])||empty($_POST['email'])){
 		if(isset($_GET['editAttempt'])){
-			header("Location: /user/edit-user.php?userID=".$userID."&failure");
+			if(isset($_GET['emergencyContact'])){
+				header("Location: /user/edit-user.php?userID=".$userID."&failure&emergencyContact");
+			}
+			else{
+				header("Location: /user/edit-user.php?userID=".$userID."&failure");
+			}
 			return;
 		}
 		else{
@@ -282,7 +287,12 @@
 	
 	if($confirm != $password){
 		echo "Invalid Password";
-		header('Location: edit-user.php?userID='.$userID.'&failureInvalidPassword');
+		if(isset($_GET['emergencyContact'])){
+				header("Location: /user/edit-user.php?userID=".$userID."&failureInvalidPassword&emergencyContact");
+			}
+			else{
+				header("Location: /user/edit-user.php?userID=".$userID."&failureInvalidPassword");
+			}
 		return;
 	}
 	$password = password_hash($password, PASSWORD_DEFAULT);

@@ -91,25 +91,30 @@
                 </ul>
                 <ul>
                   <li><p>Description:</p></li>
+                  
 				  <?php
 				  $result = getResult($_GET['id']);
                   echo "<li><input type=\"text\" name=\"description\" value=\"".$result['description']."\" /></li>";
 				  ?>
 				  </ul>
-                <ul>
+                <!-- Jamie: This ul block is what needs to be duplicated for each type. -->
+                <ul class="result-type">
                   <!-- TODO: Not sure how to deal with result types... -->
                   <li><p>Type:</p></li>
-                  <li><input type="text" name="type" value="$type" /></li>
+                  <li>
+                    <input type="text" name="type0" value="$type" />
+                    <input type="button" name="addType" value="Add" onclick="something??" />
+                  </li>
                 </ul>
               </div>
               <div class="clearfix"></div>
               <div class="form-buttons">
                 <input type="submit" name="submit" value="Update" />
                 <!-- Jamie: This javascript needs to be updated properly. -->
-				<?php
-                echo "<input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location='/study/view-study.php?studyname=".getStudyFromResult($_GET['id'])."'/>;" 
-				?>
-				</div>
+				      <?php
+                      echo "<input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location='/study/view-study.php?studyname=".getStudyFromResult($_GET['id'])."';\"/>" 
+				      ?>
+				      </div>
             </form>
           </div>
         </div>
