@@ -17,14 +17,16 @@
     <script src="js/login.js" type="text/javascript"></script>
   </head>
   <body onLoad="FocusUserName();">
-    <div class="container">
-      <noscript>
-        <div id="js-banner">
+    <noscript>
+      <div id="js-banner">
+        <div class="container">
           <div class="padding">
             <p>This website works best with JavaScript enabled.</p>
           </div>
         </div>
-      </noscript>
+      </div>
+    </noscript>
+    <div class="container">
       <div id="login-container-outer">
         <div id="login-container-inner">
           <header>

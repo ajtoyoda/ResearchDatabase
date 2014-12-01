@@ -25,6 +25,15 @@
     <link rel="stylesheet" href="/css/table.css" />
   </head>
   <body>
+    <noscript>
+      <div id="js-banner">
+        <div class="container">
+          <div class="padding">
+            <p>This website works best with JavaScript enabled.</p>
+          </div>
+        </div>
+      </div>
+    </noscript>
     <header>
       <div class="container">
         <div id="logout-tab">
