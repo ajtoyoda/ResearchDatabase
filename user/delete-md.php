@@ -45,7 +45,7 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <h1>Delete USERNAME</h1>
+		  <h1>Delete MD</h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <p>Before this user can be deleted, the studies they supervise must be reassigned to a different MD.</p>
 			<?php echo "<form action=\"delete-md.php?deleteMD&userID=".$_GET['userID']."\" method=\"post\">";?>
@@ -70,7 +70,7 @@
 					}
 					for($count =0; $count < $result->num_rows; $count++){
 						$data = $result->fetch_assoc();
-						echo "<option name=\"supervisor".$data['id']."\">".$data['name']."</option>";
+						echo "<option value=\"".$data['id']."\">".$data['name']."</option>";
 					}
 					?>
 					</select>
