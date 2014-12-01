@@ -67,6 +67,7 @@
             <?php successMessage("The user was successfully deleted.", "successfulDeleteUser"); ?>
             <?php successMessage("The user was successfully added.", "successfulAddUser"); ?>
             <?php successMessage("The user was successfully updated.", "successfulEditUser"); ?>
+            <?php errorMessage("There must be at least one MD. To delete this user, create a new MD first.", "failureCannotDeleteOnlyMD"); ?>
             <table>
               <tr id="header">
                 <th><p>User</p></th>
@@ -82,6 +83,7 @@
 			  ?>
             </table>
 			<!-- ============================== Table 2 =================================================== -->
+            <a name="permissions"></a>
             <h1>User permissions</h1>
             <?php successMessage("Successfully modified the study's permissions.", "successfulEditPermissions"); ?>
             <table class="edit-only">

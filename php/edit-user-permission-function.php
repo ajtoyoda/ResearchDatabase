@@ -51,7 +51,7 @@
 				die("Invalid query 1");
 			}
 			else{
-				header('Location: /users.php?successfulEditPermissions');
+				header('Location: /users.php?successfulEditPermissions#permissions');
 			}
 		}
 	}

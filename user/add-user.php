@@ -60,7 +60,7 @@
             <h1>Add a user</h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <?php errorMessage("The new user could not be added.", "failure");
-			errorMessage("Passwords did not match", "failureInvalidPassword");?>
+			errorMessage("The new user could not be added because the passwords do not match.", "failureInvalidPassword");?>
 			<?php
 			if(isset($_GET['emergencyContact'])){
 				echo"<form action=\"add-user.php?createAttempt&emergencyContact\" method=\"post\">";
