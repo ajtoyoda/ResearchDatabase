@@ -66,6 +66,10 @@
     border-top-right-radius: 10px;
 }
 
+.info-box ul li a.add{
+	padding: 10px;
+}
+
 .info-box ul li a:hover {
     background-color: #8FA69B;
     color: #4C5952;
