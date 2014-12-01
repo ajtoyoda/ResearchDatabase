@@ -121,10 +121,14 @@
                   <li><p>Description:</p></li>
                   <li><input type="text" name="year" value="$description" /></li>
                 </ul>
-                <ul>
+                <!-- Jamie: This ul block is what needs to be duplicated for each type. -->
+                <ul class="result-type">
                   <!-- TODO: Not sure how to deal with result types... -->
                   <li><p>Type:</p></li>
-                  <li><input type="text" name="type" value="$type" /></li>
+                  <li>
+                    <input type="text" name="type0" value="$type" />
+                    <input type="button" name="addType" value="Add" onclick="something??" />
+                  </li>
                 </ul>
               </div>
               <div class="clearfix"></div>

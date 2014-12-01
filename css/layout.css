@@ -290,6 +290,15 @@ footer a:hover {
     width: 16px;
 }
 
+.form-container ul.result-type li:last-child input[type="text"] {
+    width: 488px;
+}
+
+.form-container ul.result-type li:last-child input[type="button"] {
+    width: 100px;
+    margin-left: 5px;
+}
+
 .form-buttons {
     text-align: right;
     margin-top: 15px;
