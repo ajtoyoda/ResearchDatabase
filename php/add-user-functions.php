@@ -1,6 +1,63 @@
 ﻿<?php
-function addEmergencyContact(){
-return;
+function addEmergencyContact($ID){
+	$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
+	
+	if(!$mysqli->query("USE researchdatabase")){
+		die("failed to use database");
+	}
+	if( empty($_POST['emergname']) || empty($_POST['emergbirthmonth'])|| empty($_POST['emergbirthday'])|| empty($_POST['emergbirthyear'])
+		|| empty($_POST['emerggender']) || empty($_POST['emergaddressLine1']) ||!isset($_POST['emergaddressLine2'])
+		||empty($_POST['emergcity'])||empty($_POST['emergcountry'])
+		||empty($_POST['emergphone'])||empty($_POST['emergemail'])){
+			header("Location: /user/add-user.php?failure&emergencyContact");
+	}
+	$name = $_POST['emergname'];
+	$birthmonthString = $_POST['emergbirthmonth'];
+	$birthmonth = 1;
+	if($birthmonthString == "january")$birthmonth = 1;
+	elseif($birthmonthString =="february")$birthmonth = 2;
+	elseif($birthmonthString =="march")$birthmonth = 3;
+	elseif($birthmonthString =="april")$birthmonth = 4;
+	elseif($birthmonthString =="may")$birthmonth = 5;
+	elseif($birthmonthString =="june")$birthmonth = 6;
+	elseif($birthmonthString =="july")$birthmonth = 7;
+	elseif($birthmonthString =="august")$birthmonth = 8;
+	elseif($birthmonthString =="september")$birthmonth = 9;
+	elseif($birthmonthString =="october")$birthmonth = 10;
+	elseif($birthmonthString =="november")$birthmonth = 11;
+	else $birthmonth = 12;
+	
+	//Getting birthday into date format
+	$time = mktime(0,0,0, $birthmonth, (int)$_POST['emergbirthday'], (int)$_POST['emergbirthyear']);
+	if($time < mktime(0,0,0,1,1,1900) || $time >time()){
+		die("Invalid birthday magic");
+	}
+	$birthday = date('Y-m-d', $time);
+	
+	$gender= $_POST['emerggender'];
+	$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
+	$phone = $_POST['emergphone'];
+	$email = $_POST['emergemail'];
+	$name = $mysqli->real_escape_string($name);
+	$address = $mysqli->real_escape_string($address);
+	$phone = $mysqli->real_escape_string($phone);
+	$email = $mysqli->real_escape_string($email);
+	$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
+	if(!$result = $mysqli->query($query)){
+		echo $query;
+		die("invalid query 1");
+	}else{
+		$query = "SELECT max(id) AS id FROM person";
+		if(!($result = $mysqli->query($query))){
+			die("invalid query 2");
+		}
+		$userID = (int)$result->fetch_assoc()['id'];
+		$query ="UPDATE TABLE person SET emergency_id =$userID WHERE id = $ID";
+		if(!$mysqli->query($query)){
+			$mysqli->query("DELETE FROM person WHERE id = $userID");
+		}
+		return;
+	}
 }
 //Add users to database, including person and user. DOES NOT DO EMERGENCY CONTACTS YET
 function add_user(){
@@ -23,9 +80,6 @@ function add_user(){
 		else{
 			return;
 		}
-	}
-	if(isset($_GET['emergencyContact'])){
-		addEmergencyContact();
 	}
 	if(!$mysqli->query("USE researchdatabase")){
 		die("failed to use database");
@@ -84,6 +138,7 @@ function add_user(){
 	$query = 	"INSERT INTO person
 				VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
 	if(!$result = $mysqli->query($query)){
+		echo "first part".$query;
 		die("invalid query 1");
 	}
 	else
@@ -97,14 +152,13 @@ function add_user(){
 			VALUES($userID,'$username', '$password', '$type')";
 		$result = $mysqli->query($query);
 		if(!$result){
-			echo $query;
-			die('invalid query1');
-		}
-		if(!$result){
-			$mysqli->query("DELETE FROM user WHERE user.username = '$username'");
+			$mysqli->query("DELETE FROM person WHERE id = $userID");
 			die('invalid query2');
 		}
 		else{
+			if(isset($_GET['emergencyContact'])){
+				addEmergencyContact($userID);
+			}
 			header('Location: /users.php?successfulAddUser');
 			return;
 		}
