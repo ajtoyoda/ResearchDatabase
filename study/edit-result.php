@@ -91,19 +91,14 @@
                 </ul>
                 <ul>
                   <li><p>Description:</p></li>
-<<<<<<< HEAD
-                  <li><input type="text" name="year" value="$description" /></li>
-                </ul>
-                <!-- Jamie: This ul block is what needs to be duplicated for each type. -->
-                <ul class="result-type">
-=======
+                  
 				  <?php
 				  $result = getResult($_GET['id']);
                   echo "<li><input type=\"text\" name=\"description\" value=\"".$result['description']."\" /></li>";
 				  ?>
 				  </ul>
-                <ul>
->>>>>>> fed0b6b830fdb97f635932fc86e13f55052bc414
+                <!-- Jamie: This ul block is what needs to be duplicated for each type. -->
+                <ul class="result-type">
                   <!-- TODO: Not sure how to deal with result types... -->
                   <li><p>Type:</p></li>
                   <li>
@@ -116,10 +111,10 @@
               <div class="form-buttons">
                 <input type="submit" name="submit" value="Update" />
                 <!-- Jamie: This javascript needs to be updated properly. -->
-				<?php
-                echo "<input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location='/study/view-study.php?studyname=".getStudyFromResult($_GET['id'])."'/>;" 
-				?>
-				</div>
+				      <?php
+                      echo "<input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location='/study/view-study.php?studyname=".getStudyFromResult($_GET['id'])."';\"/>" 
+				      ?>
+				      </div>
             </form>
           </div>
         </div>
