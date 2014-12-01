@@ -1,13 +1,7 @@
 <?php
   require_once("php/user-permissions.php");
   require_once("php/login-functions.php");
-  require_once("php/view-study-functions.php");
-  require_once("php/user-functions.php");
   verifyLoggedIn();
-//should I keep this here? 
-  if(!isAdministrator()){
-	header("Location: /");
-  }
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +17,15 @@
     <link rel="stylesheet" href="/css/table.css" />
   </head>
   <body>
+    <noscript>
+      <div id="js-banner">
+        <div class="container">
+          <div class="padding">
+            <p>This website works best with JavaScript enabled.</p>
+          </div>
+        </div>
+      </div>
+    </noscript>
     <header>
       <div class="container">
         <div id="logout-tab">

@@ -23,6 +23,15 @@
     <link rel="stylesheet" href="/css/nav.css" />
   </head>
   <body onload="document.getElementById('name').focus();">
+    <noscript>
+      <div id="js-banner">
+        <div class="container">
+          <div class="padding">
+            <p>This website works best with JavaScript enabled.</p>
+          </div>
+        </div>
+      </div>
+    </noscript>
     <header>
       <div class="container">
         <div id="logout-tab">
@@ -51,7 +60,7 @@
             <h1>Add a user</h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <?php errorMessage("The new user could not be added.", "failure");
-			errorMessage("Passwords did not match", "failureInvalidPassword");?>
+			errorMessage("The new user could not be added because the passwords do not match.", "failureInvalidPassword");?>
 			<?php
 			if(isset($_GET['emergencyContact'])){
 				echo"<form action=\"add-user.php?createAttempt&emergencyContact\" method=\"post\">";

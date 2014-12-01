@@ -2,6 +2,7 @@
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
   require_once("../php/delete-user-functions.php");
+  require_once("../php/edit-user-functions.php");
   verifyLoggedIn();
   if(!isAdministrator())
 	header('Location: /');
@@ -14,12 +15,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Delete USERNAME :: Medical Research Database</title>
+    <title>Delete <?php getPerson($_GET["userID"])["name"]; ?> :: Medical Research Database</title>
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
   </head>
   <body onload="document.getElementById('supervisor').focus();">
+    <noscript>
+      <div id="js-banner">
+        <div class="container">
+          <div class="padding">
+            <p>This website works best with JavaScript enabled.</p>
+          </div>
+        </div>
+      </div>
+    </noscript>
     <header>
       <div class="container">
         <div id="logout-tab">

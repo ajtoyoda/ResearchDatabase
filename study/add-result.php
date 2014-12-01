@@ -18,6 +18,15 @@
     <link rel="stylesheet" href="/css/nav.css" />
   </head>
   <body onload="document.getElementById('patient').focus();">
+    <noscript>
+      <div id="js-banner">
+        <div class="container">
+          <div class="padding">
+            <p>This website works best with JavaScript enabled.</p>
+          </div>
+        </div>
+      </div>
+    </noscript>
     <header>
       <div class="container">
         <div id="logout-tab">

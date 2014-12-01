@@ -22,6 +22,15 @@
     <link rel="stylesheet" href="/css/nav.css" />
   </head>
   <body>
+    <noscript>
+      <div id="js-banner">
+        <div class="container">
+          <div class="padding">
+            <p>This website works best with JavaScript enabled.</p>
+          </div>
+        </div>
+      </div>
+    </noscript>
     <header>
       <div class="container">
         <div id="logout-tab">
@@ -54,7 +63,7 @@
 			?>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <?php errorMessage("The user could not be updated", "failure");
-			errorMessage("Passwords did not match", "failureInvalidPassword");
+			errorMessage("The user could not be updated because the passwords do not match.", "failureInvalidPassword");
 			?>
 			<?php
 				$userID = $_GET['userID'];

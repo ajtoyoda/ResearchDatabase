@@ -27,8 +27,19 @@
 		$query = "DELETE FROM user WHERE id = $userID";
 		if(!$mysqli->query($query)){
 			die("Bad query3");
-		}		
-		$query = "DELETE FROM person WHERE id = $userID";
+		}
+		$query = "SELECT emergency_id FROM person WHERE id = $userID";
+		$result = $mysqli->query($query);
+		if(!$result){
+			die("Bad Query 7");
+		}
+		if($result->num_rows>0){
+			$data = $result->fetch_assoc();
+			$emergencyContact = $data['emergency_id'];
+			$query = "DELETE FROM person WHERE id = '$emergencyContact'";
+		}
+		
+		$query = "DELETE FROM person WHERE id = $userID";		
 		if(!$mysqli->query($query)){
 			die("Bad query4");
 		}
@@ -48,15 +59,10 @@
 		if(!$mysqli->query("USE researchdatabase")){
 			die("Failed to use database");
 		}
-		$newSupervisorName = $_POST['supervisor'];
-		$query = "SELECT id FROM person WHERE name = '$newSupervisorName'";
-		$result = $mysqli->query($query);
-		if(!$result){
-			echo $query;
-			die("Bad query2");
+		if(empty($_POST['supervisor'])){
+			die("No post");
 		}
-		$data = $result->fetch_assoc();
-		$newSupervisorID = $data['id'];
+		$newSupervisorID = $_POST['supervisor']; 
 		$query = "UPDATE study SET supervisor_id = $newSupervisorID WHERE supervisor_id = $userID";
 		if(!$mysqli->query($query)){
 			echo $query;
