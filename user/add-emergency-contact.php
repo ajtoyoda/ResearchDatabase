@@ -162,37 +162,10 @@
                 </ul>
                 <div class="clearfix"></div>
               </div>
-              <h2>User information</h2>
-              <div class="form-container">
-                <ul>
-                  <li><p>Username:</p></li>
-                  <li><input type="text" name="username" /></li>
-                </ul>
-                <ul>
-                  <li><p>Password:</p></li>
-                  <li><input type="password" name="password" /></li>
-                </ul>
-                <ul>
-                  <li><p>Confirm password</p></li>
-                  <li><input type="password" name="confirm" /></li>
-                </ul>
-                <ul class="type">
-                  <li><p>User type:</p></li>
-                  <li>
-                    <p><input type="radio" name="type" value="R" /> Research assistant</p>
-                    <p><input type="radio" name="type" value="M" /> MD</p>
-                    <p><input type="radio" name="type" value="A" /> Administrator</p>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
               <div class="form-buttons">
                 <input type="submit" name="submit" value="Create" />
                 <input type="button" name="cancel" value="Cancel" onclick="window.location = '/users.php';" />
-				<input type="button" style="width: 250px" name="addEmergC" value="Add Emergency Contact" onclick="window.location = '/user/add-emergency-contact.php';"/>
               </div>
-			  <div class="form-buttons.long">
-			  </div>
             </form>
           </div>
         </div>
