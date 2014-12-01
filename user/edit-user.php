@@ -53,10 +53,16 @@
 				echo"<h1>Edit ".$user['name']."</h1>";
 			?>
             <p><a href="/users.php">&lt; Manage users</a></p>
-            <?php errorMessage("The user could not be updated", "failure"); ?>
+            <?php errorMessage("The user could not be updated", "failure");
+			errorMessage("Passwords did not match", "failureInvalidPassword");
+			?>
 			<?php
 				$userID = $_GET['userID'];
-				echo "<form action=\"edit-user.php?editAttempt&userID=".$userID."\" method=\"post\">";
+				if(isset($_GET['emergencyContact'])){
+					echo "<form action=\"edit-user.php?emergencyContact&editAttempt&userID=".$userID."\" method=\"post\">";
+				}else{
+					echo "<form action=\"edit-user.php?editAttempt&userID=".$userID."\" method=\"post\">";
+				}
 			?>
 			<h2>Personal information</h2>
               <div class="form-container">
