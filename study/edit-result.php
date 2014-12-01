@@ -48,79 +48,54 @@
 			<?php
 				$studyName = getStudyFromResult($_GET['id']);
 				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt;".$studyName." </a></p>";
-            ?>
-			<!-- Jamie: As usual, change the action to fit what you need to do. -->
-            <form action="/study/view-study?studyname=blahblahblah" method="post">
+				echo "<form action=\"/study/edit-results.php?id=".$_GET['id']."&editResultsAttempt\" method=\"post\">";
+			?>
               <div class="form-container">
                 <ul>
                   <li><p>Patient name:</p></li>
-                  <!-- TODO: should this be a dropdown? -->
-                  <li><input type="text" name="patient" id="patient" value="$patientname" /></li>
-                </ul>
+				  <?php
+				    echo "<li><input type=\"text\" name=\"patient\" id=\"patient\" value=\"".getPatientFromResult($_GET['id'])."\" /></li>";
+				  ?>
+				</ul>
                 <ul class="birthday">
                   <li><p>Result date:</p></li>
                   <li>
-                    <!-- Jamie: Values can be selected from dropdowns by adding selected="selected" to an option. -->
                     <p>Day:
-                      <select name="dateDay">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
+                      <select name="resultDay">
+						<?php
+							$result = getResult($_GET['id']);
+							$resultday = (int)substr($result['date'], 8,2);
+							outputOptionNumbers(1,$resultday-1);
+							echo "<option value=\"".$resultday."\" selected =\"selected\">".$resultday."</option>";
+							outputOptionNumbers($resultday+1, 31);
+						?>
                       </select>
                     </p>
                     <p>Month:
-                      <select name="dateMonth">
-                        <option value="january">January</option>
-                        <option value="february">February</option>
-                        <option value="march">March</option>
-                        <option name="april">April</option>
-                        <option name="may">May</option>
-                        <option name="june">June</option>
-                        <option name="july">July</option>
-                        <option name="august">August</option>
-                        <option name="september">September</option>
-                        <option name="october">October</option>
-                        <option name="november">November</option>
-                        <option name="december">December</option>
+                      <select name="resultMonth">
+						<?php
+							$result = getResult($_GET['id']);
+							$resultmonth = (int)substr($result['date'], 5,2);
+							outputOptionMonths($resultmonth);
+						?>
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="year" value="$year" />
+					<?php
+						$result = getResult($_GET['id']);
+						$resultyear = (int)substr($result['date'], 0,4);
+						echo "<input type=\"text\" name=\"resultYear\" value=\"".$resultyear."\" />";
+					?>
                     </p>
                   </li> 
                 </ul>
                 <ul>
                   <li><p>Description:</p></li>
-                  <li><input type="text" name="year" value="$description" /></li>
-                </ul>
+				  <?php
+				  $result = getResult($_GET['id']);
+                  echo "<li><input type=\"text\" name=\"description\" value=\"".$result['description']."\" /></li>";
+				  ?>
+				  </ul>
                 <ul>
                   <!-- TODO: Not sure how to deal with result types... -->
                   <li><p>Type:</p></li>
@@ -131,8 +106,10 @@
               <div class="form-buttons">
                 <input type="submit" name="submit" value="Update" />
                 <!-- Jamie: This javascript needs to be updated properly. -->
-                <input type="button" name="cancel" value="Cancel" onclick="window.location='/study/view-study.php?studyname=JAMIE_PUT_SOMETHING_HERE';" />
-              </div>
+				<?php
+                echo "<input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location='/study/view-study.php?studyname=".getStudyFromResult($_GET['id'])."'/>;" 
+				?>
+				</div>
             </form>
           </div>
         </div>
