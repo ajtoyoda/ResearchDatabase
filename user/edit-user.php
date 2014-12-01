@@ -63,7 +63,7 @@
 			?>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <?php errorMessage("The user could not be updated", "failure");
-			errorMessage("Passwords did not match", "failureInvalidPassword");
+			errorMessage("The user could not be updated because the passwords do not match.", "failureInvalidPassword");
 			?>
 			<?php
 				$userID = $_GET['userID'];
