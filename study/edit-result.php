@@ -3,6 +3,7 @@
   require_once("../php/login-functions.php");
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
+  require_once("../php/edit-results-functions.php");
   verifyLoggedIn();
 ?>
 
@@ -44,10 +45,11 @@
         <div id="content-inner">
           <div class="padding">
             <h1>Edit a result</h1>
-            <!-- Jamie: This link should go back to the study, so it needs the same url args as this page. -->
-            <!--        Replace $whatever-s with actual data. -->
-            <p><a href="/study/view-study?studyname=JAMIE_PUT_SOMETHING_HERE">&lt; $studyname</a></p>
-            <!-- Jamie: As usual, change the action to fit what you need to do. -->
+			<?php
+				$studyName = getStudyFromResult($_GET['id']);
+				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt;".$studyName." </a></p>";
+            ?>
+			<!-- Jamie: As usual, change the action to fit what you need to do. -->
             <form action="/study/view-study?studyname=blahblahblah" method="post">
               <div class="form-container">
                 <ul>

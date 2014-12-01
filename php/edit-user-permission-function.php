@@ -43,7 +43,7 @@
 			$studyName = $_GET['studyName'];
 			$result = $mysqli->query("SELECT user_id FROM view_edit WHERE user_id = $userID AND study_name = '$studyName'");
 			if($result->num_rows > 0){
-				$query = "UPDATE view_edit SET canRead = $canRead, canWrite = $canWrite WHERE view_edit.user_id = $userID";
+				$query = "UPDATE view_edit SET canRead = $canRead, canWrite = $canWrite WHERE view_edit.user_id = $userID AND study_name = '$studyName'";
 			}else{
 				$query= "INSERT INTO view_edit VALUES('$studyName', $userID, $canWrite, $canRead)";
 			}
