@@ -89,7 +89,7 @@ function add_user(){
 			die('invalid query2');
 		}
 		else{
-			header('Location: add-user.php?success');
+			header('Location: /user.php?successfulAddUser');
 			return;
 		}
 	}

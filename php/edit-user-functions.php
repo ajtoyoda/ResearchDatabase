@@ -308,7 +308,7 @@
 			return;
 		}
 		else{
-			header("Location: edit-user.php?userID=".$userID."&success");
+			header("Location: /users.php?successfulEditUser");
 			return;
 		}
 	}

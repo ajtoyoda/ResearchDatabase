@@ -3,6 +3,7 @@
   require_once("../php/login-functions.php");
   require_once("../php/index-functions.php");	
   require_once("../php/add-user-functions.php");
+  require_once("../php/success-failure-functions.php");
   verifyLoggedIn();
   if(!isAdministrator()){
 	header('Location: /');
@@ -49,6 +50,7 @@
           <div class="padding">
             <h1>Add a user</h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
+            <?php errorMessage("The new user could not be added.", "failure"); ?>
             <!--
                   Jamie: Change action to the name of the page containing your code.
                   we probably want to redirect to /users.php once the user is added.

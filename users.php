@@ -3,6 +3,7 @@
   require_once("php/login-functions.php");
   require_once("php/view-study-functions.php");
   require_once("php/user-functions.php");
+  require_once("php/success-failure-functions.php");
   verifyLoggedIn();
   if(!isAdministrator()){
 	header("Location: /");
@@ -54,6 +55,9 @@
               </ul>
             </div>
             <div class="clearfix"></div>
+            <?php successMessage("The user was successfully deleted.", "successfulDeleteUser"); ?>
+            <?php successMessage("The user was successfully added.", "successfulAddUser"); ?>
+            <?php successMessage("The user was successfully updated.", "successfulEditUser"); ?>
             <table>
               <tr id="header">
                 <th><p>User</p></th>
@@ -70,6 +74,7 @@
             </table>
 			<!-- ============================== Table 2 =================================================== -->
             <h1>User permissions</h1>
+            <?php successMessage("Successfully modified the users' permissions.", "successfulEditPermissions"); ?>
             <table class="edit-only">
               <tr id="header">
                 <th><p>Study</p></th>

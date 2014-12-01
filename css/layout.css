@@ -328,3 +328,31 @@ footer a:hover {
     color: #FF4444;
     font-size: 10pt;
 }
+
+.red-box {
+    border: 1px solid #FF4444;
+    background-color: #FFDDDD;
+    color: #FF4444;
+}
+
+.green-box {
+    border: 1px solid #449944;
+    background-color: #DDFFDD;
+}
+
+.red-box .padding, .green-box .padding {
+    padding: 10px;
+}
+
+.red-box p, .green-box p {
+    font-size: 10pt;
+    margin: 0px;
+}
+
+.red-box p {
+    color: #FF4444;
+}
+
+.green-box p {
+    color: #449944;
+}

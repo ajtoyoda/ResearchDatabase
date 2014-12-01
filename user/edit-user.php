@@ -3,6 +3,7 @@
   require_once("../php/login-functions.php");
   require_once("../php/index-functions.php");	
   require_once("../php/edit-user-functions.php");
+  require_once("../php/success-failure-functions.php");
   verifyLoggedIn();
   if (!isAdministrator())
 	header("Location: /");
@@ -15,7 +16,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Edit $user :: Medical Research Database</title>
+    <title>Edit <?php echo getPerson($_GET["userID"])["name"]; ?> :: Medical Research Database</title>
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
@@ -52,6 +53,7 @@
 				echo"<h1>Edit ".$user['name']."</h1>";
 			?>
             <p><a href="/users.php">&lt; Manage users</a></p>
+            <?php errorMessage("The user could not be updated", "failure"); ?>
 			<?php
 				$userID = $_GET['userID'];
 				echo "<form action=\"edit-user.php?editAttempt&userID=".$userID."\" method=\"post\">";

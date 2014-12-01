@@ -30,7 +30,7 @@
 		if(!$mysqli->query($query)){
 			die("Bad query5");
 		}
-		header('Location: /users.php?successfulDelete');
+		header('Location: /users.php?successfulDeleteUser');
 	}
 
 ?>
