@@ -1,7 +1,8 @@
 <?php
   require_once("/php/user-permissions.php");
   require_once("/php/login-functions.php");
-  require_once("/php/index-functions.php");	
+  require_once("/php/index-functions.php");
+  require_once("/php/success-failure-functions.php");
   verifyLoggedIn();
 ?>
 
@@ -50,6 +51,8 @@
               </ul>
             </div>
             <div class="clearfix"></div>
+            <?php successMessage("The new study was successfully created.", "successfulAddStudy"); ?>
+            <?php successMessage("The study was successfully updated.", "successfulEditStudy"); ?>
             <div class="info-box">
 				 <ul>
 					<?php

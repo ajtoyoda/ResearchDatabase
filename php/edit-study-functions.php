@@ -107,6 +107,6 @@
 				return;
 			}
 		}
-		header("Location: /study/edit-study.php?studyname=".$studyName."&success");
+		header("Location: /index.php?successfulEditStudy");
 	}
 ?>

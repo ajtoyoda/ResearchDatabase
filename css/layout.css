@@ -332,12 +332,15 @@ footer a:hover {
 .red-box {
     border: 1px solid #FF4444;
     background-color: #FFDDDD;
-    color: #FF4444;
 }
 
 .green-box {
     border: 1px solid #449944;
     background-color: #DDFFDD;
+}
+
+.red-box, .green-box {
+    margin-top: 10px;
 }
 
 .red-box .padding, .green-box .padding {

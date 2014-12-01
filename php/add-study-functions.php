@@ -92,6 +92,6 @@
 			die("Invalid query 1");
 			return;
 		}
-		header('Location: /study/add-study.php?success');
+		header('Location: /index.php?successfulAddStudy');
 	}
 ?>

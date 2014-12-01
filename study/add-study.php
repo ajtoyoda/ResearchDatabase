@@ -4,6 +4,7 @@
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
   require_once("../php/add-study-functions.php");
+  require_once("../php/success-failure-functions.php");
   verifyLoggedIn();
   if (!isAdministrator())
         header("Location: /");
@@ -49,6 +50,9 @@
           <div class="padding">
             <h1>Create a study</h1>
             <p><a href="/">&lt; My studies</a></p>
+            <?php errorMessage("The study could not be created.", "failure"); ?>
+            <?php errorMessage("The budget must be numeric.", "failureNotNumeric"); ?>
+            <?php errorMessage("The supervisor specified does not exist.", "failureInvalidSupervisor"); ?>
             <!-- Jamie: As usual, change the action to fit what you need to do. -->
             <form action="/study/add-study.php?addStudyAttempt" method="post">
               <div class="form-container">

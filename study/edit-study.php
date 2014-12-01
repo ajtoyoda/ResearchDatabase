@@ -4,6 +4,7 @@
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
   require_once("../php/edit-study-functions.php");
+  require_once("../php/success-failure-functions.php");
   verifyLoggedIn();
   if (!isAdministrator())
         header("Location: /");
@@ -52,6 +53,9 @@
             echo "<h1>Edit $studyName</h1>";
 			?>
             <p><a href="/">&lt; My studies</a></p>
+            <?php errorMessage("The study could not be updated.", "failure"); ?>
+            <?php errorMessage("The budget must be a number.", "failureNotNumeric"); ?>
+            <?php errorMessage("The supervisor specified does not exist.", "failureInvalidSupervisor"); ?>
             <?php
 				$studyName = $_GET['studyname'];
 				echo "<form action=\"/study/edit-study.php?studyname=".$studyName."&editStudyAttempt\" method=\"post\">";
