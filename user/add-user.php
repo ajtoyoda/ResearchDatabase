@@ -192,7 +192,7 @@
                             <?php
 			  if(!isset($_GET['emergencyContact'])){
 			    echo "<div class=\"form-buttons\">
-                <input type=\"submit\" name=\"submit\" value=\"Update\" />
+                <input type=\"submit\" name=\"submit\" value=\"Submit\" />
                 <input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location = '/users.php';\" />
 				<input type=\"button\" style=\"width: 250px\" name=\"addEmergC\" value=\"Add Emergency Contact\" onclick=\"window.location = '/user/add-user.php?emergencyContact';\"/>";
 					}else{

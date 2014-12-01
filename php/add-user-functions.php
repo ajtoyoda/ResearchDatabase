@@ -1,4 +1,7 @@
 ﻿<?php
+function addEmergencyContact(){
+return;
+}
 //Add users to database, including person and user. DOES NOT DO EMERGENCY CONTACTS YET
 function add_user(){
 	$mysqli= new mysqli("localhost", "root", "", "researchdatabase");

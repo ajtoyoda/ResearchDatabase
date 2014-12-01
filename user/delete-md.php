@@ -1,9 +1,11 @@
 <?php
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
+  require_once("../php/delete-user-functions.php");
   verifyLoggedIn();
   if(!isAdministrator())
 	header('Location: /');
+  deleteMD();
 ?>
 
 <!DOCTYPE html>
@@ -46,18 +48,32 @@
             <h1>Delete USERNAME</h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <p>Before this user can be deleted, the studies they supervise must be reassigned to a different MD.</p>
-            <!--
-                  Jamie: Change action to the name of the page containing your code.
-                  we probably want to redirect to /users.php once the user is added.
-            -->
-            <form action="delete-md.php?deleteMD" method="post">
+			<?php echo "<form action=\"delete-md.php?deleteMD&userID=".$_GET['userID']."\" method=\"post\">";?>
               <div class="form-container">
                 <ul class="wide-select">
                   <li><p>New supervisor:</p></li>
                   <li>
-                    <select name="supervisor">
-                      <option name="supervisor1">Jaimie: Autopopulate this</option>
-                    </select>
+				  <select name="supervisor">
+					<?php 
+					$mysqli= new mysqli("localhost", "root", "", "researchdatabase");
+					if(!$mysqli->query("USE researchdatabase")){
+						die("Failed to use database");
+					}
+					$query = "SELECT p.name AS name, p.id AS id FROM user AS u INNER JOIN person AS p
+							ON u.id = p.id WHERE u.type_flag='M' AND u.id != ".$_GET['userID'];
+                    $result = $mysqli->query($query);
+					if(!$result){
+						die("Invalid query");
+					}
+					if($result->num_rows ==0){
+						header('Location: /users.php?failureCannotDeleteOnlyMD');
+					}
+					for($count =0; $count < $result->num_rows; $count++){
+						$data = $result->fetch_assoc();
+						echo "<option name=\"supervisor".$data['id']."\">".$data['name']."</option>";
+					}
+					?>
+					</select>
                   </li>
                 </ul>
                 <div class="clearfix"></div>

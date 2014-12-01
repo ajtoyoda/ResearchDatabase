@@ -1,4 +1,5 @@
 <?php
+	require_once("add-user-functions.php");
 	//This output specifically formatted numbers from range $startRange to $endRange
 	function outputOptionNumbers($startRange, $endRange){
 		if($startRange > 31 or $startRange < 1 or $endRange < $startRange or $endRange > 31){
@@ -242,6 +243,9 @@
 		else{
 			return;
 		}
+	}
+	if(isset($_GET['emergencyContact'])){
+		addEmergencyContact();
 	}
 	$username = $_POST['username'];
 	$password = $_POST['password'];
