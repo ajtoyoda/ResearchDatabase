@@ -83,12 +83,22 @@ INNER JOIN person AS p ON u.id=p.id WHERE s.name = '$studyName'";
 		echo "</td>";
 		echo "<td class=\"subtable\">";
 		for($count = 0; $count < count($canReadArray); $count++){
-			echo "<p>".$canReadArray[$count]."</p>";
+			echo "<p>";
+      if ($canReadArray[$count] == 0)
+        echo "no";
+      else
+        echo "yes";
+      echo "</p>";
 		}
 		echo "</td>";
 		echo "<td class=\"subtable\">";
 		for($count = 0; $count < count($canWriteArray); $count++){
-			echo "<p>".$canWriteArray[$count]."</p>";
+			echo "<p>";
+      if ($canWriteArray[$count] == 0)
+        echo "no";
+      else
+        echo "yes";
+      echo "</p>";
 		}
 		echo "</td>		
 		<td><a href=\"/user/edit-user-permission.php?studyName=".$studyName."\">Edit</a></p></td>
