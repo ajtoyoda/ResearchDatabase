@@ -348,7 +348,6 @@
 		die("Invalid birthday magic");
 	}
 	$birthday = date('Y-m-d', $time);
-	
 	$type = $_POST['type'];
 	$gender= $_POST['gender'];
 	$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];

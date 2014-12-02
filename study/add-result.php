@@ -58,8 +58,8 @@
             <!-- Jamie: This link should go back to the study, so it needs the same url args as this page. -->
             <!--        Replace $whatever-s with actual data. -->
 			<?php
-				echo "<p><a href=\"/study/view-study?studyname=".$_GET['studyname']."\">&lt; ".$_GET['studyname']."</a></p>";
-				echo "<form action=\"/study/add-result?studyname=".$_GET['studyname']."&resultAddAttempt\" method=\"post\">";
+				echo "<p><a href=\"/study/view-study.php?studyname=".$_GET['studyname']."\">&lt; ".$_GET['studyname']."</a></p>";
+				echo "<form action=\"/study/add-result.php?studyname=".$_GET['studyname']."&numTypes=".$_GET['numTypes']."&resultAddAttempt\" method=\"post\">";
 			?>
               <div class="form-container">
                 <ul>
@@ -123,13 +123,13 @@
                       </select>
                     </p>
                     <p>Year:
-                      <input type="text" name="year" />
+                      <input type="text" name="dateYear" />
                     </p>
                   </li> 
                 </ul>
                 <ul>
                   <li><p>Description:</p></li>
-                  <li><input type="text" name="year" /></li>
+                  <li><input type="text" name="description" /></li>
                 </ul>
                 <!-- Jamie: This ul block is what you need to duplicate for each type. -->
 				<?php
