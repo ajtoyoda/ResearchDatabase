@@ -78,6 +78,7 @@
               <tr id="header">
                 <th><p>Patient</p></th>
                 <th><p>Date</p></th>
+                <th><p>Type</p></th>
                 <th><p>Description</p></th>
                 <th></th>
               </tr>

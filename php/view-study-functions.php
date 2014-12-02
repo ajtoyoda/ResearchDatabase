@@ -39,10 +39,24 @@
             die("Query 1 failed");
         }
 		$data = $result->fetch_assoc();
+    
+    // Get result type(s).
+    $query = "SELECT t.type, r.ID FROM type AS t INNER JOIN results AS r ON r.ID = t.Result_ID WHERE r.ID = '" . $resultID . "'";
+    $types = $mysqli->query($query);
+    if (!$types)
+        die("Query 2 failed");
+    
 		echo " <tr>
 				<td><p>".$data['name']."</p></td>
-                <td><p>".$data['date']."</p></td>
-                <td><p>".$data['description']."</p></td>
+                <td><p>".$data['date']."</p></td><td>";
+                
+    if ($types->num_rows != 0)
+    {
+        for ($i = 0; $i < $types->num_rows; $i++)
+            echo "<p>" . $types->fetch_assoc()["type"] . "</p>";
+    }
+    
+    echo "</td><td><p>".$data['description']."</p></td>
                 <td><a href=\"edit-result.php?id=".$resultID."&numTypes=0&studyname=".$_GET['studyname']."\">Edit</a><a href=\"delete-result.php?id=".$resultID."&studyname=".$_GET['studyname']."\">Delete</a></p></td> 
 				</tr>";
 	}
