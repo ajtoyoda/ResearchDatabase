@@ -68,14 +68,17 @@
             <div class="add-header">
               <ul>
                 <li><h2>Results</h2></li>
-                <li><input type="button" name="addResult" value="New" onclick="window.location = 'add-result.php';" /></li>
-              </ul>
+				<?php
+                echo "<li><input type=\"button\" name=\"addResult\" value=\"New\" onclick=\"window.location = 'add-result.php?numTypes=0&studyname=".$_GET['studyname']."';\" /></li>";
+				?>
+				</ul>
             </div>
             <div class="clearfix"></div>
             <table>
               <tr id="header">
                 <th><p>Patient</p></th>
                 <th><p>Date</p></th>
+                <th><p>Type</p></th>
                 <th><p>Description</p></th>
                 <th></th>
               </tr>

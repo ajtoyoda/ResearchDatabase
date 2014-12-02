@@ -52,9 +52,11 @@ function addEmergencyContact($ID){
 			die("invalid query 2");
 		}
 		$userID = (int)$result->fetch_assoc()['id'];
-		$query ="UPDATE TABLE person SET emergency_id =$userID WHERE id = $ID";
+		$query ="UPDATE person SET emergency_id =$userID WHERE id = $ID";
 		if(!$mysqli->query($query)){
 			$mysqli->query("DELETE FROM person WHERE id = $userID");
+			echo $query;
+			die("invalid query3");
 		}
 		return;
 	}
