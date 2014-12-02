@@ -98,11 +98,8 @@ table.patient-table td{
 	text-align: center;
 	
 }
-<<<<<<< HEAD
+
 table.patient-table td a, td a:focus, td a:visited, td:last-child a, td:last-child a:focus, td:last-child a:visited{
-=======
-table.patient-table td a, table.patient-table td a:focus, table.patient-table td a:visited{
->>>>>>> bf84b0529d79245e6503dacd921bbb347c749822
 	display: block;
     background-color: #4C5952;
     padding: 5px;
