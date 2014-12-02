@@ -6,6 +6,13 @@
 		if(!$mysqli->query("USE researchdatabase")){
 			die("Failed to use database");
 		}
+    // Don't allow the user to delete themselves.
+    session_start();
+    if ($_SESSION["userid"] == $userID)
+    {
+      header("Location: /users.php?failureLoggedIn");
+      return;
+    }
 		//If a supervisor need to replace first before finishing deletion
 		$query = "SELECT name FROM study WHERE supervisor_id = $userID";
 		$result = $mysqli->query($query);
