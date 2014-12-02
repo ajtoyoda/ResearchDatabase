@@ -92,20 +92,20 @@ table.no-modify td:first-child {
 
 table.patient-table td{
 	padding: 0px;
-	width:110px;
+	width:210px;
 	margin: 0px;
 	background-color: #4C5952;
 	text-align: center;
 	
 }
-table.patient-table td a, td a:focus, td a:visited{
+table.patient-table td a, td a:focus, td a:visited, td:last-child a, td:last-child a:focus, td:last-child a:visited{
 	display: block;
     background-color: #4C5952;
     padding: 5px;
 	margin: 0px!important;
     color: #EEEEEE;
     border-bottom: 0px;
-	width: 100px;
+	width: 200px;
     transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
 }
 

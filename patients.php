@@ -55,6 +55,7 @@
               <ul>
                 <li style="width: 525px;"><h1>Patients</h1></li>
 				<li><select name="studySelect" style="margin-right: 10px;">
+				<option name="default">All Studies</option>
 				<option name="studyName1">studyName1 </option></select></li>
                 <li><input type="button" name="addPatient" value="New" onclick="window.location = '/patient/add-patient.php';" /></li>
               </ul>
@@ -64,19 +65,13 @@
               <tr id="header">
 				<th><p>Name</th></p>
 				<th colspan="3"></th>
-				<th></th>
-				<th></th>
               </tr>
 			  
 			  <td><p>Patient Name1</p></td>
 			  <td><p><a href="/patient/view-patient.php">Patient</a></p></td>
 			  <td><p><a href="/patient/view-personal.php">Personal</a></p></td>
 			  <td><p><a href="/patient/view-medical.php">Medical</a></p></td>
-			  <td><p><a href="/patient/edit-patient.php">Edit</a></p></td>
-			  <td><p><a href="/patient/delete-patient.php">Delete</a></p></td>
-
-
-
+			  
             </table>
            
           </div>
