@@ -3,7 +3,9 @@
   require_once("../php/login-functions.php");
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
+  require_once("../php/add-results-functions.php");
   verifyLoggedIn();
+  addResult();
 ?>
 
 <!DOCTYPE html>
@@ -55,9 +57,10 @@
             <h1>Create a result</h1>
             <!-- Jamie: This link should go back to the study, so it needs the same url args as this page. -->
             <!--        Replace $whatever-s with actual data. -->
-            <p><a href="/study/view-study?studyname=JAMIE_PUT_SOMETHING_HERE">&lt; $studyname</a></p>
-            <!-- Jamie: As usual, change the action to fit what you need to do. -->
-            <form action="/study/view-study?studyname=blahblahblah" method="post">
+			<?php
+				echo "<p><a href=\"/study/view-study?studyname=".$_GET['studyname']."\">&lt; ".$_GET['studyname']."</a></p>";
+				echo "<form action=\"/study/add-result?studyname=".$_GET['studyname']."&resultAddAttempt\" method=\"post\">";
+			?>
               <div class="form-container">
                 <ul>
                   <li><p>Patient name:</p></li>
@@ -129,14 +132,44 @@
                   <li><input type="text" name="year" /></li>
                 </ul>
                 <!-- Jamie: This ul block is what you need to duplicate for each type. -->
-                <ul class="result-type">
-                  <!-- TODO: Not sure how to deal with result types... -->
-                  <li><p>Type:</p></li>
-                  <li>
-                    <input type="text" name="type0" />
-                    <input type="button" name="addType" value="Add" onclick="something??" />
-                  </li>
-                </ul>
+				<?php
+				$numTypes = $_GET['numTypes'];
+				if(!$numTypes){
+					echo " <ul class=\"result-type\"><li><p>Type:</p></li><li><input type=\"button\" name=\"addType\" style=\"width: 100px; margin-left: 0px;\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=1&studyname=".$_GET['studyname']."';\" /></li></ul>";
+				}
+				else{
+					if($numTypes == 1){
+					echo "<ul class=\"result-type\"><li><p>Type:</p></li><li>
+                    <input type=\"text\" name=\"type0\" />
+                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=".++$numTypes."&studyname=".$_GET['studyname']."';\" />
+					</li>
+					</ul>";
+					}else{
+					echo "<ul class=\"result-type\"><li><p>Type:</p></li>
+							<li>
+							<input type=\"text\" name=\"type0\" />
+							<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."';\" />
+							</li>
+						</ul>";
+					for($count = 2; $count < $numTypes; $count++){
+						echo "<ul class=\"result-type\">
+								<li><p></p></li>
+								<li>
+								<input type=\"text\" name=\"type".($count-2)."\" />
+								<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."';\" />
+								</li>
+							</ul>";
+					}
+					echo"<ul class=\"result-type\">
+					<li><p></p></li>
+					<li>
+                    <input type=\"text\" name=\"type".($numTypes-1)."\" />
+                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=".++$numTypes."&studyname=".$_GET['studyname']."';\" />
+					</li>
+					</ul>";
+				}
+				}
+				?>
               </div>
               <div class="clearfix"></div>
               <div class="form-buttons">

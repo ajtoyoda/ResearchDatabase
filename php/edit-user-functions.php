@@ -1,5 +1,84 @@
 <?php
-	require_once("add-user-functions.php");
+	function editEmergencyContact($ID){
+	$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
+	if(!$mysqli->query("USE researchdatabase")){
+		die("failed to use database");
+	}
+	if( empty($_POST['emergname']) || empty($_POST['emergbirthmonth'])|| empty($_POST['emergbirthday'])|| empty($_POST['emergbirthyear'])
+		|| empty($_POST['emerggender']) || empty($_POST['emergaddressLine1']) ||!isset($_POST['emergaddressLine2'])
+		||empty($_POST['emergcity'])||empty($_POST['emergcountry'])
+		||empty($_POST['emergphone'])||empty($_POST['emergemail'])){
+			header("Location: /user/add-user.php?failure&emergencyContact");
+	}
+	if(!($result =$mysqli->query("SELECT emergency_id FROM person WHERE id = $ID"))){
+		die("Invalid query for check");
+	}else{
+		if($result->num_rows == 0){
+		$emergencyID = NULL;
+		}
+		else{
+		$data = $result->fetch_assoc();
+		$emergencyID=$data['emergency_id'];
+		}
+	}
+	$name = $_POST['emergname'];
+	$birthmonthString = $_POST['emergbirthmonth'];
+	$birthmonth = 1;
+	if($birthmonthString == "january")$birthmonth = 1;
+	elseif($birthmonthString =="february")$birthmonth = 2;
+	elseif($birthmonthString =="march")$birthmonth = 3;
+	elseif($birthmonthString =="april")$birthmonth = 4;
+	elseif($birthmonthString =="may")$birthmonth = 5;
+	elseif($birthmonthString =="june")$birthmonth = 6;
+	elseif($birthmonthString =="july")$birthmonth = 7;
+	elseif($birthmonthString =="august")$birthmonth = 8;
+	elseif($birthmonthString =="september")$birthmonth = 9;
+	elseif($birthmonthString =="october")$birthmonth = 10;
+	elseif($birthmonthString =="november")$birthmonth = 11;
+	else $birthmonth = 12;
+	
+	//Getting birthday into date format
+	$time = mktime(0,0,0, $birthmonth, (int)$_POST['emergbirthday'], (int)$_POST['emergbirthyear']);
+	if($time < mktime(0,0,0,1,1,1900) || $time >time()){
+		die("Invalid birthday magic");
+	}
+	$birthday = date('Y-m-d', $time);
+	
+	$gender= $_POST['emerggender'];
+	$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
+	$phone = $_POST['emergphone'];
+	$email = $_POST['emergemail'];
+	$name = $mysqli->real_escape_string($name);
+	$address = $mysqli->real_escape_string($address);
+	$phone = $mysqli->real_escape_string($phone);
+	$email = $mysqli->real_escape_string($email);
+	if($emergencyID == NULL){
+	$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
+	if(!$result = $mysqli->query($query)){
+		echo $query;
+		die("invalid query 1");
+	}else{
+		$query = "SELECT max(id) AS id FROM person";
+		if(!($result = $mysqli->query($query))){
+			die("invalid query 2");
+		}
+		$userID = (int)$result->fetch_assoc()['id'];
+		$query ="UPDATE person SET emergency_id =$userID WHERE id = $ID";
+		if(!$mysqli->query($query)){
+			echo $query;
+			die("invalid query3");
+		}
+		return;
+		}
+	}else{
+		$query = "UPDATE person SET birthday = '$birthday', gender = $gender, name = '$name', phone = '$phone'
+				address = '$address', email = '$email' WHERE id = $emergencyID";
+		if(!$mysqli->query($query)){
+			echo $query;
+			die("invalid query4");
+		}
+	}
+}
 	//This output specifically formatted numbers from range $startRange to $endRange
 	function outputOptionNumbers($startRange, $endRange){
 		if($startRange > 31 or $startRange < 1 or $endRange < $startRange or $endRange > 31){
@@ -244,9 +323,6 @@
 			return;
 		}
 	}
-	if(isset($_GET['emergencyContact'])){
-		addEmergencyContact();
-	}
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$confirm = $_POST['confirm'];
@@ -317,11 +393,14 @@
 					WHERE id = $userID";
 		$result = $mysqli->query($query);
 		if(!$result){
-			$mysqli->query("DELETE FROM user WHERE user.username = '$username'");
+			$mysqli->query("DELETE FROM user WHERE user.name = '$username'");
 			die('invalid query2');
 			return;
 		}
 		else{
+			if(isset($_GET['emergencyContact'])){
+				editEmergencyContact($userID);
+			}
 			header("Location: /users.php?successfulEditUser");
 			return;
 		}
