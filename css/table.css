@@ -98,7 +98,7 @@ table.patient-table td{
 	text-align: center;
 	
 }
-table.patient-table td a, td a:focus, td a:visited{
+table.patient-table td a, table.patient-table td a:focus, table.patient-table td a:visited{
 	display: block;
     background-color: #4C5952;
     padding: 5px;

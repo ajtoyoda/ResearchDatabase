@@ -60,7 +60,7 @@
             <div class="add-header" id="top">
               <ul>
                 <li><h1>Manage users</h1></li>
-                <li><input type="button" name="addUser" value="New" onclick="window.location = '/user/add-user.php';" /></li>
+                <li><input type="button" name="addUser" value="New" onclick="window.location = '/user/add-user.php?emergencyContact';" /></li>
               </ul>
             </div>
             <div class="clearfix"></div>
@@ -68,6 +68,7 @@
             <?php successMessage("The user was successfully added.", "successfulAddUser"); ?>
             <?php successMessage("The user was successfully updated.", "successfulEditUser"); ?>
             <?php errorMessage("There must be at least one MD. To delete this user, create a new MD first.", "failureCannotDeleteOnlyMD"); ?>
+            <?php errorMessage("You cannot delete yourself.", "failureLoggedIn"); ?>
             <table>
               <tr id="header">
                 <th><p>User</p></th>
