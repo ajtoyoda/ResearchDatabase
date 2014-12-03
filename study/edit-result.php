@@ -44,7 +44,7 @@
           <li id="current"><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, false); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -56,8 +56,8 @@
             <h1>Edit a result</h1>
 			<?php
 				$studyName = getStudyFromResult($_GET['id']);
-				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt;".$studyName." </a></p>";
-				echo "<form action=\"/study/edit-results.php?id=".$_GET['id']."&editResultsAttempt\" method=\"post\">";
+				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt; ".$studyName." </a></p>";
+				echo "<form action=\"/study/edit-results.php?id=".$_GET['id']."&amp;editResultsAttempt\" method=\"post\">";
 			?>
               <div class="form-container">
                 <ul>

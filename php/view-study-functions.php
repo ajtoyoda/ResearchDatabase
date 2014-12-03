@@ -57,7 +57,7 @@
     }
     
     echo "</td><td><p>".$data['description']."</p></td>
-                <td><a href=\"edit-result.php?id=".$resultID."&numTypes=0&studyname=".$_GET['studyname']."\">Edit</a><a href=\"delete-result.php?id=".$resultID."&studyname=".$_GET['studyname']."\">Delete</a></p></td> 
+                <td><p><a href=\"edit-result.php?id=".$resultID."&amp;numTypes=0&amp;studyname=".$_GET['studyname']."\">Edit</a><a href=\"delete-result.php?id=".$resultID."&amp;studyname=".$_GET['studyname']."\">Delete</a></p></td> 
 				</tr>";
 	}
 	//This function returns an array of results associated with the study(PK aka study_name) which is passed in

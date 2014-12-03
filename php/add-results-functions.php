@@ -84,6 +84,6 @@ function addResult(){
 			die("Invalid query ".$count);
 		}	
 	}
-	header('Location: /study/view-study.php?studyname='.$studyName.'&successfulAddResult);
+	header('Location: /study/view-study.php?studyname='.$studyName.'&successfulAddResult');
 }
 ?>
