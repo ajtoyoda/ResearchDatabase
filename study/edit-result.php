@@ -47,7 +47,7 @@
           <li id="current"><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, false); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>

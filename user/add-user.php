@@ -48,7 +48,7 @@
           <li><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, true); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -63,7 +63,7 @@
 			errorMessage("The new user could not be added because the passwords do not match.", "failureInvalidPassword");?>
 			<?php
 			if(isset($_GET['emergencyContact'])){
-				echo"<form action=\"add-user.php?createAttempt&emergencyContact\" method=\"post\">";
+				echo"<form action=\"add-user.php?createAttempt&amp;emergencyContact\" method=\"post\">";
 			}else{
 				echo"<form action=\"add-user.php?createAttempt\" method=\"post\">";
 			}
@@ -210,7 +210,7 @@
               <div class=\"form-container\">
                 <ul>
                   <li><p>Name:</p></li>
-                  <li><input type=\"text\" name=\"emergname\" id=\"name\" /></li>
+                  <li><input type=\"text\" name=\"emergname\" /></li>
                 </ul>
                 <ul class=\"birthday\">
                   <li><p>Birthday:</p></li>
@@ -314,11 +314,10 @@
               </div>
               <div class=\"form-buttons\">
                 <input type=\"submit\" name=\"submit\" value=\"Create\" />
-                <input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location = '/users.php';\" />";}	
+                <input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location = '/users.php';\" />
+              </div>";}	
 				?>
-			  <div class="form-buttons.long">
-			  </div>
-            </form>
+			      </form>
           </div>
         </div>
       </div>

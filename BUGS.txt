@@ -1,0 +1,5 @@
+Things that are broken:
+  * Add result: invalid query.
+  * Edit result doesn't work with types.
+  * It is possible to edit an MD and change their type to non-MD
+    status without reassigning the studies they supervise.

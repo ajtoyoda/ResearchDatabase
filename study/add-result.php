@@ -45,7 +45,7 @@
           <li id="current"><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, false); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -111,15 +111,15 @@
                         <option value="january">January</option>
                         <option value="february">February</option>
                         <option value="march">March</option>
-                        <option name="april">April</option>
-                        <option name="may">May</option>
-                        <option name="june">June</option>
-                        <option name="july">July</option>
-                        <option name="august">August</option>
-                        <option name="september">September</option>
-                        <option name="october">October</option>
-                        <option name="november">November</option>
-                        <option name="december">December</option>
+                        <option value="april">April</option>
+                        <option value="may">May</option>
+                        <option value="june">June</option>
+                        <option value="july">July</option>
+                        <option value="august">August</option>
+                        <option value="september">September</option>
+                        <option value="october">October</option>
+                        <option value="november">November</option>
+                        <option value="december">December</option>
                       </select>
                     </p>
                     <p>Year:
@@ -135,28 +135,33 @@
 				<?php
 				$numTypes = $_GET['numTypes'];
 				if(!$numTypes){
-					echo " <ul class=\"result-type\"><li><p>Type:</p></li><li><input type=\"button\" name=\"addType\" style=\"width: 100px; margin-left: 0px;\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=1&studyname=".$_GET['studyname']."';\" /></li></ul>";
+					echo " <ul class=\"result-type\"><li><p>Type:</p></li><li><input type=\"button\" name=\"addType\" style=\"width: 100px; margin-left: 0px;\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=1&amp;studyname=".$_GET['studyname']."';\" /></li></ul>";
 				}
 				else{
 					if($numTypes == 1){
 					echo "<ul class=\"result-type\"><li><p>Type:</p></li><li>
                     <input type=\"text\" name=\"type0\" />
-                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=".++$numTypes."&studyname=".$_GET['studyname']."';\" />
+                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=".++$numTypes."&amp;studyname=".$_GET['studyname']."';\" />
 					</li>
 					</ul>";
 					}else{
 					echo "<ul class=\"result-type\"><li><p>Type:</p></li>
 							<li>
 							<input type=\"text\" name=\"type0\" />
-							<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."';\" />
+							<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&amp;studyname=".$_GET['studyname']."';\" />
 							</li>
 						</ul>";
 					for($count = 2; $count < $numTypes; $count++){
 						echo "<ul class=\"result-type\">
 								<li><p></p></li>
 								<li>
+<<<<<<< HEAD
 								<input type=\"text\" name=\"type".($count-1)."\" />
 								<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."';\" />
+=======
+								<input type=\"text\" name=\"type".($count-2)."\" />
+								<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&amp;studyname=".$_GET['studyname']."';\" />
+>>>>>>> e63a830e60d60193b3f538ce3906f3d22fbe9b71
 								</li>
 							</ul>";
 					}
@@ -164,7 +169,7 @@
 					<li><p></p></li>
 					<li>
                     <input type=\"text\" name=\"type".($numTypes-1)."\" />
-                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=".++$numTypes."&studyname=".$_GET['studyname']."';\" />
+                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=".++$numTypes."&amp;studyname=".$_GET['studyname']."';\" />
 					</li>
 					</ul>";
 				}
@@ -175,7 +180,7 @@
               <div class="form-buttons">
                 <input type="submit" name="submit" value="Create" />
                 <!-- Jamie: This javascript needs to be updated properly. -->
-                <input type="button" name="cancel" value="Cancel" onclick="window.location='/study/view-study.php?studyname=JAMIE_PUT_SOMETHING_HERE';" />
+                <input type="button" name="cancel" value="Cancel" onclick="window.location='/study/view-study.php?studyname=<?php echo $_GET["studyname"]; ?>';" />
               </div>
             </form>
           </div>

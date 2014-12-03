@@ -17,7 +17,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Edit $study :: Medical Research Database</title>
+    <title>Edit <?php echo $_GET["studyname"]; ?> :: Medical Research Database</title>
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
@@ -48,7 +48,7 @@
           <li id="current"><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, false); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -67,7 +67,7 @@
             <?php errorMessage("The supervisor specified does not exist.", "failureInvalidSupervisor"); ?>
             <?php
 				$studyName = $_GET['studyname'];
-				echo "<form action=\"/study/edit-study.php?studyname=".$studyName."&editStudyAttempt\" method=\"post\">";
+				echo "<form action=\"/study/edit-study.php?studyname=".$studyName."&amp;editStudyAttempt\" method=\"post\">";
 			?>
 				<div class="form-container">
                 <ul>

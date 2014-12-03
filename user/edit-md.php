@@ -44,7 +44,7 @@
           <li><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, true); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -56,7 +56,7 @@
 		  <h1>Edit <?php echo getPerson($_GET["userID"])["name"]; ?></h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <p>This MD is currently supervising projects. Before their user type can be modified, the projects they are supervising must be assigned to a new MD.</p>
-			<?php echo "<form action=\"edit-md.php?editMD&userID=".$_GET['userID']."\" method=\"post\">";?>
+			<?php echo "<form action=\"edit-md.php?editMD&amp;userID=".$_GET['userID']."\" method=\"post\">";?>
               <div class="form-container">
                 <ul class="wide-select">
                   <li><p>New supervisor:</p></li>

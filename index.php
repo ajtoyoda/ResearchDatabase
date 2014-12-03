@@ -44,7 +44,7 @@
           <li id="current"><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false,false); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -63,15 +63,15 @@
             <?php successMessage("The new study was successfully created.", "successfulAddStudy"); ?>
             <?php successMessage("The study was successfully updated.", "successfulEditStudy"); ?>
             <div class="info-box">
-				 <ul>
-					<?php
-						$canViewStudies = getStudies();
-						for($count = 0; $count < count($canViewStudies); $count++){
-						  showStudy($canViewStudies[$count]);
-						}
-					?>
-                 </ul>
-              <div class="clearfix" />
+				      <ul>
+					      <?php
+						      $canViewStudies = getStudies();
+						      for($count = 0; $count < count($canViewStudies); $count++){
+						        showStudy($canViewStudies[$count]);
+						      }
+					      ?>
+              </ul>
+              <div class="clearfix"></div>
             </div>
           </div>
         </div>
