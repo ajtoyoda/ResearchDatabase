@@ -49,7 +49,7 @@
           <li><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, true);?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -65,7 +65,7 @@
 			<p><a href="/users.php">&lt; Manage users</a></p>
 			<?php
 				$studyName = $_GET['studyName'];
-				echo "<form action=\"/user/edit-user-permission.php?attemptEditUserPermissions&studyName=".$studyName."\" method=\"post\">";
+				echo "<form action=\"/user/edit-user-permission.php?attemptEditUserPermissions&amp;studyName=".$studyName."\" method=\"post\">";
 			?>
 			<table class="no-modify">
                 <tr id="header">
