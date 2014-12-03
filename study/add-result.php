@@ -59,7 +59,7 @@
             <!--        Replace $whatever-s with actual data. -->
 			<?php
 				echo "<p><a href=\"/study/view-study.php?studyname=".$_GET['studyname']."\">&lt; ".$_GET['studyname']."</a></p>";
-				echo "<form action=\"/study/add-result.php?studyname=".$_GET['studyname']."&numTypes=".$_GET['numTypes']."&resultAddAttempt\" method=\"post\">";
+				echo "<form action=\"/study/add-result.php?studyname=".$_GET['studyname']."&numTypes=".$_GET['numTypes']."&addResultAttempt\" method=\"post\">";
 			?>
               <div class="form-container">
                 <ul>
@@ -155,7 +155,7 @@
 						echo "<ul class=\"result-type\">
 								<li><p></p></li>
 								<li>
-								<input type=\"text\" name=\"type".($count-2)."\" />
+								<input type=\"text\" name=\"type".($count-1)."\" />
 								<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."';\" />
 								</li>
 							</ul>";

@@ -5,6 +5,9 @@
   require_once("../php/index-functions.php");
   require_once("../php/edit-results-functions.php");
   verifyLoggedIn();
+  editResult();
+  checkNumType();
+  deleteType();
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +60,7 @@
 			<?php
 				$studyName = getStudyFromResult($_GET['id']);
 				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt;".$studyName." </a></p>";
-				echo "<form action=\"/study/edit-results.php?id=".$_GET['id']."&editResultsAttempt\" method=\"post\">";
+				echo "<form action=\"/study/edit-result.php?id=".$_GET['id']."&numTypes=".$_GET['numTypes']."&studyname=".$_GET['studyname']."&editResultsAttempt\" method=\"post\">";
 			?>
               <div class="form-container">
                 <ul>
@@ -107,14 +110,51 @@
 				  ?>
 				  </ul>
                 <!-- Jamie: This ul block is what needs to be duplicated for each type. -->
-                <ul class="result-type">
-                  <!-- TODO: Not sure how to deal with result types... -->
-                  <li><p>Type:</p></li>
-                  <li>
-                    <input type="text" name="type0" value="$type" />
-                    <input type="button" name="addType" value="Add" onclick="something??" />
-                  </li>
-                </ul>
+               <?php
+				$numTypes = $_GET['numTypes'];
+				if(!$numTypes){
+					echo " <ul class=\"result-type\"><li><p>Type:</p></li><li><input type=\"button\" name=\"addType\" style=\"width: 100px; margin-left: 0px;\" value=\"Add\" onclick=\"window.location='edit-result.php?id=".$_GET['id']."&numTypes=".++$numTypes."&studyname=".$_GET['studyname']."&setNumTypes';\" /></li></ul>";
+				}
+				else{
+					$types = getTypeFromResult($_GET['id']);
+					if(count($types)<$numTypes){
+						for($count = count($types); $count < $numTypes; $count++){
+							array_push($types, "");
+						}
+					}
+					if($numTypes == 1){
+					echo "<ul class=\"result-type\"><li><p>Type:</p></li><li>
+                    <input type=\"text\" name=\"type0\" value=\"".$types[0]."\" />
+                    <input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."&setNumTypes&deleteTypeAttempt=".$types[0]."';\" />
+					<input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".++$numTypes."&studyname=".$_GET['studyname']."&setNumTypes';\" />
+					</li>
+					</ul>";
+					}else{
+					echo "<ul class=\"result-type\"><li><p>Type:</p></li>
+							<li>
+							<input type=\"text\" name=\"type0\" value=\"".$types[0]."\" />
+							<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."&setNumTypes&deleteTypeAttempt=".$types[0]."';\" />
+							</li>
+						</ul>";
+					for($count = 2; $count < $numTypes; $count++){
+						echo "<ul class=\"result-type\">
+								<li><p></p></li>
+								<li>
+								<input type=\"text\" name=\"type".($count-1)."\" value=\"".$types[$count -1]."\" />
+								<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."&setNumTypes&deleteTypeAttempt=".$types[$count-1]."';\" />
+								</li>
+							</ul>";
+					}
+					echo"<ul class=\"result-type\">
+					<li><p></p></li>
+					<li>
+                    <input type=\"text\" name=\"type".($numTypes-1)."\" value=\"".$types[$numTypes-1]."\"/>
+                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".++$numTypes."&studyname=".$_GET['studyname']."&setNumTypes';\" />
+					</li>
+					</ul>";
+				}
+				}
+				?>
               </div>
               <div class="clearfix"></div>
               <div class="form-buttons">
