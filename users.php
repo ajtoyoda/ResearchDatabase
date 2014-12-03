@@ -48,7 +48,7 @@
           <li><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, true);?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -70,39 +70,38 @@
             <?php errorMessage("There must be at least one MD. To delete this user, create a new MD first.", "failureCannotDeleteOnlyMD"); ?>
             <?php errorMessage("You cannot delete yourself.", "failureLoggedIn"); ?>
             <table>
-              <tr id="header">
+              <tr>
                 <th><p>User</p></th>
                 <th><p>ID</p></th>
                 <th><p>Type</p></th>
                 <th></th>
               </tr>
               <?php
-				$userID = getUsers();
-				for($count = 0; $count < count($userID); $count++){
-					showAllUserInfo($userID[$count]);
-				}
-			  ?>
+				        $userID = getUsers();
+				        for($count = 0; $count < count($userID); $count++){
+					        showAllUserInfo($userID[$count]);
+				        }
+			        ?>
             </table>
-			<!-- ============================== Table 2 =================================================== -->
-            <a name="permissions"></a>
+			      <!-- ============================== Table 2 =================================================== -->
+            <a id="permissions"></a>
             <h1>User permissions</h1>
             <?php successMessage("Successfully modified the study's permissions.", "successfulEditPermissions"); ?>
             <table class="edit-only">
-              <tr id="header">
+              <tr>
                 <th><p>Study</p></th>
-				<th><p>User</p></th>
+				        <th><p>User</p></th>
                 <th><p>Can read</p></th>
                 <th><p>Can write</p></th>
                 <th></th>
               </tr>
-				<?php
+				      <?php
                 $studyNames = getAllStudies();
-				for($count = 0; $count < count($studyNames); $count++){
-					showView_EditInfo($studyNames[$count]);
-				}
-				?>
+				        for($count = 0; $count < count($studyNames); $count++){
+					          showView_EditInfo($studyNames[$count]);
+				        }
+			        ?>
             </table>
-		
           </div>
         </div>
       </div>

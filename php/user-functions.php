@@ -23,7 +23,7 @@
 			<td><p>".$data['name']."</p></td>
 			<td><p>".$userID."</p></td>
 			<td><p>".$type."</p></td>
-			<td><a href=\"/user/edit-user.php?userID=".$userID."\">Edit</a><a href=\"/user/delete-user.php?userID=".$userID."\">Delete</a></p></td>
+			<td><p><a href=\"/user/edit-user.php?userID=".$userID."\">Edit</a><a href=\"/user/delete-user.php?userID=".$userID."\">Delete</a></p></td>
 			</tr>";
     }
 	//This function returns all users in an array. To access all of them in a loop use
@@ -101,7 +101,7 @@ INNER JOIN person AS p ON u.id=p.id WHERE s.name = '$studyName'";
       echo "</p>";
 		}
 		echo "</td>		
-		<td><a href=\"/user/edit-user-permission.php?studyName=".$studyName."\">Edit</a></p></td>
+		<td><p><a href=\"/user/edit-user-permission.php?studyName=".$studyName."\">Edit</a></p></td>
 		</tr>";
 	}
 	//This function returns all studies regardless of view_edit privledges of user(only should be used by admin)
