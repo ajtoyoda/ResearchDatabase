@@ -1,6 +1,6 @@
 <?php
-  require_once("php/user-permissions.php");
-  require_once("php/login-functions.php");
+  require_once("../php/user-permissions.php");
+  require_once("../php/login-functions.php");
   verifyLoggedIn();
 ?>
 
@@ -61,9 +61,9 @@
               </ul>
             </div>
             <div class="clearfix"></div>
-            <table class=no-modify>
+            <table>
               <tr id="header">
-				<th><p>Name</th></p>
+				<th><p>Name</p></th>
 				<th><p>Health Care Number</p></th>
 				<th><p>Height</p></th>
 				<th><p>Weight</p></th>
@@ -72,9 +72,9 @@
               </tr>
 			  
 			  <td><p>Patient Name1</p></td>
-			  <td><p>Health Care Number</td></p>
-			  <td><p>Height</td></p>
-			  <td><p>Weight</td></p>
+			  <td><p>Health Care Number</p></td>
+			  <td><p>Height</p></td>
+			  <td><p>Weight</p></td>
 			  <td><p><a href="/patient/edit-patient.php">Edit</a></p></td>
 			  
 			  
