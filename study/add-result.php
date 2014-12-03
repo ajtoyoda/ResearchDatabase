@@ -141,7 +141,8 @@
 					if($numTypes == 1){
 					echo "<ul class=\"result-type\"><li><p>Type:</p></li><li>
                     <input type=\"text\" name=\"type0\" />
-                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?numTypes=".++$numTypes."&amp;studyname=".$_GET['studyname']."';\" />
+                    <input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."';\" />
+					<input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/add-result.php?&numTypes=".++$numTypes."&studyname=".$_GET['studyname']."';\" />
 					</li>
 					</ul>";
 					}else{
@@ -155,13 +156,8 @@
 						echo "<ul class=\"result-type\">
 								<li><p></p></li>
 								<li>
-<<<<<<< HEAD
 								<input type=\"text\" name=\"type".($count-1)."\" />
 								<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."';\" />
-=======
-								<input type=\"text\" name=\"type".($count-2)."\" />
-								<input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/add-result.php?numTypes=".($numTypes-1)."&amp;studyname=".$_GET['studyname']."';\" />
->>>>>>> e63a830e60d60193b3f538ce3906f3d22fbe9b71
 								</li>
 							</ul>";
 					}
