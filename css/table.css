@@ -123,3 +123,9 @@ table.patient-table td:first-child{
 	background-color: #EEEEEE
 }
 
+table.std td:last-child{
+	border: 1px solid #4C5952;
+    padding: 5px;
+	vertical-align: top;
+	background-color: #EEEEEE
+}

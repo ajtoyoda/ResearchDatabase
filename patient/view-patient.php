@@ -1,6 +1,7 @@
 <?php
-  require_once("/php/user-permissions.php");
-  require_once("/php/login-functions.php");
+  require_once("../php/user-permissions.php");
+  require_once("../php/login-functions.php");
+
   verifyLoggedIn();
 ?>
 
@@ -53,33 +54,42 @@
           <div class="padding">
             <div class="add-header" id="top">
               <ul>
-                <li style="width: 525px;"><h1>Patients</h1></li>
-				<li><select name="studySelect" style="margin-right: 10px;">
-				<option name="default">All Studies</option>
-				<option name="studyName1">studyName1 </option></select></li>
-                <li><input type="button" name="addPatient" value="New" onclick="window.location = '/patient/add-patient.php';" /></li>
+                <li style="width: 455px;"><h1>Patient Name</h1></li>
+				<li><h2 style="padding-right: 10px;">Patient Information</h2></li>
+                <li><input type="button" name="editPersonal" value="Edit" onclick="window.location = '/patient/edit-personal.php';" /></li>
+				<!-- How do I make this justify left? And how do i put a < infront of it without it being a tag-->
+				<li><a href="/patients.php">Patients</a></li>
               </ul>
             </div>
             <div class="clearfix"></div>
-            <table class=no-modify>
+
+             <table class = "std">
               <tr id="header">
-				<th><p>Name</th></p>
-				<th><p>Health Care Number</p></th>
-				<th><p>Height</p></th>
-				<th><p>Weight</p></th>
-				
+				<th></th>
 				<th></th>
               </tr>
-			  
-			  <td><p>Patient Name1</p></td>
-			  <td><p>Health Care Number</td></p>
-			  <td><p>Height</td></p>
-			  <td><p>Weight</td></p>
-			  <td><p><a href="/patient/edit-patient.php">Edit</a></p></td>
-			  
-			  
-			  
+			  <tr>
+			    <td><p>Name</p></td>
+			    <td><p>Patient Name1</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Health Care Number</p></td>
+			    <td><p>11111-1111</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Height</p></td>
+			    <td><p>150</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Weight</p></td>			  
+			    <td><p>50</p></td>
+			  </tr>
             </table>
+			
+			  
+			  
+			  
+            
            
           </div>
         </div>
