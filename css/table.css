@@ -125,12 +125,11 @@ table.patient-table td:first-child{
 
 table.std td:last-child{
 	border: 1px solid #4C5952;
-    
 	vertical-align: top;
-	background-color: #EEEEEE
+	background-color: #EEEEEE;
 }
 
-table.std td a, td a:focus, td a:visited{
+table.std td a, table.std td a:focus,table.std td a:visited{
 	
 	display: block;
     background-color: #4C5952;
@@ -142,7 +141,9 @@ table.std td a, td a:focus, td a:visited{
     transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
 }
 
-table.std td a:hover{
+table.std td a:hover,table.std td:last-child:hover{
 	color: #4C5952;
     background-color: #EEEEEE;
 }
+
+

@@ -1,3 +1,5 @@
 Things that are broken:
   * It is possible to edit an MD and change their type to non-MD
     status without reassigning the studies they supervise.
+  * The back to patients link on patient sub pages does not justify 
+	left
