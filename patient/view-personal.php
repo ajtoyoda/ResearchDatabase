@@ -54,7 +54,7 @@
           <div class="padding">
             <div class="add-header" id="top">
               <ul>
-                <li style="width: 455px;"><h1>Patient Name</h1></li>
+                <li style="width: 440px;"><h1>Patient Name</h1></li>
 				<li><h2 style="padding-right: 10px;">Personal Information</h2></li>
                 <li><input type="button" name="editPersonal" value="Edit" onclick="window.location = '/patient/edit-personal.php';" /></li>
 				<!-- How do I make this justify left? And how do i put a < infront of it without it being a tag-->
@@ -92,13 +92,45 @@
 			    <td><p>Address</p></td>			  
 			    <td><p>11 xxxxxxxxxxxxxx xxxxx XX Calgary AB</p></td>
 			  </tr>
+			  <!-- if the patient has an emerge contact-->
+			  <!--<tr>
+				<td><p>Emergency Contact</p></td>
+				<td><a href="/patient/edit-emerge.php">View</a></td>
+			  </tr>-->
             </table>
 			
-			  
-			  
-			  
-            
-           
+			<!-- again, if present, I think this is better -->
+			<h2><p>Emergency Contact</p></h2>
+			<table class = "std">
+              <tr id="header">
+				<th></th>
+				<th></th>
+              </tr>
+			  <tr>
+			    <td><p>Name</p></td>
+			    <td><p>Patient Name1</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Gender</p></td>
+			    <td><p>M/F</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Birthday</p></td>
+			    <td><p>1111-22-33</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Phone</p></td>
+			    <td><p>111-222-3333</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Email</p></td>
+			    <td><p>xxxxx.xxxxxx@xxxx.com</p></td>
+			  </tr>
+			  <tr>
+			    <td><p>Address</p></td>			  
+			    <td><p>11 xxxxxxxxxxxxxx xxxxx XX Calgary AB</p></td>
+			  </tr>
+			</table>
           </div>
         </div>
       </div>
