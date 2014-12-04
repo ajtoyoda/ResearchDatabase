@@ -47,7 +47,7 @@
           <li><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, true); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -69,9 +69,9 @@
 			<?php
 				$userID = $_GET['userID'];
 				if(isset($_GET['emergencyContact'])){
-					echo "<form action=\"edit-user.php?emergencyContact&editAttempt&userID=".$userID."\" method=\"post\">";
+					echo "<form action=\"edit-user.php?emergencyContact&amp;editAttempt&amp;userID=".$userID."\" method=\"post\">";
 				}else{
-					echo "<form action=\"edit-user.php?editAttempt&userID=".$userID."\" method=\"post\">";
+					echo "<form action=\"edit-user.php?editAttempt&amp;userID=".$userID."\" method=\"post\">";
 				}
 			?>
 			<h2>Personal information</h2>
@@ -251,7 +251,7 @@
 			    echo "<div class=\"form-buttons\">
                 <input type=\"submit\" name=\"submit\" value=\"Update\" />
                 <input type=\"button\" name=\"cancel\" value=\"Cancel\" onclick=\"window.location = '/users.php';\" />
-				<input type=\"button\" style=\"width: 250px\" name=\"addEmergC\" value=\"Add Emergency Contact\" onclick=\"window.location = '/user/edit-user.php?userID=".$_GET['userID']."&emergencyContact';\"/>";
+				<input type=\"button\" style=\"width: 250px\" name=\"addEmergC\" value=\"Add Emergency Contact\" onclick=\"window.location = '/user/edit-user.php?userID=".$_GET['userID']."&amp;emergencyContact';\"/>";
 					}else{
 					echo    
               "<h2>Emergency contact information</h2>

@@ -3,12 +3,15 @@ function addResult(){
 	$mysqli= new mysqli("localhost", "root", "", "researchdatabase");
 	if(empty($_POST['patient'])||empty($_POST['dateDay']) 
 		|| empty($_POST['dateMonth'])|| empty($_POST['dateYear'])|| empty($_POST['description'])){
-		if(isset($_GET['addStudyAttempt'])){
+		if(isset($_GET['addResultAttempt'])){
 			header("Location: /study/add-result.php?failure&studyname=".$_GET['studyname']."&numTypes=".$_GET['numTypes']."");
 		}
 		else{
 			return;
 		}
+	}
+	if(!isset($_GET['addResultAttempt'])){
+		return;
 	}
 	$typeArray = array();
 	for($count = 0; $count < $_GET['numTypes']; $count++){
@@ -27,17 +30,17 @@ function addResult(){
 	$birthmonthString = $_POST['dateMonth'];
 	echo $birthmonthString;
 	$birthmonth = 1;
-	if($birthmonthString == "January")$birthmonth = 1;
-	elseif($birthmonthString =="February")$birthmonth = 2;
-	elseif($birthmonthString =="March")$birthmonth = 3;
-	elseif($birthmonthString =="April")$birthmonth = 4;
-	elseif($birthmonthString =="May")$birthmonth = 5;
-	elseif($birthmonthString =="June")$birthmonth = 6;
-	elseif($birthmonthString =="July")$birthmonth = 7;
-	elseif($birthmonthString =="August")$birthmonth = 8;
-	elseif($birthmonthString =="September")$birthmonth = 9;
-	elseif($birthmonthString =="October")$birthmonth = 10;
-	elseif($birthmonthString =="November")$birthmonth = 11;
+	if($birthmonthString == "january")$birthmonth = 1;
+	elseif($birthmonthString =="february")$birthmonth = 2;
+	elseif($birthmonthString =="march")$birthmonth = 3;
+	elseif($birthmonthString =="april")$birthmonth = 4;
+	elseif($birthmonthString =="may")$birthmonth = 5;
+	elseif($birthmonthString =="june")$birthmonth = 6;
+	elseif($birthmonthString =="july")$birthmonth = 7;
+	elseif($birthmonthString =="august")$birthmonth = 8;
+	elseif($birthmonthString =="september")$birthmonth = 9;
+	elseif($birthmonthString =="october")$birthmonth = 10;
+	elseif($birthmonthString =="november")$birthmonth = 11;
 	else $birthmonth = 12;
 	
 	//Getting birthday into date format
@@ -84,6 +87,6 @@ function addResult(){
 			die("Invalid query ".$count);
 		}	
 	}
-	header('Location: /study/view-study.php?studyname='.$studyName.'&successfulAddResult);
+	header('Location: /study/view-study.php?studyname='.$studyName.'&successfulAddResult');
 }
 ?>

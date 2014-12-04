@@ -143,7 +143,7 @@
 	}
 	elseif($monthSelected ==2){
 		echo "<option value=\"january\" >January</option>
-                        <option value=\"february\"selected=\"selected\">February</option>
+                        <option value=\"february\" selected=\"selected\">February</option>
                         <option value=\"march\">March</option>
                         <option value=\"april\">April</option>
                         <option value=\"may\">May</option>
@@ -173,7 +173,7 @@
 		echo "<option value=\"january\" >January</option>
                         <option value=\"february\">February</option>
                         <option value=\"march\">March</option>
-                        <option value=\"april\"selected=\"selected\">April</option>
+                        <option value=\"april\" selected=\"selected\">April</option>
                         <option value=\"may\">May</option>
                         <option value=\"june\">June</option>
                         <option value=\"july\">July</option>
@@ -233,7 +233,7 @@
                         <option value=\"may\">May</option>
                         <option value=\"june\">June</option>
                         <option value=\"july\">July</option>
-                        <option value=\"august\"selected=\"selected\">August</option>
+                        <option value=\"august\" selected=\"selected\">August</option>
                         <option value=\"september\">September</option>
                         <option value=\"october\">October</option>
                         <option value=\"november\">November</option>
@@ -278,7 +278,7 @@
                         <option value=\"august\">August</option>
                         <option value=\"september\">September</option>
                         <option value=\"october\">October</option>
-                        <option value=\"november\"selected=\"selected\">November</option>
+                        <option value=\"november\" selected=\"selected\">November</option>
                         <option value=\"december\">December</option>";
 	}
 	else{
@@ -293,7 +293,7 @@
                         <option value=\"september\">September</option>
                         <option value=\"october\">October</option>
                         <option value=\"november\">November</option>
-                        <option value=\"december\"selected=\"selected\">December</option>";
+                        <option value=\"december\" selected=\"selected\">December</option>";
 	}
 	
 	

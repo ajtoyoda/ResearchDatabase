@@ -50,7 +50,7 @@
           <li id="current"><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, false); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -69,7 +69,7 @@
               <ul>
                 <li><h2>Results</h2></li>
 				<?php
-                echo "<li><input type=\"button\" name=\"addResult\" value=\"New\" onclick=\"window.location = 'add-result.php?numTypes=0&studyname=".$_GET['studyname']."';\" /></li>";
+                echo "<li><input type=\"button\" name=\"addResult\" value=\"New\" onclick=\"window.location = 'add-result.php?numTypes=0&amp;studyname=".$_GET['studyname']."';\" /></li>";
 				?>
 				</ul>
             </div>

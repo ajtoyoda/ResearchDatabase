@@ -46,7 +46,7 @@
           <li><a href="/">My studies</a></li>
           <li><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, true); ?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -58,7 +58,7 @@
 		  <h1>Delete MD</h1>
             <p><a href="/users.php">&lt; Manage users</a></p>
             <p>Before this user can be deleted, the studies they supervise must be reassigned to a different MD.</p>
-			<?php echo "<form action=\"delete-md.php?deleteMD&userID=".$_GET['userID']."\" method=\"post\">";?>
+			<?php echo "<form action=\"delete-md.php?deleteMD&amp;userID=".$_GET['userID']."\" method=\"post\">";?>
               <div class="form-container">
                 <ul class="wide-select">
                   <li><p>New supervisor:</p></li>
