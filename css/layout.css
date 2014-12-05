@@ -189,7 +189,7 @@ footer a:hover {
     color: #FFFFFF;
 }
 
-.add-header {
+.add-header, .filter-header {
     margin-top: 20px;
 }
 
@@ -197,23 +197,40 @@ footer a:hover {
     margin-top: 0px !important;
 }
 
-.add-header ul {
+.add-header ul, .filter-header ul {
     list-style-type: none;
 }
 
-.add-header ul li {
+.add-header ul li, .filter-header ul li {
     float: left;
+}
+
+.filter-header ul li select {
+    width: 150px;
+}
+
+.filter-header ul li {
+    width: 150px;
+    margin-left: 10px;
+}
+    
+.filter-header ul li:first-child {
+    margin-left: 0px;
 }
 
 .add-header ul li:first-child {
     width: 660px;
 }
 
-.add-header ul li:last-child {
+.add-header ul li:last-child, .filter-header ul li.button {
     width: 100px;
 }
 
-.add-header h2 {
+.add-header input, .filter-header input {
+    width: 100px;
+}
+
+.add-header h2, .filter-header h2 {
     margin: 0px;
 }
 

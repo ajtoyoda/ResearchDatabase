@@ -77,9 +77,9 @@
             ?>
             <div class="clearfix"></div>
             
-            <div class="add-header">
+            <div class="filter-header">
               <ul>
-                <li><h2>Results</h2></li>
+                <li style="width: 340;"><h2>Results</h2></li>
 				<?php echo "<form name=\"filterForm\" action=\"/study/view-study.php?filter&studyname=".$_GET['studyname']."\" method=\"POST\">";?>
 				<li>
 				  <?php echo "<select name=\"filterBySelect\", style=\"margin-right: 10px;\" onchange=\"filterForm.submit()\">";
@@ -98,6 +98,8 @@
 					}
 				  ?>
 				  </select>
+        </li>
+        <li>
 				  <select name="filterWithSelect", style="margin-right: 2px;" onchange="filterForm.submit()">
 					<?php
 						echo "<option name=\"all\" value=\"all\">All</option>";
@@ -126,7 +128,7 @@
 				</li>
 				</form>
 				<?php
-                echo "<li><input type=\"button\" name=\"addResult\" value=\"New\" onclick=\"window.location = 'add-result.php?numTypes=0&amp;studyname=".$_GET['studyname']."';\" /></li>";
+                echo "<li class=\"button\"><input type=\"button\" name=\"addResult\" value=\"New\" onclick=\"window.location = 'add-result.php?numTypes=0&amp;studyname=".$_GET['studyname']."';\" /></li>";
 				?>
 				</ul>
             </div>

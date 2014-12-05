@@ -3,6 +3,14 @@
   require_once("php/login-functions.php");
   require_once("php/edit-user-functions.php");
   verifyLoggedIn();
+  
+  // Verify URL arguments.
+  if (!isset($_GET["userID"]) || !isset($_SESSION["userid"]))
+      header("Location: /");
+  
+  // Don't let users view other users' information.
+  if ($_GET["userID"] != $_SESSION["userid"])
+      header("Location: /");
 ?>
 
 <!DOCTYPE html>
@@ -53,17 +61,29 @@
         <div id="content-inner">
           <div class="padding">
             <div class="clearfix"></div>
-            <div class="add-header">
+            <div class="add-header" id="top">
               <ul>
                 <li><h1>My account</h1></li>
 				        <li><input type="button" name="editAccount" value="Edit" onclick="window.location = '/account/edit-account.php?userID=<?php echo $_GET["userID"]; ?>';" /></li>
               </ul>
             </div>
             <div class="clearfix"></div>
-            <div id="study-info">
+            <div id="study-info-wide">
               <ul>
                 <li><p>Name:</p></li>
                 <li><p><?php echo getPerson($_GET["userID"])["name"]; ?></p></li>
+              </ul>
+              <ul>
+                <li><p>Birthday:</p></li>
+                <li><p><?php echo getPerson($_GET["userID"])["birthday"]; ?></p></li>
+              </ul>
+              <ul>
+                <li><p>Gender:</p></li>
+                <li><p><?php echo getPerson($_GET["userID"])["gender"]; ?></p></li>
+              </ul>
+              <ul>
+                <li><p>Address line 1:</p></li>
+                <li><p><?php echo getPerson($_GET["userID"])["address"]; ?></p></li>
               </ul>
             </div>
           </div>

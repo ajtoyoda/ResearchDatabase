@@ -52,10 +52,11 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
-            <div class="add-header" id="top">
+            <div class="filter-header" id="top">
               <ul>
-                <li style="width: 525px;"><h1>Patients</h1></li>
-				<li><form action="/patients.php?filter" method="POST" >
+                <li style="width: 390px;"><h1>Patients</h1></li>
+                <form action="/patients.php?filter" method="POST" >
+				  <li>
 				  <select name="studySelect" style="margin-right: 10px;">
 				  <option name="default" value="">All Studies</option>
 				  <?php
@@ -73,8 +74,8 @@
 				  ?>
 				  </select>
 				  </li>
-				<li><input type="submit" name="filterButton" value="Filter"/></li>
-                <li><input type="button" name="addPatient" value="New" onclick="window.location = '/patient/add-patient.php';" /></li>
+				<li class="button"><input type="submit" name="filterButton" value="Filter"/></li>
+                <li class="button"><input type="button" name="addPatient" value="New" onclick="window.location = '/patient/add-patient.php';" /></li>
 				</form>
               </ul>
             </div>
