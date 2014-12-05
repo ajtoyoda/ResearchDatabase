@@ -71,7 +71,8 @@
 						}
 					}
 				  ?>
-				  </select></li>
+				  </select>
+				  </li>
 				<li><input type="submit" name="filterButton" value="Filter"/></li>
                 <li><input type="button" name="addPatient" value="New" onclick="window.location = '/patient/add-patient.php';" /></li>
 				</form>

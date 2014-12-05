@@ -3,8 +3,20 @@
   require_once("../php/login-functions.php");
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
+  require_once("../php/gf.php");
   verifyLoggedIn();
   verifyStudy();
+  //This code makes sure they cant try and filter by patients while still keeping a type as the filter with variable
+  if(!isset($_SESSION['filterByResults'])){
+	$_SESSION['filterByResults'] = "all";
+  }
+  echo $_SESSION['filterByResults'];
+  if(!empty($_POST['filterBySelect'])){
+	if($_SESSION['filterByResults']  != $_POST['filterBySelect']){
+		$_POST['filterWithSelect']= 'all';
+	}
+	$_SESSION['filterByResults']	= $_POST['filterBySelect'];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +80,51 @@
             <div class="add-header">
               <ul>
                 <li><h2>Results</h2></li>
+				<?php echo "<form name=\"filterForm\" action=\"/study/view-study.php?filter&studyname=".$_GET['studyname']."\" method=\"POST\">";?>
+				<li>
+				  <?php echo "<select name=\"filterBySelect\", style=\"margin-right: 10px;\" onchange=\"filterForm.submit()\">";
+					echo "<option name=\"default\" value=\"\">No Filter</option>";
+					if(isset($_GET['filter']) && $_POST['filterBySelect']=='patients'){
+						echo "<option name=\"patients\" value=\"patients\" selected=\"selected\">Patients</option>
+						<option name=\"resultType\" value=\"resultType\">Type</option>";
+					}
+					elseif(isset($_GET['filter']) && $_POST['filterBySelect']=='resultType'){
+						echo "<option name=\"patients\" value=\"patients\">Patients</option>
+						<option name=\"resultType\" value=\"resultType\" selected=\"selected\">Type</option>";
+					}
+					else{
+						echo "<option name=\"patients\" value=\"patients\">Patients</option>
+						<option name=\"resultType\" value=\"resultType\">Type</option>";
+					}
+				  ?>
+				  </select>
+				  <select name="filterWithSelect", style="margin-right: 2px;" onchange="filterForm.submit()">
+					<?php
+						echo "<option name=\"all\" value=\"all\">All</option>";
+						if(isset($_GET['filter'])){
+							$filterBy = $_POST['filterBySelect'];
+							$mysqli = mysqliInit();
+							if($filterBy =='patients'){
+								$query = "SELECT name FROM patient INNER JOIN person ON patient.id = person.id";
+								$dataArray = queryArray($mysqli, $query, 'name');
+							}
+							if($filterBy == 'resultType'){
+								$query = "SELECT DISTINCT type FROM type";
+								$dataArray = queryArray($mysqli, $query, 'type');
+							}
+							for($count = 0; $count < count($dataArray); $count++){
+								if(isset($_GET['filter']) && $_POST['filterWithSelect'] == $dataArray[$count]){
+									echo "<option name=\"".$dataArray[$count]."\" value=\"".$dataArray[$count]."\" selected=\"selected\">".$dataArray[$count]."</option>";
+								}
+								else{
+									echo "<option name=\"".$dataArray[$count]."\" value=\"".$dataArray[$count]."\">".$dataArray[$count]."</option>";
+								}
+							}
+						}
+					?>
+				  </select>
+				</li>
+				</form>
 				<?php
                 echo "<li><input type=\"button\" name=\"addResult\" value=\"New\" onclick=\"window.location = 'add-result.php?numTypes=0&amp;studyname=".$_GET['studyname']."';\" /></li>";
 				?>
@@ -84,7 +141,20 @@
               </tr>
 				<?php
 					$studyName = $_GET['studyname'];
-					$result = getResults($studyName);
+					$mysqli=mysqliInit();
+					if(empty($_POST['filterWithSelect']) OR $_POST['filterWithSelect'] == 'all')
+						$result = getResults($studyName);
+					elseif($_POST['filterBySelect']== 'patients'){
+						$query = "SELECT person.id AS id FROM patient INNER JOIN person ON patient.id = person.id WHERE name='".$_POST['filterWithSelect']."'";
+						$data = queryAssoc($mysqli, $query);
+						$query = "SELECT id FROM results WHERE study_name='".$studyName."' AND  patient_number=".$data['id'];
+						$result = queryArray($mysqli, $query, 'id');
+					}elseif($_POST['filterBySelect']== 'resultType'){
+						$query = "SELECT result_id FROM type WHERE study_name='".$studyName."' AND type='".$_POST['filterWithSelect']."'";
+						$result = queryArray($mysqli, $query, 'result_id');
+					}else{
+						$result = getResults($studyName);
+					}
 					for($count = 0; $count < count($result); $count++){
 						showAllResultInfo($result[$count]);
 					}
