@@ -55,10 +55,26 @@
             <div class="add-header" id="top">
               <ul>
                 <li style="width: 525px;"><h1>Patients</h1></li>
-				<li><select name="studySelect" style="margin-right: 10px;">
-				<option name="default">All Studies</option>
-				<option name="studyName1">studyName1 </option></select></li>
+				<li><form action="/patients.php?filter" method="POST" >
+				  <select name="studySelect" style="margin-right: 10px;">
+				  <option name="default" value="">All Studies</option>
+				  <?php
+					$mysqli= mysqliInit();
+					$query = "SELECT name FROM study";
+					$dataArray = queryArray($mysqli, $query, 'name');
+					for($count = 0; $count < count($dataArray); $count++){
+						if(isset($_GET['filter']) && $dataArray[$count] == $_POST['studySelect']){
+							echo "<option name=\"".$dataArray[$count]."\" value=\"".$dataArray[$count]."\" selected=\"selected\">".$dataArray[$count]."</option>";
+						}
+						else{
+							echo "<option name=\"".$dataArray[$count]."\" value=\"".$dataArray[$count]."\">".$dataArray[$count]."</option>";
+						}
+					}
+				  ?>
+				  </select></li>
+				<li><input type="submit" name="filterButton" value="Filter"/></li>
                 <li><input type="button" name="addPatient" value="New" onclick="window.location = '/patient/add-patient.php';" /></li>
+				</form>
               </ul>
             </div>
             <div class="clearfix"></div>
@@ -69,7 +85,12 @@
               </tr>
 			  <?php
 			    $mysqli = mysqliInit();
-				$query = "SELECT name FROM patient INNER JOIN person ON patient.id = person.id";
+				if(!isset($_GET['filter']) || empty($_POST['studySelect']) || $_POST['studySelect'] == ""){
+					$query = "SELECT DISTINCT name FROM patient INNER JOIN person ON patient.id = person.id";
+				}
+				else{
+					$query = "SELECT DISTINCT name FROM patient INNER JOIN person ON patient.id = person.id INNER JOIN results ON person.id = results.patient_number WHERE results.study_name = '".$_POST['studySelect']."'"; 
+				}
 				$key="name";
 				
 				$dataArray = queryArray($mysqli, $query, $key);
