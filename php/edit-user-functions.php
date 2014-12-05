@@ -1,84 +1,62 @@
 <?php
+	require_once("gf.php");
+	//This function edits the emergency contact of the person whose id is given
 	function editEmergencyContact($ID){
-	$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
-	if(!$mysqli->query("USE researchdatabase")){
-		die("failed to use database");
-	}
-	if( empty($_POST['emergname']) || empty($_POST['emergbirthmonth'])|| empty($_POST['emergbirthday'])|| empty($_POST['emergbirthyear'])
-		|| empty($_POST['emerggender']) || empty($_POST['emergaddressLine1']) ||!isset($_POST['emergaddressLine2'])
-		||empty($_POST['emergcity'])||empty($_POST['emergcountry'])
-		||empty($_POST['emergphone'])||empty($_POST['emergemail'])){
-			header("Location: /user/add-user.php?failure&emergencyContact");
-	}
-	if(!($result =$mysqli->query("SELECT emergency_id FROM person WHERE id = $ID"))){
-		die("Invalid query for check");
-	}else{
-		if($result->num_rows == 0){
-		$emergencyID = NULL;
+		$mysqli = mysqliInit();
+		if( empty($_POST['emergname']) || empty($_POST['emergbirthmonth'])|| empty($_POST['emergbirthday'])|| empty($_POST['emergbirthyear'])
+			|| empty($_POST['emerggender']) || empty($_POST['emergaddressLine1']) ||!isset($_POST['emergaddressLine2'])
+			||empty($_POST['emergcity'])||empty($_POST['emergcountry'])
+			||empty($_POST['emergphone'])||empty($_POST['emergemail'])){
+				header("Location: /user/add-user.php?failure&emergencyContact");
+		}
+		//Check if person already has emergency contact
+		if(!($result =$mysqli->query("SELECT emergency_id FROM person WHERE id = $ID"))){
+			die("Invalid query for check");
+		}else{
+			if($result->num_rows == 0){
+				$emergencyID = NULL;
+			}
+			else{
+				$data = $result->fetch_assoc();
+				$emergencyID=$data['emergency_id'];
+			}
+		}
+		
+		//Get posted values
+		$name = $_POST['emergname'];
+		$birthmonthString = $_POST['emergbirthmonth'];
+		$birthday = formatDate((int)$_POST['emergbirthday'], $birthmonthString, (int)$_POST['emergbirthyear']);
+		$gender= $_POST['emerggender'];
+		$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
+		$phone = $_POST['emergphone'];
+		$email = $_POST['emergemail'];
+		//Add in escape characters
+		$name = $mysqli->real_escape_string($name);
+		$address = $mysqli->real_escape_string($address);
+		$phone = $mysqli->real_escape_string($phone);
+		$email = $mysqli->real_escape_string($email);
+		
+		if($emergencyID == NULL){
+			$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
+			if(!$result = $mysqli->query($query)){
+				echo $query;
+				die("invalid query 1");
+			}
+			else{
+				$query = "SELECT max(id) AS id FROM person";
+				$data = queryAssoc($mysqli, $query);
+				$userID = $data['id'];
+				$query ="UPDATE person SET emergency_id =$userID WHERE id = $ID";
+				queryNoReturn($mysqli, $query);
+			}
 		}
 		else{
-		$data = $result->fetch_assoc();
-		$emergencyID=$data['emergency_id'];
-		}
-	}
-	$name = $_POST['emergname'];
-	$birthmonthString = $_POST['emergbirthmonth'];
-	$birthmonth = 1;
-	if($birthmonthString == "january")$birthmonth = 1;
-	elseif($birthmonthString =="february")$birthmonth = 2;
-	elseif($birthmonthString =="march")$birthmonth = 3;
-	elseif($birthmonthString =="april")$birthmonth = 4;
-	elseif($birthmonthString =="may")$birthmonth = 5;
-	elseif($birthmonthString =="june")$birthmonth = 6;
-	elseif($birthmonthString =="july")$birthmonth = 7;
-	elseif($birthmonthString =="august")$birthmonth = 8;
-	elseif($birthmonthString =="september")$birthmonth = 9;
-	elseif($birthmonthString =="october")$birthmonth = 10;
-	elseif($birthmonthString =="november")$birthmonth = 11;
-	else $birthmonth = 12;
-	
-	//Getting birthday into date format
-	$time = mktime(0,0,0, $birthmonth, (int)$_POST['emergbirthday'], (int)$_POST['emergbirthyear']);
-	if($time < mktime(0,0,0,1,1,1900) || $time >time()){
-		die("Invalid birthday magic");
-	}
-	$birthday = date('Y-m-d', $time);
-	
-	$gender= $_POST['emerggender'];
-	$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
-	$phone = $_POST['emergphone'];
-	$email = $_POST['emergemail'];
-	$name = $mysqli->real_escape_string($name);
-	$address = $mysqli->real_escape_string($address);
-	$phone = $mysqli->real_escape_string($phone);
-	$email = $mysqli->real_escape_string($email);
-	if($emergencyID == NULL){
-	$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
-	if(!$result = $mysqli->query($query)){
-		echo $query;
-		die("invalid query 1");
-	}else{
-		$query = "SELECT max(id) AS id FROM person";
-		if(!($result = $mysqli->query($query))){
-			die("invalid query 2");
-		}
-		$userID = (int)$result->fetch_assoc()['id'];
-		$query ="UPDATE person SET emergency_id =$userID WHERE id = $ID";
-		if(!$mysqli->query($query)){
-			echo $query;
-			die("invalid query3");
-		}
-		return;
-		}
-	}else{
-		$query = "UPDATE person SET birthday = '$birthday', gender = $gender, name = '$name', phone = '$phone'
+			$query = "UPDATE person SET birthday = '$birthday', gender = $gender, name = '$name', phone = '$phone'
 				address = '$address', email = '$email' WHERE id = $emergencyID";
-		if(!$mysqli->query($query)){
-			echo $query;
-			die("invalid query4");
+			queryNoReturn($mysqli, $query);
 		}
 	}
-}
+	
 	//This output specifically formatted numbers from range $startRange to $endRange
 	function outputOptionNumbers($startRange, $endRange){
 		if($startRange > 31 or $startRange < 1 or $endRange < $startRange or $endRange > 31){
@@ -88,41 +66,19 @@
 			echo "<option value=\"".$count."\">".$count."</option>";
 		}
 	}
+	
 	//This function return an associated array related to the person with id== userID
 	function getPerson($userID){
-		$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
-		if(!$mysqli->query("USE researchdatabase")){
-			die("Failed to use database");
-		}
+		$mysqli = mysqliInit();
 		$query = "SELECT id, birthday, gender, name, phone, address, email, emergency_id FROM person WHERE id = '$userID'";
-		$result = $mysqli->query($query);
-		if(!$result){
-			die("Invalid query 1");
-			return;
-		}
-		if($result->num_rows < 1){
-			die("Invalid page programming error");
-			return;
-		}
-		$data = $result->fetch_assoc();
-		return $data;
+		return queryAssoc($mysqli, $query);
 	}
+	
 	//This function return an associated user related to the user with user==userID
 	function getUser($userID){
-		$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
-		if(!$mysqli->query("USE researchdatabase")){
-			die("Failed to use database");
-		}
+		$mysqli = mysqliInit();
 		$query = "SELECT id,username, password, type_flag AS type FROM user WHERE id = '$userID'";
-		$result = $mysqli->query($query);
-		if(!$result){
-			die("Invalid query 1");
-		}
-		if($result->num_rows < 1){
-			die("Invalid page programming error");
-		}
-		$data = $result->fetch_assoc();
-		return $data;
+		return queryAssoc($mysqli, $query);
 	}
 	//This function outputs the months with the monthSelected as selected. 
 	//This is also needlessly long
@@ -301,108 +257,84 @@
 	}
 	//This function takes the values of the user to be edited and updates the database
 	function editUser(){
-
-	$userID = $_GET['userID'];
-	$mysqli= new mysqli("localhost", "root", "", "researchdatabase");
-	if(empty($_POST['username'])||empty($_POST['password']) 
-		|| empty($_POST['confirm'])|| empty($_POST['type'])|| empty($_POST['name']) 
-		|| empty($_POST['birthmonth'])|| empty($_POST['birthday'])|| empty($_POST['birthyear'])
-		|| empty($_POST['gender']) || empty($_POST['addressLine1']) ||!isset($_POST['addressLine2'])
-		||empty($_POST['city'])||empty($_POST['country'])
-		||empty($_POST['phone'])||empty($_POST['email'])){
-		if(isset($_GET['editAttempt'])){
+		if(!isset($_GET['editAttempt'])){
+			return;
+		}
+		$userID = $_GET['userID'];
+		$mysqli= mysqliInit();
+		if(empty($_POST['username'])||empty($_POST['password']) 
+			|| empty($_POST['confirm'])|| empty($_POST['type'])|| empty($_POST['name']) 
+			|| empty($_POST['birthmonth'])|| empty($_POST['birthday'])|| empty($_POST['birthyear'])
+			|| empty($_POST['gender']) || empty($_POST['addressLine1']) ||!isset($_POST['addressLine2'])
+			||empty($_POST['city'])||empty($_POST['country'])
+			||empty($_POST['phone'])||empty($_POST['email'])){
 			if(isset($_GET['emergencyContact'])){
 				header("Location: /user/edit-user.php?userID=".$userID."&failure&emergencyContact");
 			}
 			else{
 				header("Location: /user/edit-user.php?userID=".$userID."&failure");
 			}
-			return;
 		}
-		else{
-			return;
-		}
-	}
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$confirm = $_POST['confirm'];
-	$name = $_POST['name'];
-	$birthmonthString = $_POST['birthmonth'];
-	$birthmonth = 1;
-	if($birthmonthString == "january")$birthmonth = 1;
-	elseif($birthmonthString =="february")$birthmonth = 2;
-	elseif($birthmonthString =="march")$birthmonth = 3;
-	elseif($birthmonthString =="april")$birthmonth = 4;
-	elseif($birthmonthString =="may")$birthmonth = 5;
-	elseif($birthmonthString =="june")$birthmonth = 6;
-	elseif($birthmonthString =="july")$birthmonth = 7;
-	elseif($birthmonthString =="august")$birthmonth = 8;
-	elseif($birthmonthString =="september")$birthmonth = 9;
-	elseif($birthmonthString =="october")$birthmonth = 10;
-	elseif($birthmonthString =="november")$birthmonth = 11;
-	else $birthmonth = 12;
+		//get posted data
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$confirm = $_POST['confirm'];
+		$name = $_POST['name'];
+		$birthmonthString = $_POST['birthmonth'];
+		$birthday= formatDate((int)$_POST['birthday'], $birthmonthString,  (int)$_POST['birthyear']);
+		$type = $_POST['type'];
+		$gender= $_POST['gender'];
+		$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
+		$phone = $_POST['phone'];
+		$email = $_POST['email'];
+		//Escape characters
+		$username = $mysqli->real_escape_string($username);
+		$password = $mysqli->real_escape_string($password);
+		$confirm = $mysqli->real_escape_string($confirm);
+		$name = $mysqli->real_escape_string($name);
+		$address = $mysqli->real_escape_string($address);
+		$phone = $mysqli->real_escape_string($phone);
+		$email = $mysqli->real_escape_string($email);
 	
-	//Getting birthday into date format
-	$time = mktime(0,0,0, $birthmonth, (int)$_POST['birthday'], (int)$_POST['birthyear']);
-	if($time < mktime(0,0,0,1,1,1900) || $time >time()){
-		die("Invalid birthday magic");
-	}
-	$birthday = date('Y-m-d', $time);
-	$type = $_POST['type'];
-	$gender= $_POST['gender'];
-	$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
-	$phone = $_POST['phone'];
-	$email = $_POST['email'];
-	if(!$mysqli->query("USE researchdatabase")){
-		die("failed to use database");
-	}
-	$username = $mysqli->real_escape_string($username);
-	$password = $mysqli->real_escape_string($password);
-	$confirm = $mysqli->real_escape_string($confirm);
-	$name = $mysqli->real_escape_string($name);
-	$address = $mysqli->real_escape_string($address);
-	$phone = $mysqli->real_escape_string($phone);
-	$email = $mysqli->real_escape_string($email);
-	
-	if($confirm != $password){
-		echo "Invalid Password";
-		if(isset($_GET['emergencyContact'])){
+		//Make sure passwords match
+		if($confirm != $password){
+			if(isset($_GET['emergencyContact'])){
 				header("Location: /user/edit-user.php?userID=".$userID."&failureInvalidPassword&emergencyContact");
 			}
 			else{
 				header("Location: /user/edit-user.php?userID=".$userID."&failureInvalidPassword");
 			}
-		return;
-	}
-	$password = password_hash($password, PASSWORD_DEFAULT);
+			return;
+		}
+		$password = password_hash($password, PASSWORD_DEFAULT);
  
-	$query = "UPDATE user
+		$query = "UPDATE user
 			SET username = '$username', password = '$password', type_flag = '$type' 
 			WHERE id = $userID";
-	echo $query;
-	$result = $mysqli->query($query);
-	if(!$result){
-		die('invalid query1');
-		return;
-	}
-	else
-	{
-		$query = 	"UPDATE person
-					SET birthday ='$birthday', gender = '$gender', name = '$name', phone= '$phone', address= '$address', email='$email'
-					WHERE id = $userID";
 		$result = $mysqli->query($query);
 		if(!$result){
-			$mysqli->query("DELETE FROM user WHERE user.name = '$username'");
-			die('invalid query2');
+			echo $query;
+			die('Failure query outside');
 			return;
 		}
-		else{
-			if(isset($_GET['emergencyContact'])){
-				editEmergencyContact($userID);
+		else
+		{
+			$query = 	"UPDATE person
+					SET birthday ='$birthday', gender = '$gender', name = '$name', phone= '$phone', address= '$address', email='$email'
+					WHERE id = $userID";
+			$result = $mysqli->query($query);
+			if(!$result){
+				$mysqli->query("DELETE FROM user WHERE user.name = '$username'");
+				echo $query;
+				die('Failure query outside');
+				return;
 			}
-			header("Location: /users.php?successfulEditUser");
-			return;
+			else{
+				if(isset($_GET['emergencyContact'])){
+					editEmergencyContact($userID);
+				}
+				header("Location: /users.php?successfulEditUser");
+			}
 		}
-	}
 }
 ?>

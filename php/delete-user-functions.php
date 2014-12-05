@@ -6,13 +6,14 @@
 		if(!$mysqli->query("USE researchdatabase")){
 			die("Failed to use database");
 		}
-    // Don't allow the user to delete themselves.
-    session_start();
-    if ($_SESSION["userid"] == $userID)
-    {
-      header("Location: /users.php?failureLoggedIn");
-      return;
-    }
+		// Don't allow the user to delete themselves.
+		session_start();
+		if ($_SESSION["userid"] == $userID)
+		{
+			header("Location: /users.php?failureLoggedIn");
+			return;
+		}
+		
 		//If a supervisor need to replace first before finishing deletion
 		$query = "SELECT name FROM study WHERE supervisor_id = $userID";
 		$result = $mysqli->query($query);
@@ -23,18 +24,16 @@
 			header('Location: /user/delete-md.php?userID='.$userID);
 			return;
 		}
+		
 		$query = "DELETE FROM view_edit WHERE user_id = $userID";
-		if(!$mysqli->query($query)){
-			die("Bad query");
-		}
+		queryNoReturn($mysqli, $query);
+		
 		$query = "DELETE FROM works_on WHERE assistant_id = $userID";
-		if(!$mysqli->query($query)){
-			die("Bad query6");
-		}
+		queryNoReturn($mysqli, $query);
+		
 		$query = "DELETE FROM user WHERE id = $userID";
-		if(!$mysqli->query($query)){
-			die("Bad query3");
-		}
+		queryNoReturn($mysqli, $query);
+		
 		$query = "SELECT emergency_id FROM person WHERE id = $userID";
 		$result = $mysqli->query($query);
 		if(!$result){
@@ -47,25 +46,23 @@
 		}
 		
 		$query = "DELETE FROM person WHERE id = $userID";		
-		if(!$mysqli->query($query)){
-			die("Bad query4");
-		}
+		queryNoReturn($mysqli, $query);
+		
 		$query = "UPDATE person SET emergency_id=NULL WHERE emergency_id = $userID";
-		if(!$mysqli->query($query)){
-			die("Bad query5");
-		}
+		queryNoReturn($mysqli, $query);
+		
 		header('Location: /users.php?successfulDeleteUser');
 	}
+	
+	//This function updates studies with old md to new md($_POST['supervisor'] and then deletes the old md
 	function deleteMD(){
-		
 		if(!isset($_GET['deleteMD'])){
 			return;
 		}
+		
+		$mysqli = mysqliInit();
 		$userID = $_GET['userID'];
-		$mysqli = new mysqli("localhost", "root", "", "researchdatabase");
-		if(!$mysqli->query("USE researchdatabase")){
-			die("Failed to use database");
-		}
+		
 		if(empty($_POST['supervisor'])){
 			die("No post");
 		}

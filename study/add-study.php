@@ -137,7 +137,7 @@
                   </li> 
                 </ul>
                 <ul class="birthday">
-                  <li><p>Start date:</p></li>
+                  <li><p>End date:</p></li>
                   <li>
                     <p>Day:
                       <select name="endDateDay">

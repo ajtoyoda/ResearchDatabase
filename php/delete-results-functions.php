@@ -1,19 +1,11 @@
 <?php
+	require_once("gf.php");
 	function deleteResult($resultID){
-		$mysqli= new mysqli("localhost", "root", "", "researchdatabase");
-		if(!$mysqli->query("USE researchdatabase")){
-			die("failed to use database");
-		}
+		$mysqli= mysqliInit();
 		$query = "DELETE FROM type WHERE result_id=$resultID";
-		if(!$mysqli->query($query)){
-			echo $query;
-			die("Invalid query 1");
-		}
+		queryNoReturn($mysqli, $query);
 		$query = "DELETE FROM results WHERE id=$resultID";
-		if(!$mysqli->query($query)){
-			echo $query;
-			die("Invalid query 2");
-		}
+		queryNoReturn($mysqli, $query);
 		header("Location: /study/view-study.php?studyname=".$_GET['studyname']);
 	}
 ?>
