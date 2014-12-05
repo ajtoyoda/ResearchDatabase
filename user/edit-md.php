@@ -98,7 +98,7 @@
     <footer>
       <div class="container">
         <div class="padding">
-          <p><a href="/">My studies</a> | <a href="/patients.php">Patients</a> | <?php printManageUsers(true, true); ?> <a href="/account.php">My account</a></p>
+          <p><a href="/">My studies</a> | <a href="/patients.php">Patients</a> | <?php printManageUsers(true, true); ?> <a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></p>
           <p>Copyright &copy; 2014. Use of this website is permitted for authorized personnel only.</p>
         </div>
       </div>

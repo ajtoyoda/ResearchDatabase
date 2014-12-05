@@ -42,7 +42,7 @@
           <li><a href="/">My studies</a></li>
           <li id="current"><a href="/patients.php">Patients</a></li>
           <?php printManageUsers(false, false);?>
-          <li><a href="/account.php">My account</a></li>
+          <li><a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -81,7 +81,7 @@
     <footer>
       <div class="container">
         <div class="padding">
-          <p><a href="/">My studies</a> | <a href="/patients.php">Patients</a> | <?php printManageUsers(true,true); ?> <a href="/account.php">My account</a></p>
+          <p><a href="/">My studies</a> | <a href="/patients.php">Patients</a> | <?php printManageUsers(true,true); ?> <a href="/account.php?userID=<?php echo $_SESSION["userid"]; ?>">My account</a></p>
           <p>Copyright &copy; 2014. Use of this website is permitted for authorized personnel only.</p>
         </div>
       </div>
