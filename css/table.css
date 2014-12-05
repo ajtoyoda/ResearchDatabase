@@ -139,6 +139,7 @@ table.std td a, table.std td a:focus,table.std td a:visited{
     border-bottom: 0px;
 	width: 200px;
     transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
+	
 }
 
 table.std td a:hover,table.std td:last-child:hover{

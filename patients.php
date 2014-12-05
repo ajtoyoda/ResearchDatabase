@@ -1,6 +1,7 @@
 <?php
   require_once("/php/user-permissions.php");
   require_once("/php/login-functions.php");
+  require_once("/php/gf.php");
   verifyLoggedIn();
 ?>
 
@@ -66,13 +67,22 @@
 				<th><p>Name</th></p>
 				<th colspan="3"></th>
               </tr>
-			  
-			  <td><p>Patient Name1</p></td>
-			  <td><p><a href="/patient/view-patient.php">Patient</a></p></td>
-			  <td><p><a href="/patient/view-personal.php">Personal</a></p></td>
-			  <td><p><a href="/patient/view-medical.php">Medical</a></p></td>
-			  
-            </table>
+			  <?php
+			    $mysqli = mysqliInit();
+				$query = "SELECT name FROM patient INNER JOIN person ON patient.id = person.id";
+				$key="name";
+				
+				$dataArray = queryArray($mysqli, $query, $key);
+				for($count = 0; $count < count($dataArray);$count++){
+					echo " <tr>
+			    <td><p>".$dataArray[$count]."</p></td>
+			    <td><p><a href=\"/patient/view-patient.php?name=".$dataArray[$count]."\">Patient</a></p></td>
+			    <td><p><a href=\"/patient/view-personal.php?name=".$dataArray[$count]."\">Personal</a></p></td>
+			    <td><p><a href=\"/patient/view-medical.php?name=".$dataArray[$count]."\">Medical</a></p></td>
+			  </tr> ";
+				}
+			  ?>
+			  </table>
            
           </div>
         </div>
