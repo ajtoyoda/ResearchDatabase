@@ -1,27 +1,23 @@
 /* Styles specific to /study/ pages. */
 
-#study-info, #study-info-wide {
+#study-info, .study-info-wide {
     margin-top: 10px;
 }
 
-#study-info ul, #study-info-wide ul {
+#study-info ul, .study-info-wide ul {
     list-style-type: none;
     clear: both;
 }
 
-#study-info ul li, #study-info-wide ul li {
+#study-info ul li, .study-info-wide ul li {
     float: left;
 }
 
-#study-info ul li:first-child, #study-info-wide ul li:first-child {
-    width: 100px;
+#study-info ul li:first-child, .study-info-wide ul li:first-child {
+    width: 150px;
     font-weight: bold;
 }
 
-#study-info p, #study-info-wide p {
+#study-info p {
     margin: 0px;
-}
-
-#study-info-wide ul li {
-    margin-top: 10px;
 }

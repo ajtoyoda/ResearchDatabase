@@ -51,7 +51,7 @@
 			}
 		}
 		else{
-			$query = "UPDATE person SET birthday = '$birthday', gender = $gender, name = '$name', phone = '$phone'
+			$query = "UPDATE person SET birthday = '$birthday', gender = '$gender', name = '$name', phone = '$phone',
 				address = '$address', email = '$email' WHERE id = $emergencyID";
 			queryNoReturn($mysqli, $query);
 		}
@@ -256,7 +256,7 @@
 	
 	}
 	//This function takes the values of the user to be edited and updates the database
-	function editUser(){
+	function editUser($place = ""){
 		if(!isset($_GET['editAttempt'])){
 			return;
 		}
@@ -333,7 +333,11 @@
 				if(isset($_GET['emergencyContact'])){
 					editEmergencyContact($userID);
 				}
-				header("Location: /users.php?successfulEditUser");
+				if($place == 'self'){
+					header("Location: /account.php?userID=".$userID);
+				}else{
+					header("Location: /users.php?successfulEditUser");
+				}
 			}
 		}
 }
