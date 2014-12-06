@@ -64,24 +64,30 @@
             <div class="clearfix"></div>
 			<a href="/patients.php">&lt; Patients</a>
             <h2>Pre-existing Medical Conditions and Notes</h2>
-			 <ul style="padding:15px;">
-			   <li><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut iaculis hendrerit mauris. 
-			   Sed gravida imperdiet mauris, in hendrerit odio suscipit vel. Quisque tincidunt, metus nec tempus facilisis, 
-			   ante purus fermentum risus, quis faucibus tellus dui eu mauris. Mauris posuere purus eget metus convallis fermentum. 
-			   </p></li>
-			   <li><p>Praesent rhoncus gravida elit at venenatis. Vestibulum consequat iaculis purus ut posuere. Vivamus ac nulla porta, 
-			   pharetra quam malesuada, feugiat magna. Duis dignissim id nisl gravida tempor. Pellentesque nec eros justo. 
-			   Morbi et arcu a eros dapibus vestibulum. Pellentesque congue sapien quis lacinia tempor.
-			   </p></li>
+			<ul style="padding:15px;">
+			  <?php
+			  $mysqli = mysqliInit();
+			  $ID = $_GET['ID'];
+			  $query = "SELECT Issues FROM patient_health_issues WHERE id = \"".$ID."\"";
+			  $key = "Issues";
+			  $dataArray = queryArray($mysqli, $query, $key);
+			  for($count = 0; $count < count($dataArray);$count++){
+				echo "<li><p>".$dataArray[$count]."</p></li>";
+			   }
+			   ?>
 			 </ul>
 			<h2>Medications</h2>
 			  <ul style="padding:15px;">
-			    <li>Medication A</li>  
-			    <li>Medication B</li>  
-			    <li>Medication C</li>  
-			    <li>Medication D</li>  
-			    <li>Medication E</li>  
-			    <li>Medication F</li>  
+			    <?php
+			  $mysqli = mysqliInit();
+			  $ID = $_GET['ID'];
+			  $query = "SELECT Medications FROM patient_medications WHERE id = \"".$ID."\"";
+			  $key = "Medications";
+			  $dataArray = queryArray($mysqli, $query, $key);
+			  for($count = 0; $count < count($dataArray);$count++){
+				echo "<li><p>".$dataArray[$count]."</p></li>";
+			   }
+			   ?> 
 			  </ul>
 			  
 			  

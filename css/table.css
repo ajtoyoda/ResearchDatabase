@@ -104,6 +104,7 @@ table.patient-table td a, td a:focus, td a:visited, td:last-child a, td:last-chi
     background-color: #4C5952;
     padding: 5px;
 	margin: 0px!important;
+	text-align:center!important;
     color: #EEEEEE;
     border-bottom: 0px;
 	width: 200px;

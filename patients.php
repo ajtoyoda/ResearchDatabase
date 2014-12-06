@@ -88,20 +88,23 @@
 			  <?php
 			    $mysqli = mysqliInit();
 				if(!isset($_GET['filter']) || empty($_POST['studySelect']) || $_POST['studySelect'] == ""){
-					$query = "SELECT DISTINCT name FROM patient INNER JOIN person ON patient.id = person.id";
+					$query = "SELECT id FROM patient";
 				}
 				else{
-					$query = "SELECT DISTINCT name FROM patient INNER JOIN person ON patient.id = person.id INNER JOIN results ON person.id = results.patient_number WHERE results.study_name = '".$_POST['studySelect']."'"; 
+					$query = "SELECT id FROM patient INNER JOIN person ON patient.id = person.id INNER JOIN results ON person.id = results.patient_number WHERE results.study_name = '".$_POST['studySelect']."'"; 
 				}
-				$key="name";
+				$key="id";
 				
 				$dataArray = queryArray($mysqli, $query, $key);
+				
 				for($count = 0; $count < count($dataArray);$count++){
+					$nameQuery = "SELECT name FROM person WHERE id=\"".$dataArray[$count]."\"";
+					$name =queryAssoc($mysqli, $nameQuery);
 					echo " <tr>
-			    <td><p>".$dataArray[$count]."</p></td>
-			    <td><p><a href=\"/patient/view-patient.php?name=".$dataArray[$count]."\">Patient</a></p></td>
-			    <td><p><a href=\"/patient/view-personal.php?name=".$dataArray[$count]."\">Personal</a></p></td>
-			    <td><p><a href=\"/patient/view-medical.php?name=".$dataArray[$count]."\">Medical</a></p></td>
+			    <td><p>".$name['name']."</p></td>
+			    <td><p><a href=\"/patient/view-patient.php?ID=".$dataArray[$count]."\">Patient</a></p></td>
+			    <td><p><a href=\"/patient/view-personal.php?ID=".$dataArray[$count]."\">Personal</a></p></td>
+			    <td><p><a href=\"/patient/view-medical.php?ID=".$dataArray[$count]."\">Medical</a></p></td>
 			  </tr> ";
 				}
 			  ?>

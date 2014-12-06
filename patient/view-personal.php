@@ -68,69 +68,76 @@
 				<th></th>
 				<th></th>
               </tr>
-			  <tr>
-			    <td><p>Name</p></td>
-			    <td><p>Patient Name1</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Gender</p></td>
-			    <td><p>M/F</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Birthday</p></td>
-			    <td><p>1111-22-33</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Phone</p></td>
-			    <td><p>111-222-3333</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Email</p></td>
-			    <td><p>xxxxx.xxxxxx@xxxx.com</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Address</p></td>			  
-			    <td><p>11 xxxxxxxxxxxxxx xxxxx XX Calgary AB</p></td>
-			  </tr>
-			  <!-- if the patient has an emerge contact-->
-			  <!--<tr>
-				<td><p>Emergency Contact</p></td>
-				<td><a href="/patient/edit-emerge.php">View</a></td>
-			  </tr>-->
-            </table>
-			
-			<!-- again, if present, I think this is better -->
-			<h2><p>Emergency Contact</p></h2>
-			<table class = "std">
-              <tr id="header">
-				<th></th>
-				<th></th>
-              </tr>
-			  <tr>
-			    <td><p>Name</p></td>
-			    <td><p>Patient Name1</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Gender</p></td>
-			    <td><p>M/F</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Birthday</p></td>
-			    <td><p>1111-22-33</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Phone</p></td>
-			    <td><p>111-222-3333</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Email</p></td>
-			    <td><p>xxxxx.xxxxxx@xxxx.com</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Address</p></td>			  
-			    <td><p>11 xxxxxxxxxxxxxx xxxxx XX Calgary AB</p></td>
-			  </tr>
-			</table>
+			  
+			  <?php
+				$ID = $_GET['ID'];
+				$mysqli = mysqliInit();
+				$query = "Select * FROM patient INNER JOIN person ON patient.id = person.id WHERE person.id = \"".$ID."\"";
+				$dataArray = queryAssoc($mysqli, $query);
+					echo
+					  "<tr>
+						<td><p>Name</p></td>
+						<td><p>".$dataArray['Name']."</p></td>
+					  </tr>
+					  <tr>
+						<td><p>Gender</p></td>
+						<td><p>".$dataArray['Gender']."</p></td>
+					  </tr>
+					  <tr>
+						<td><p>Birthday</p></td>
+						<td><p>".$dataArray['Birthday']."</p></td>
+					  </tr>
+					  <tr>
+						<td><p>Phone</p></td>
+						<td><p>".$dataArray['Phone']."</p></td>
+					  </tr>
+					  <tr>
+						<td><p>Email</p></td>
+						<td><p>".$dataArray['Email']."</p></td>
+					  </tr>
+					  <tr>
+						<td><p>Address</p></td>			  
+						<td><p>".$dataArray['Address']."</p></td>
+					  </tr>
+					  </table>";
+			//EMERGENCY CONTACT
+				if(!empty($dataArray['Emergency_ID'])){
+					$query = "Select * FROM person INNER JOIN person ON patient.id = person.id WHERE person.id = \"".$dataArray['Emergency_ID']."\"";
+					$dataArray = queryAssoc($mysqli, $query);
+					echo
+						"<h2><p>Emergency Contact</p></h2>
+						<table class = \"std\">
+						  <tr id=\"header\">
+							<th></th>
+							<th></th>
+						  </tr>
+						  <tr>
+							<td><p>Name</p></td>
+							<td><p>".$dataArray['Name']."</p></td>
+						  </tr>
+						  <tr>
+							<td><p>Gender</p></td>
+							<td><p>".$dataArray['Gender']."</p></td>
+						  </tr>
+						  <tr>
+							<td><p>Birthday</p></td>
+							<td><p>".$dataArray['Birthday']."</p></td>
+						  </tr>
+						  <tr>
+							<td><p>Phone</p></td>
+							<td><p>".$dataArray['Phone']."</p></td>
+						  </tr>
+						  <tr>
+							<td><p>Email</p></td>
+							<td><p>".$dataArray['Email']."</p></td>
+						  </tr>
+						  <tr>
+							<td><p>Address</p></td>			  
+							<td><p>".$dataArray['Address']."</p></td>
+						  </tr>
+						  </table>";
+				}
+			  ?>
           </div>
         </div>
       </div>

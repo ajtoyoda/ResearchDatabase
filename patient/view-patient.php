@@ -57,7 +57,6 @@
                 <li style="width: 455px;"><h1>Patient Name</h1></li>
 				<li><h2 style="padding-right: 10px;">Patient Information</h2></li>
                 <li><input type="button" name="editPatient" value="Edit" onclick="window.location = '/patient/edit-patient.php';" /></li>
-				<!-- How do I make this justify left? And how do i put a < infront of it without it being a tag-->
               </ul>
             </div>
             <div class="clearfix"></div>
@@ -69,20 +68,27 @@
               </tr>
 			  <tr>
 			    <td><p>Name</p></td>
-			    <td><p>Patient Name1</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Health Care Number</p></td>
-			    <td><p>11111-1111</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Height</p></td>
-			    <td><p>150</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Weight</p></td>			  
-			    <td><p>50</p></td>
-			  </tr>
+			    <?php
+					$mysqli = mysqliInit();
+					
+					$query = "SELECT * FROM patient INNER JOIN person ON patient.id = person.id WHERE patient.id = \"".$_GET['ID']."\"";
+					$dataArray = queryAssoc($mysqli, $query);
+					
+					echo "<td><p>".$dataArray['Name']."</p></td>
+					</tr>
+					<tr>
+					  <td><p>Health Care Number</p></td>
+					  <td><p>".$dataArray['Healthcare_No']."</p></td>
+					</tr>
+					<tr>
+					  <td><p>Height</p></td>
+					  <td><p>".$dataArray['Height']."</p></td>
+					</tr>
+					<tr>
+					  <td><p>Weight</p></td>			  
+					  <td><p>".$dataArray['Weight']."<p></td>
+					</tr>";
+			  ?>
             </table>
 			
 			  
