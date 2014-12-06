@@ -1,6 +1,12 @@
 <?php
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
+  require_once("../php/edit-user-functions.php");
+  require_once("../php/gf.php");
+
+  // Check URL arguments.
+  if (!isset($_GET["ID"]))
+      header("Location: /patients.php");
 
   verifyLoggedIn();
 ?>
@@ -11,7 +17,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Patients :: Medical Research Database</title>
+    <title>Edit <?php echo getPerson($_GET["ID"])["name"]; ?> :: Medical Research Database</title>
     
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
@@ -54,84 +60,223 @@
           <div class="padding">
             <div class="add-header" id="top">
               <ul>
-                <li style="width: 440px;"><h1>Patient Name</h1></li>
-				<li><h2 style="padding-right: 10px;">Personal Information</h2></li>
-                <li><input type="button" name="editPersonal" value="Edit" onclick="window.location = '/patient/edit-personal.php';" /></li>
-				<!-- How do I make this justify left? And how do i put a < infront of it without it being a tag-->
-              </ul>
+                <li style="width: 440px;"><h1>Edit <?php echo getPerson($_GET["ID"])["name"]; ?></h1></li>
+                <li style="text-align: right;"><h2 style="width: 320px;">Personal Information</h2></li>
+				      </ul>
             </div>
             <div class="clearfix"></div>
-			<a href="/patients.php">&lt; Patients</a>
-
-             <table class = "std">
-              <tr id="header">
-				<th></th>
-				<th></th>
-              </tr>
-			  <tr>
-			    <td><p>Name</p></td>
-			    <td><p>Patient Name1</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Gender</p></td>
-			    <td><p>M/F</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Birthday</p></td>
-			    <td><p>1111-22-33</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Phone</p></td>
-			    <td><p>111-222-3333</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Email</p></td>
-			    <td><p>xxxxx.xxxxxx@xxxx.com</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Address</p></td>			  
-			    <td><p>11 xxxxxxxxxxxxxx xxxxx XX Calgary AB</p></td>
-			  </tr>
-			  <!-- if the patient has an emerge contact-->
-			  <!--<tr>
-				<td><p>Emergency Contact</p></td>
-				<td><a href="/patient/edit-emerge.php">View</a></td>
-			  </tr>-->
-            </table>
-			
-			<!-- again, if present, I think this is better -->
-			<h2><p>Emergency Contact</p></h2>
-			<table class = "std">
-              <tr id="header">
-				<th></th>
-				<th></th>
-              </tr>
-			  <tr>
-			    <td><p>Name</p></td>
-			    <td><p>Patient Name1</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Gender</p></td>
-			    <td><p>M/F</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Birthday</p></td>
-			    <td><p>1111-22-33</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Phone</p></td>
-			    <td><p>111-222-3333</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Email</p></td>
-			    <td><p>xxxxx.xxxxxx@xxxx.com</p></td>
-			  </tr>
-			  <tr>
-			    <td><p>Address</p></td>			  
-			    <td><p>11 xxxxxxxxxxxxxx xxxxx XX Calgary AB</p></td>
-			  </tr>
-			</table>
-          </div>
+			      <a href="/patient/view-personal.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Personal information</a>
+            <form action="/patient/edit-personal.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
+              <div class="form-container">
+                <ul>
+                  <li><p>Name:</p></li>
+                  <li><input type="text" name="name" value="<?php echo getPerson($_GET["ID"])["name"]; ?>" /></li>
+                </ul>
+                <ul class="gender">
+                  <li><p>Gender:</p></li>
+                  <li>
+                    <?php
+                      $gender = getPerson($_GET["ID"])["gender"];
+                      
+                      if ($gender == 'M' || $gender == 'm')
+                      {
+                          echo "<p><input type=\"radio\" name=\"gender\" value=\"M\" checked=\"checked\" /> Male</p>\n";
+                          echo "<p><input type=\"radio\" name=\"gender\" value=\"F\" /> Female</p>\n";
+                      }
+                      else
+                      {
+                          echo "<p><input type=\"radio\" name=\"gender\" value=\"M\" /> Male</p>\n";
+                          echo "<p><input type=\"radio\" name=\"gender\" value=\"F\" checked=\"checked\" /> Female</p>\n";
+                      }
+                    ?>
+                  </li>
+                </ul>
+                <ul class="birthday">
+                  <li><p>Birthday:</p></li>
+                  <li>
+                    <p>Day: 
+                      <select name="birthday">
+                        <?php
+							            $birthday = (int)substr(getPerson($_GET["ID"])['birthday'], 8,2);
+							            outputOptionNumbers(1, $birthday-1);
+							            echo "<option value=\"".$birthday."\" selected =\"selected\">".$birthday."</option>";
+							            outputOptionNumbers($birthday+1, 31);
+						            ?>
+                      </select>
+                    </p>
+                    <p>Month:
+                      <select name="birthmonth">
+                        <?php
+							            $birthmonth = (int)substr(getPerson($_GET["ID"])['birthday'], 5,2);
+							            outputOptionMonths($birthmonth);
+						            ?>
+                      </select>
+                    </p>
+                    <p>Year: <input type="text" name="year" value="<?php echo substr(getPerson($_GET["ID"])["birthday"], 0, 4); ?>" /></p>
+                  </li>
+                </ul>
+                <ul>
+                  <li><p>Phone number:</p></li>
+                  <li><input type="text" name="phone" value="<?php echo getPerson($_GET["ID"])["phone"]; ?>" /></li>
+                </ul>
+                <ul>
+                  <li><p>Email:</p></li>
+                  <li><input type="text" name="email" value="<?php echo getPerson($_GET["ID"])["email"]; ?>" /></li>
+                </ul>
+                <?php
+                  // Address.
+                  $userID = $_GET['ID'];
+					        $person = getPerson($userID);
+					        $substrings = explode('|', $person['address'], 4);
+					        if(count($substrings) <4){
+					        echo "<ul>
+						        <li><p>Address line 1:</p></li>
+						        <li><input type=\"text\" name=\"addressLine1\" value=\"".$substrings[0]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Address line 2:</p></li>
+						        <li><input type=\"text\" name=\"addressLine2\" value=\"\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>City:</p></li>
+						        <li><input type=\"text\" name=\"city\" value=\"\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Country:</p></li>
+						        <li><input type=\"text\" name=\"country\" value=\"\" /></li>
+					        </ul>";
+					        }else{
+					        echo "<ul>
+						        <li><p>Address line 1:</p></li>
+						        <li><input type=\"text\" name=\"addressLine1\" value=\"".$substrings[0]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Address line 2:</p></li>
+						        <li><input type=\"text\" name=\"addressLine2\" value=\"".$substrings[1]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>City:</p></li>
+						        <li><input type=\"text\" name=\"city\" value=\"".$substrings[2]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Country:</p></li>
+						        <li><input type=\"text\" name=\"country\" value=\"".$substrings[3]."\" /></li>
+					        </ul>";
+					        }
+				        ?>
+                <div class="clearfix"></div>
+              </div>
+              <?php
+                // Emergency contact.
+                $mysqli  = mysqliInit();
+                $emergID = queryAssoc($mysqli, "SELECT p.emergency_id FROM person AS p WHERE p.ID = " . $_GET["ID"])["emergency_id"];
+                
+                if ($emergID != Null)
+                {
+                    $emerg = getPerson($emergID);
+                    echo "<h2>Emergency contact information</h2>
+                       <div class=\"form-container\">
+                        <ul>
+                          <li><p>Name:</p></li>
+                          <li><input type=\"text\" name=\"emergname\" id=\"name\" value=\"" . $emerg["name"] . "\" /></li>
+                        </ul>
+                        <ul class=\"birthday\">
+                          <li><p>Birthday:</p></li>
+                          <li>
+                            <p>Day:
+                              <select name=\"emergbirthday\">";
+                                $birthday = (int)substr($emerg['birthday'], 8,2);
+							                  outputOptionNumbers(1, $birthday-1);
+							                  echo "<option value=\"".$birthday."\" selected =\"selected\">".$birthday."</option>";
+							                  outputOptionNumbers($birthday+1, 31);
+                              echo "</select>
+                            </p>
+                            <p>Month:
+                              <select name=\"emergbirthmonth\">";
+                                $birthmonth = (int)substr($emerg['birthday'], 5,2);
+							                  outputOptionMonths($birthmonth);
+                              echo "</select>
+                            </p>
+                            <p>Year:
+                              <input type=\"text\" name=\"emergbirthyear\" value=\"" . substr($emerg["birthday"], 0, 4) . "\" />
+                            </p>
+                          </li> 
+                        </ul>
+                        
+                        <ul class=\"gender\">
+                          <li><p>Gender:</p></li>
+                          <li>";
+                          
+                          if ($emerg["gender"] == 'M' || $emerg["gender"] == 'm')
+                          {
+                              echo "<p><input type=\"radio\" name=\"emerggender\" value=\"M\" checked=\"checked\" /> Male</p>
+                                    <p><input type=\"radio\" name=\"emerggender\" value=\"F\" /> Female</p>";
+                          }
+                          else
+                          {
+                              echo "<p><input type=\"radio\" name=\"emerggender\" value=\"M\" /> Male</p>
+                                    <p><input type=\"radio\" name=\"emerggender\" value=\"F\" checked=\"checked\" /> Female</p>";
+                          }
+                          
+                          echo "</li>
+                        </ul>";
+                        
+                        // Address
+					        $substrings = explode('|', $emerg['address'], 4);
+					        if(count($substrings) <4){
+					        echo "<ul>
+						        <li><p>Address line 1:</p></li>
+						        <li><input type=\"text\" name=\"addressLine1\" value=\"".$substrings[0]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Address line 2:</p></li>
+						        <li><input type=\"text\" name=\"addressLine2\" value=\"\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>City:</p></li>
+						        <li><input type=\"text\" name=\"city\" value=\"\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Country:</p></li>
+						        <li><input type=\"text\" name=\"country\" value=\"\" /></li>
+					        </ul>";
+					        }else{
+					        echo "<ul>
+						        <li><p>Address line 1:</p></li>
+						        <li><input type=\"text\" name=\"addressLine1\" value=\"".$substrings[0]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Address line 2:</p></li>
+						        <li><input type=\"text\" name=\"addressLine2\" value=\"".$substrings[1]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>City:</p></li>
+						        <li><input type=\"text\" name=\"city\" value=\"".$substrings[2]."\" /></li>
+					        </ul>
+					        <ul>
+						        <li><p>Country:</p></li>
+						        <li><input type=\"text\" name=\"country\" value=\"".$substrings[3]."\" /></li>
+					        </ul>";
+					        }
+                        
+                        echo "<ul>
+                          <li><p>Phone number:</p></li>
+                          <li><input type=\"text\" name=\"emergphone\" value=\"" . $emerg["phone"] . "\" /></li>
+                        </ul>
+                        <ul>
+                          <li><p>Email:</p></li>
+                          <li><input type=\"text\" name=\"emergemail\" value=\"" . $emerg["email"] . "\" /></li>
+                        </ul>
+                        <div class=\"clearfix\"></div>
+                      </div>";
+                      }
+                    ?>
+              <div class="form-buttons">
+                <input type="submit" name="submit" value="Update" />
+                <input type="button" name="cancel" value="Cancel" onclick="window.location ='/patient/view-personal.php?ID=<?php echo $_GET["ID"]; ?>'" />
+              </div>
+            </form>
+			    </div>
         </div>
       </div>
     </div>
