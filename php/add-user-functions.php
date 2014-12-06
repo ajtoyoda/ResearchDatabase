@@ -40,9 +40,10 @@
 	}
 	//Add users to database, including person and user. DOES NOT DO EMERGENCY CONTACTS YET
 	function add_user(){
-		if(!isset($_POST['createAttempt'])){
+		if(!isset($_GET['createAttempt'])){
 			return;
 		}
+		echo 1;
 		$mysqli= mysqliInit();
 		if(empty($_POST['username'])||empty($_POST['password']) 
 			|| empty($_POST['confirm'])|| empty($_POST['type'])|| empty($_POST['name']) 
