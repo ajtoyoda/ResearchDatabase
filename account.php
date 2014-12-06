@@ -98,7 +98,7 @@
                     if ($gender == 'M' || $gender == 'm')
                         echo "Male";
                     else
-                        echo "Famale";
+                        echo "Female";
                   ?></p></li>
               </ul>
               <?php
