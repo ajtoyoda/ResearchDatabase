@@ -14,7 +14,7 @@
   if ($_GET["userID"] != $_SESSION["userid"])
       header("Location: /");
   
-  editUser();
+  editUser('self');
 ?>
 
 <!DOCTYPE html>

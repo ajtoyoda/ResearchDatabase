@@ -10,7 +10,6 @@
   if(!isset($_SESSION['filterByResults'])){
 	$_SESSION['filterByResults'] = "all";
   }
-  echo $_SESSION['filterByResults'];
   if(!empty($_POST['filterBySelect'])){
 	if($_SESSION['filterByResults']  != $_POST['filterBySelect']){
 		$_POST['filterWithSelect']= 'all';
