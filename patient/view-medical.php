@@ -56,7 +56,7 @@
               <ul>
                 <li style="width: 440px;"><h1>Patient Name</h1></li>
 				<li><h2 style="padding-right: 10px;">Medical Information</h2></li>
-                <li><input type="button" name="editPersonal" value="Edit" onclick="window.location = '/patient/edit-personal.php';" /></li>
+                <li><input type="button" name="editPersonal" value="Edit" onclick="window.location = '/patient/edit-medical.php?ID=<?php echo $_GET["ID"]; ?>';" /></li>
 				<!-- How do I make this justify left? And how do i put a < infront of it without it being a tag-->
 				<!--<li><a href="/patients.php">&lt; Patients</a></li>-->
               </ul>
