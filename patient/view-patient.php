@@ -56,7 +56,7 @@
               <ul>
                 <li style="width: 455px;"><h1>Patient Name</h1></li>
 				<li><h2 style="padding-right: 10px;">Patient Information</h2></li>
-                <li><input type="button" name="editPatient" value="Edit" onclick="window.location = '/patient/edit-patient.php';" /></li>
+                <li><input type="button" name="editPatient" value="Edit" onclick="window.location = '/patient/edit-patient.php?ID=<?php echo $_GET["ID"]; ?>';" /></li>
               </ul>
             </div>
             <div class="clearfix"></div>
