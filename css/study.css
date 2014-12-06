@@ -18,10 +18,6 @@
     font-weight: bold;
 }
 
-#study-info p, #.tudy-info-wide p {
+#study-info p {
     margin: 0px;
-}
-
-.study-info-wide ul li {
-    margin-top: 10px;
 }
