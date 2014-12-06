@@ -3,7 +3,7 @@
   require_once("../php/login-functions.php");
   require_once("../php/edit-user-functions.php");
   require_once("../php/gf.php");
-
+  require_once("../php/edit-personal-functions.php");
   // Check URL arguments.
   if (!isset($_GET["ID"]))
       header("Location: /patients.php");
@@ -12,7 +12,7 @@
   $emergID = queryAssoc($mysqli, "SELECT p.emergency_id FROM person AS p WHERE p.ID = " . $_GET["ID"])["emergency_id"];
   if ($emergID != Null && !isset($_GET["emergencyContact"]))
       header("Location: /patient/edit-personal.php?ID=" . $_GET["ID"] . "&emergencyContact");
-
+  editPersonal();
   verifyLoggedIn();
 ?>
 
