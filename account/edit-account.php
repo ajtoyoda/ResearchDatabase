@@ -68,6 +68,7 @@
             <?php errorMessage("Your account could not be updated", "failure");
 			errorMessage("Your account could not be updated because the passwords do not match.", "failureInvalidPassword");
       errorMessage("Your account could not be updated because they are the only MD. Add a new MD before changing this user's type.", "failureCannotEditOnlyMD");
+      errorMessage("The specified phone number is invalid.", "failureBadPhone");
 			?>
 			<?php
 				$userID = $_GET['userID'];

@@ -35,6 +35,12 @@
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
 		
+    if ($phone == "")
+    {
+        header("Location: /patient/edit-personal.php?ID=" . $_GET["ID"] . "&failureBadPhone");
+        return;
+    }
+        
 		if($emergencyID == NULL){
 			$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
 			if(!$result = $mysqli->query($query)){
@@ -86,6 +92,12 @@
 		$address = $mysqli->real_escape_string($address);
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
+    
+    if ($phone == "")
+    {
+        header("Location: /patient/edit-personal.php?ID=" . $_GET["ID"] . "&failureBadPhone");
+        return;
+    }
 	
 		$query = 	"UPDATE person
 				SET birthday ='$birthday', gender = '$gender', name = '$name', phone= '$phone', address= '$address', email='$email'

@@ -22,6 +22,13 @@
 		$address = $mysqli->real_escape_string($address);
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
+    
+    if ($phone == "")
+    {
+        header("Location: /user/add-user.php?failureBadPhone");
+        return;
+    }
+        
 		$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
 		if(!$result = $mysqli->query($query)){
 			echo $query;
@@ -72,6 +79,12 @@
 		$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
 		$phone = validatePhoneNumber($_POST['phone']);
 		$email = $_POST['email'];
+    
+    if ($phone == "")
+    {
+        header("Location: /user/add-user.php?failureBadPhone");
+        return;
+    }
 	
 		//Escape strings
 		$username = $mysqli->real_escape_string($username);
