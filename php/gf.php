@@ -42,7 +42,8 @@
 			die("Failed query check assoc");
 		}
 		if($result->num_rows < 1){
-			header('Location = '.$errorLocation);
+			header('Location: '.$errorLocation.'');
+			die("Shouldn't get here");
 		}
 		return $result->fetch_assoc();
 	}
@@ -85,5 +86,65 @@
 			header("Location: /?failure");
 		}
 		return date('Y-m-d', $time);
+	}
+  
+  // Checks whether the specified phone number is valid.  Valid phone numbers consist
+  // 10 digits and two separator characters.
+  //   phone: The phone number to check.
+  //
+  // Returns: The phone number passed to this function if the phone number was valid,
+  //          or an empty string if the phone number was invalid.
+  //
+  function validatePhoneNumber($phone)
+  {
+      // Strip separator characters.
+      $phoneNumeric = array();
+      for ($i = 0; $i < strlen($phone); ++$i)
+          if (is_numeric($phone[$i]))
+              array_push($phoneNumeric, $phone[$i]);
+
+      // Check length.  There should only be 10 characters.
+      if (strlen(implode("", $phoneNumeric)) != 10)
+          return "";
+          
+      // Phone number is valid.  Add the separator characters back.
+      $validatedPhone = array();
+      $iNext          = 0;
+      
+      for ($i = 0; $i < 10; ++$i)
+      {
+          array_push($validatedPhone, $phoneNumeric[$i]);
+          ++$iNext;
+          
+          if ($i == 2 || $i == 5)
+          {
+              array_push($validatedPhone, '-');
+              ++$iNext;
+          }
+      }
+
+      return implode("", $validatedPhone);
+  }
+
+	//This function checks if users has canRead permissions for given study
+	function canView($studyname, $userID){
+		$mysqli = mysqliInit();
+		$query = "SELECT canRead, canWrite FROM view_edit WHERE user_id = $userID AND study_name = '$studyname'";
+		$data = queryAssoc($mysqli, $query);
+		if($data['canRead'] == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function canWrite($studyname, $userID){
+		$mysqli = mysqliInit();
+		$query = "SELECT canRead, canWrite FROM view_edit WHERE user_id = $userID AND study_name = '$studyname'";
+		$data = queryAssoc($mysqli, $query);
+		if($data['canWrite'] == 1){
+			return true;
+		}else{
+			return false;
+		}		
 	}
 ?>

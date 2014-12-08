@@ -53,6 +53,7 @@
       <div class="container">
         <div id="content-inner">
           <div class="padding">
+            <?php errorMessage("An unknown error ocurred.", "failure"); ?>
             <div class="add-header" id="top">
               <ul>
                 <li><h1>My studies</h1></li>

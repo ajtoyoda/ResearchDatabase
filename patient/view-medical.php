@@ -1,6 +1,7 @@
 <?php
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
+  require_once("../php/success-failure-functions.php");
 
   verifyLoggedIn();
 ?>
@@ -54,15 +55,20 @@
           <div class="padding">
             <div class="add-header" id="top">
               <ul>
-                <li style="width: 440px;"><h1>Patient Name</h1></li>
+				<?php
+				$mysqli = mysqliInit();
+				$query = "SELECT name FROM person WHERE id = ".$_GET['ID'];
+				$data = queryAssoc($mysqli, $query);
+				$name = $data['name'];
+                echo "<li style=\"width: 440px;\"><h1>$name</h1></li>";
+				?>
 				<li><h2 style="padding-right: 10px;">Medical Information</h2></li>
                 <li><input type="button" name="editPersonal" value="Edit" onclick="window.location = '/patient/edit-medical.php?ID=<?php echo $_GET["ID"]; ?>';" /></li>
-				<!-- How do I make this justify left? And how do i put a < infront of it without it being a tag-->
-				<!--<li><a href="/patients.php">&lt; Patients</a></li>-->
-              </ul>
+				      </ul>
             </div>
             <div class="clearfix"></div>
 			<a href="/patients.php">&lt; Patients</a>
+            <?php successMessage("The patient's medical information was successfully updated.", "successfulEdit"); ?>
             <h2>Pre-existing Medical Conditions and Notes</h2>
 			<ul style="padding:15px;">
 			  <?php

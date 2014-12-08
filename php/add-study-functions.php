@@ -31,7 +31,7 @@
 		$name = $mysqli->real_escape_string($name);
 		$supervisorName = $mysqli->real_escape_string($supervisorName);
 		$query="SELECT user.id FROM person INNER JOIN user ON person.id = user.id WHERE name = '$supervisorName' and type_flag = 'M'";
-		$data = queryAssoc($mysqli, $query);
+		$data = queryCheckAssoc($mysqli, $query, '/study/add-study.php?failureInvalidSupervisor');
 		$supervisor_id = $data['id'];
 		
 		//Check if duplicate study name
@@ -43,8 +43,9 @@
 				header('Location: /study/add-study.php?failureDuplicateName');
 			}
 		}
-		$query = "INSERT INTO study VALUES('$name', $budget, '$endDate', '$startDate', $supervisor_id)";
+		/*$query = "INSERT INTO study VALUES('$name', $budget, '$endDate', '$startDate', $supervisor_id)";
 		queryNoReturn($mysqli, $query);
 		header('Location: /index.php?successfulAddStudy');
+		*/
 	}
 ?>

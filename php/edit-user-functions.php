@@ -28,14 +28,21 @@
 		$birthday = formatDate((int)$_POST['emergbirthday'], $birthmonthString, (int)$_POST['emergbirthyear']);
 		$gender= $_POST['emerggender'];
 		$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
-		$phone = $_POST['emergphone'];
+		$phone = validatePhoneNumber($_POST['emergphone']);
 		$email = $_POST['emergemail'];
-		//Add in escape characters
+		
+    if ($phone === "")
+    {
+        header("Location: /user/edit-user.php?userID=" . $_GET["userID"] . "&failureBadPhone");
+        return;
+    }
+		
+    //Add in escape characters
 		$name = $mysqli->real_escape_string($name);
 		$address = $mysqli->real_escape_string($address);
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
-		
+    
 		if($emergencyID == NULL){
 			$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
 			if(!$result = $mysqli->query($query)){
@@ -285,9 +292,16 @@
 		$type = $_POST['type'];
 		$gender= $_POST['gender'];
 		$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
-		$phone = $_POST['phone'];
+		$phone = validatePhoneNumber($_POST['phone']);
 		$email = $_POST['email'];
-		//Escape characters
+		
+    if ($phone === "")
+    {
+        header("Location: /user/edit-user.php?userID=" . $_GET["userID"] . "&failureBadPhone");
+        return;
+    }
+    
+    //Escape characters
 		$username = $mysqli->real_escape_string($username);
 		$password = $mysqli->real_escape_string($password);
 		$confirm = $mysqli->real_escape_string($confirm);

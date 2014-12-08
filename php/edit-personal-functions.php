@@ -27,7 +27,7 @@
 		$birthday = formatDate((int)$_POST['emergbirthday'], $birthmonthString, (int)$_POST['emergbirthyear']);
 		$gender= $_POST['emerggender'];
 		$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
-		$phone = $_POST['emergphone'];
+		$phone = validatePhoneNumber($_POST['emergphone']);
 		$email = $_POST['emergemail'];
 		//Add in escape characters
 		$name = $mysqli->real_escape_string($name);
@@ -35,6 +35,12 @@
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
 		
+    if ($phone == "")
+    {
+        header("Location: /patient/edit-personal.php?ID=" . $_GET["ID"] . "&failureBadPhone");
+        return;
+    }
+        
 		if($emergencyID == NULL){
 			$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
 			if(!$result = $mysqli->query($query)){
@@ -79,13 +85,19 @@
 		$birthday= formatDate((int)$_POST['birthday'], $birthmonthString,  (int)$_POST['birthyear']);
 		$gender= $_POST['gender'];
 		$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
-		$phone = $_POST['phone'];
+		$phone = validatePhoneNumber($_POST['phone']);
 		$email = $_POST['email'];
 		//Escape characters
 		$name = $mysqli->real_escape_string($name);
 		$address = $mysqli->real_escape_string($address);
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
+    
+    if ($phone == "")
+    {
+        header("Location: /patient/edit-personal.php?ID=" . $_GET["ID"] . "&failureBadPhone");
+        return;
+    }
 	
 		$query = 	"UPDATE person
 				SET birthday ='$birthday', gender = '$gender', name = '$name', phone= '$phone', address= '$address', email='$email'
@@ -102,7 +114,7 @@
 			if($place == 'self'){
 				header("Location: /account.php?userID=".$userID);
 			}else{
-				header("Location: /patient/view-personal.php?ID=".$_GET['ID']."&amp;successfulEditPersonal");
+				header("Location: /patient/view-personal.php?ID=".$_GET['ID']."&successfulEditPersonal");
 			}
 		}
 	}
