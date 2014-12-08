@@ -1,5 +1,8 @@
 Things that are broken:
   * It is possible to edit an MD and change their type to non-MD
     status without reassigning the studies they supervise.
+  * Results drop down menus are improperly justified
+  * no success message when updating results
+    
   
   

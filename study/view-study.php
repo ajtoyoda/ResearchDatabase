@@ -78,7 +78,7 @@
             
             <div class="filter-header">
               <ul>
-                <li style="width: 340;"><h2>Results</h2></li>
+                <li stye="width:300px;"><h2 style="width: 300px;">Results</h2></li>
 				<?php echo "<form name=\"filterForm\" action=\"/study/view-study.php?filter&studyname=".$_GET['studyname']."\" method=\"POST\">";?>
 				<li>
 				  <?php echo "<select name=\"filterBySelect\", style=\"margin-right: 10px;\" onchange=\"filterForm.submit()\">";

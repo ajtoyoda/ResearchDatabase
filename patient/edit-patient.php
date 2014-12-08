@@ -9,6 +9,15 @@
       header("Location: /patients.php");
 
   verifyLoggedIn();
+  if(isset( $_GET['editAttempt']))
+  {
+	$mysqli = mysqliInit();
+	$query = 	"UPDATE patient 
+				SET Healthcare_No = '".$_POST['healthcareNumber']."',Height = ".$_POST['height'].",Weight = ".$_POST['weight']."
+				WHERE patient.ID = ".$_GET['ID'];
+	queryNoReturn($mysqli, $query);
+	header("Location: /patient/view-patient.php?ID=".$_GET['ID']."&success");
+  }
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +75,7 @@
             </div>
             <div class="clearfix"></div>
 			      <a href="/patient/view-patient.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Patient information</a>
-			      <form action="/patients/edit-patient.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
+			      <form action="/patient/edit-patient.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
 				      <div class="form-container">
 					      <ul>
 					        <li><p>Healthcare no.:</p></li>
