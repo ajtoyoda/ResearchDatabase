@@ -8,13 +8,15 @@
 			return;
 		}
 		$mysqli= mysqliInit();
+		$query = "SELECT * FROM type WHERE result_id=".$_GET['id']." AND type ='".$_GET['deleteTypeAttempt']."'";
+		queryCheckAssoc($mysqli, $query, '/study/edit-result.php?id='.$_GET['id'].'&numTypes='.$_GET['numTypes'].'&studyname='.$_GET['studyname'].'&setNumTypes');
 		$query = "DELETE FROM type WHERE result_id = ".$_GET['id']." AND type = '".$_GET['deleteTypeAttempt']."'";
 		queryNoReturn($mysqli, $query);
-		header('Location: /study/edit-result.php?id='.$_GET['id'].'&numTypes='.$_GET['numTypes'].'&studyname='.$_GET['studyname']);
+		header('Location: /study/edit-result.php?id='.$_GET['id'].'&numTypes='.$_GET['numTypes'].'&studyname='.$_GET['studyname'].'&setNumTypes');
 		
 	}
 
-	//This function updates the result and type table
+	//This function updates the result and $type table
 	function editResult(){
 		$mysqli= mysqliInit();
 		if(!isset($_GET['editResultsAttempt'])){
@@ -64,13 +66,14 @@
 		}else{
 			$data = $result->fetch_assoc();
 		}
+		$query = "SELECT type FROM type WHERE result_id = $resultID";
+		$result = $mysqli->query($query);
 		if($_GET['numTypes'] > $data['numTypes']){
 			for($count = $data['numTypes']; $count<$_GET['numTypes']; $count++){
 				$query = "INSERT INTO type VALUES($resultID, '$studyName', $patientID, '".$typeArray[$count]."')";
 				queryNoReturn($mysqli, $query);
 			}
 		}
-		$query = "SELECT type FROM type WHERE result_id = $resultID";
 		queryCheckAssoc($mysqli, $query, '/study/view-study.php?studyname='.$studyName.'&successfulEditResult');
 		for($count = 0; $count < $data['numTypes']; $count++){
 			$typeData = $result->fetch_assoc();

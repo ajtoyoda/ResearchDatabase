@@ -3,11 +3,15 @@
   require_once("../php/login-functions.php");
   require_once("../php/patient-functions.php");
   require_once("../php/edit-user-functions.php");
-
+  require_once("../php/gf.php");
+  require_once("../php/edit-medical-functions.php");
   // Check URL arguments.
   if (!isset($_GET["ID"]))
       header("Location: /patients.php");
-  
+  setNum();
+  deleteMed();
+  deleteIssue();
+  edit();
   verifyLoggedIn();
 ?>
 
@@ -66,7 +70,7 @@
             </div>
             <div class="clearfix"></div>
 			      <a href="/patient/view-medical.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Medical information</a>
-            <form action="/patient/edit-medical.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
+            <form action="/patient/edit-medical.php?ID=<?php echo $_GET["ID"]."&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=".$_GET['numMeds']; ?>&editAttempt&setNumTypes" method="post">
               <div class="form-container">
               <h2>Pre-existing medical conditions and notes</h2>
               <!-- 
@@ -74,39 +78,47 @@
                    This makes the buttons appear but I don't know what to do after that, query-wise.
               -->
               <?php
-				        $numConditions = $_GET['numConditions'];
-				        if(!$numConditions){
-					        echo " <ul class=\"result-type\"><li><p>Condition:</p></li><li><input type=\"button\" name=\"addCondition\" style=\"width: 100px; margin-left: 0px;\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numConditions=1';\" /></li></ul>";
+				        $numIssues = $_GET['numIssues'];
+						$mysqli = mysqliInit();
+						$query = "SELECT issues FROM patient_health_issues WHERE id = ".$_GET['ID'];
+						$issue = queryArray($mysqli, $query, 'issues');
+						if(count($issue)<$numIssues){
+							for($count = count($issue); $count < $numIssues; $count++){
+								array_push($issue, "");
+							}
+						}
+				        if(!$numIssues){
+					        echo " <ul class=\"result-type\"><li><p>Condition:</p></li><li><input type=\"button\" name=\"addCondition\" style=\"width: 100px; margin-left: 0px;\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=1&amp;numMeds=".$_GET['numMeds']."&amp;setNumTypes';\" /></li></ul>";
 				        }
 				        else{
-					        if($numConditions == 1){
+					        if($numIssues == 1){
 					        echo "<ul class=\"result-type\"><li><p>Condition:</p></li><li>
-                            <input type=\"text\" name=\"condition0\" />
-                            <input type=\"button\" name=\"addCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numConditions=".($numConditions-1)."';\" />
-					        <input type=\"button\" name=\"addCondition\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numConditions=".++$numConditions."';\" />
+                            <input type=\"text\" name=\"issue0\" value=\"".$issue[0]."\" />
+                            <input type=\"button\" name=\"addCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".($numIssues-1)."&amp;numMeds=".$_GET['numMeds']."&amp;setNumTypes&amp;deleteIssueAttempt=".$issue[0]."';\" />
+					        <input type=\"button\" name=\"addCondition\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".++$numIssues."&amp;numMeds=".$_GET['numMeds']."&amp;setNumTypes';\" />
 					        </li>
 					        </ul>";
 					        }else{
 					        echo "<ul class=\"result-type\"><li><p>Condition:</p></li>
 							        <li>
-							        <input type=\"text\" name=\"condition0\" />
-							        <input type=\"button\" name=\"addCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numConditions=".($numConditions-1)."';\" />
+							        <input type=\"text\" name=\"issue0\" value=\"".$issue[0]."\"/>
+							        <input type=\"button\" name=\"removeCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".($numIssues-1)."&amp;numMeds=".$_GET['numMeds']."&amp;setNumTypes&amp;deleteIssueAttempt=".$issue[0]."';\" />
 							        </li>
 						        </ul>";
-					        for($count = 2; $count < $numConditions; $count++){
+					        for($count = 2; $count < $numIssues; $count++){
 						        echo "<ul class=\"result-type\">
 								        <li><p></p></li>
 								        <li>
-								        <input type=\"text\" name=\"condition".($count-1)."\" />
-								        <input type=\"button\" name=\"addCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numConditions=".($numConditions-1)."';\" />
+								        <input type=\"text\" name=\"issue".($count-1)."\" value=\"".$issue[$count-1]."\" />
+								        <input type=\"button\" name=\"removeCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".($numIssues-1)."&amp;numMeds=".$_GET['numMeds']."&amp;setNumTypes&amp;deleteIssueAttempt=".$issue[$count-1]."';\" />
 								        </li>
 							        </ul>";
 					        }
 					        echo"<ul class=\"result-type\">
 					        <li><p></p></li>
 					        <li>
-                            <input type=\"text\" name=\"condition".($numConditions-1)."\" />
-                            <input type=\"button\" name=\"addCondition\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numConditions=".++$numConditions."';\" />
+                            <input type=\"text\" name=\"issue".($numIssues-1)."\" value=\"".$issue[$numIssues-1]."\" />
+                            <input type=\"button\" name=\"addCondition\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".(1+$numIssues)."&amp;numMeds=".$_GET['numMeds']."&amp;setNumTypes';\" />
 					        </li>
 					        </ul>";
 				        }
@@ -114,13 +126,58 @@
 				        ?>
                 <div class="clearfix"></div>
                 <h2>Medications</h2>
-                <!-- Similarely, not sure how to get this one to work. -->
-                <!-- We need another add medication result thing here. -->
+              <?php
+				        $numMeds = $_GET['numMeds'];
+						$mysqli = mysqliInit();
+						$query = "SELECT medications FROM patient_medications WHERE id = ".$_GET['ID'];
+						$meds = queryArray($mysqli, $query, 'medications');
+						if(count($meds)<$numMeds){
+							for($count = count($meds); $count < $numMeds; $count++){
+								array_push($meds, "");
+							}
+						}
+				        if(!$numMeds){
+					        echo " <ul class=\"result-type\"><li><p>Condition:</p></li><li><input type=\"button\" name=\"addCondition\" style=\"width: 100px; margin-left: 0px;\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=1&amp;setNumTypes';\" /></li></ul>";
+				        }
+				        else{
+					        if($numMeds == 1){
+					        echo "<ul class=\"result-type\"><li><p>Condition:</p></li><li>
+                            <input type=\"text\" name=\"med0\" value=\"".$meds[0]."\" />
+                            <input type=\"button\" name=\"addCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=".($numMeds-1)."&amp;setNumTypes&amp;deleteMedsAttempt=".$meds[0]."';\" />
+					        <input type=\"button\" name=\"addCondition\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=".($numMeds+1)."&amp;setNumTypes&amp;deleteMedsAttempt=".$meds[0]."';\" />
+					        </li>
+					        </ul>";
+					        }else{
+					        echo "<ul class=\"result-type\"><li><p>Condition:</p></li>
+							        <li>
+							        <input type=\"text\" name=\"med0\" value=\"".$meds[0]."\"/>
+							        <input type=\"button\" name=\"addCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=".($numMeds-1)."&amp;setNumTypes&amp;deleteMedsAttempt=".$meds[0]."';\" />
+							        </li>
+						        </ul>";
+					        for($count = 2; $count < $numMeds; $count++){
+						        echo "<ul class=\"result-type\">
+								        <li><p></p></li>
+								        <li>
+								        <input type=\"text\" name=\"med".($count-1)."\" value=\"".$meds[$count-1]."\"/>
+								        <input type=\"button\" name=\"addCondition\" value=\"Remove\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=".($numMeds-1)."&amp;setNumTypes&amp;deleteMedsAttempt=".$meds[$count-1]."';\" />
+								        </li>
+							        </ul>";
+					        }
+					        echo"<ul class=\"result-type\">
+					        <li><p></p></li>
+					        <li>
+                            <input type=\"text\" name=\"med".($numMeds-1)."\"value=\"".$meds[$numMeds-1]."\" />
+                            <input type=\"button\" name=\"addCondition\" value=\"Add\" onclick=\"window.location='/patient/edit-medical.php?ID=" . $_GET["ID"] . "&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=".++$numMeds."&amp;setNumTypes';\" />
+					        </li>
+					        </ul>";
+				        }
+				        }
+				        ?>
                 <div class="clearfix"></div>
               </div>
               <div class="form-buttons">
                 <input type="submit" name="submit" value="Update" />
-                <input type="button" name="cancel" value="Cancel" onclick="window.location='/patient/view-medical.php?ID=<?php echo $_GET["ID"]; ?>';" />
+                <input type="button" name="cancel" value="Cancel" onclick="window.location='/patient/view-medical.php?ID=<?php echo $_GET["ID"]."&amp;editAttempt"; ?>';" />
               </div>
             </form>
           </div>
