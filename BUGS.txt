@@ -1,15 +1,17 @@
 Things that are broken:
   * [SK] It is possible to edit an MD and change their type to non-MD
     status without reassigning the studies they supervise.
-  * Results drop down menus are improperly justified
-  * no success message when updating results
+  * no success message on these pages:
+    * Edit result
+    * Add result
+    * Delete result
+    * 
   * [SK] Entering data longer than the allowed limit for VARCHAR types
     crashes the query.
+  * Invalid supervisor names break the query.
   * [SK] Invalid phone numbers are accepted.
-  * [SK] Wierd dates produce weird results (Feb 31 20000 = Dec 31 1969
+  * [SK] Weird dates produce weird results (Feb 31 20000 = Dec 31 1969
   * [SK] Emails without an @ or . are accepted.
-  * [SK] Edit study name field needs different CSS styles from other
-    fields to indicate it is read only.
   * [SK] Editing results with nonexistent patient names crashes the
     system.
   * [SK] Create result needs error messages.
@@ -17,7 +19,6 @@ Things that are broken:
   * [SK] Edit pages don't remember changes past page reloads (like
     adding types).
   * [SK] SQL injections work on edit results page.
-  * [SK] Edit result is missing a space between < and the study name.
   * [SK] Integers can go over INT_MAX and cause problems.
   * [SK] Excluding numtypes from a manually-entered URL for pages with
     type addition boxes breaks the system
