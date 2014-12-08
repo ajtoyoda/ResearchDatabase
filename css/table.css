@@ -99,7 +99,7 @@ table.patient-table td{
 	
 }
 
-table.patient-table td a, td a:focus, td a:visited, td:last-child a, td:last-child a:focus, td:last-child a:visited{
+table.patient-table td a, table.patient-table td a:focus, table.patient-table td a:visited, table.patient-table td:last-child a, table.patient-table td:last-child a:focus, table.patient-tabletd:last-child a:visited{
 	display: block;
     background-color: #4C5952;
     padding: 5px;

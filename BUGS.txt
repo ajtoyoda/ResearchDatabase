@@ -1,6 +1,5 @@
 Things that are broken:
   * It is possible to edit an MD and change their type to non-MD
     status without reassigning the studies they supervise.
-  * Patients Medical link jumps to the left when clicked. I suspect
-    Witchcraft
+  
   
