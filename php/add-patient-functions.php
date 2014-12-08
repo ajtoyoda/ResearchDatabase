@@ -72,6 +72,7 @@
 		if($phone == ""){
 			header("Location: /patient/add-patient.php?failureBadPhone");
 			return;
+			
 		}
 		
 		//Escape strings
