@@ -4,13 +4,11 @@ Things that are broken:
   * Patient pages display "Patient name" instead of actual name
   * Entering data longer than the allowed limit for VARCHAR types
     crashes the query.
-  * Invalid phone numbers are accepted.
   * Weird dates produce weird results (Feb 31 20000 = Dec 31 1969
   * Emails without an @ or . are accepted.
   * Editing results with nonexistent patient names crashes the
     system.
   * Create result needs error messages.
-  * Edit result needs error messages.
   * Edit pages don't remember changes past page reloads (like
     adding types).
   * SQL injections work on edit results page.

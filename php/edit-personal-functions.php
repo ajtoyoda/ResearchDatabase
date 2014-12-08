@@ -27,7 +27,7 @@
 		$birthday = formatDate((int)$_POST['emergbirthday'], $birthmonthString, (int)$_POST['emergbirthyear']);
 		$gender= $_POST['emerggender'];
 		$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
-		$phone = $_POST['emergphone'];
+		$phone = validatePhoneNumber($_POST['emergphone']);
 		$email = $_POST['emergemail'];
 		//Add in escape characters
 		$name = $mysqli->real_escape_string($name);
@@ -79,7 +79,7 @@
 		$birthday= formatDate((int)$_POST['birthday'], $birthmonthString,  (int)$_POST['birthyear']);
 		$gender= $_POST['gender'];
 		$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
-		$phone = $_POST['phone'];
+		$phone = validatePhoneNumber($_POST['phone']);
 		$email = $_POST['email'];
 		//Escape characters
 		$name = $mysqli->real_escape_string($name);
