@@ -124,11 +124,11 @@
 						$userID = $_GET['userID'];
 						$person = getPerson($userID);
 						if($person['gender'] == 'M'){
-						echo "<p><input type=\"radio\" name=\"gender\" value=\"male\" checked=\"checked\"/> Male</p>
-							<p><input type=\"radio\" name=\"gender\" value=\"female\" /> Female</p>";
+						echo "<p><input type=\"radio\" name=\"gender\" value=\"M\" checked=\"checked\"/> Male</p>
+							<p><input type=\"radio\" name=\"gender\" value=\"F\" /> Female</p>";
 						}else{
-							echo "<p><input type=\"radio\" name=\"gender\" value=\"male\" /> Male</p>
-							<p><input type=\"radio\" name=\"gender\" value=\"female\" checked=\"checked\"/> Female</p>";
+							echo "<p><input type=\"radio\" name=\"gender\" value=\"M\" /> Male</p>
+							<p><input type=\"radio\" name=\"gender\" value=\"F\" checked=\"checked\"/> Female</p>";
 						}
 						
 					?>
@@ -422,8 +422,8 @@
                                 <ul class=\"gender\">
                                   <li><p>Gender:</p></li>
                                   <li>
-                                    <p><input type=\"radio\" name=\"emerggender\" checked=\"checked\" /> Male</p>
-                                    <p><input type=\"radio\" name=\"emerggender\" /> Female</p>
+                                    <p><input type=\"radio\" name=\"emerggender\" value=\"M\" checked=\"checked\" /> Male</p>
+                                    <p><input type=\"radio\" name=\"emerggender\" value=\"F\"/> Female</p>
                                   </li>
                                 </ul>
                                 <ul>
