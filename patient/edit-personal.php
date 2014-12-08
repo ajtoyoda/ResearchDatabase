@@ -231,36 +231,36 @@
 					        if(count($substrings) <4){
 					        echo "<ul>
 						        <li><p>Address line 1:</p></li>
-						        <li><input type=\"text\" name=\"addressLine1\" value=\"".$substrings[0]."\" /></li>
+						        <li><input type=\"text\" name=\"emergaddressLine1\" value=\"".$substrings[0]."\" /></li>
 					        </ul>
 					        <ul>
 						        <li><p>Address line 2:</p></li>
-						        <li><input type=\"text\" name=\"addressLine2\" value=\"\" /></li>
+						        <li><input type=\"text\" name=\"emermgaddressLine2\" value=\"\" /></li>
 					        </ul>
 					        <ul>
 						        <li><p>City:</p></li>
-						        <li><input type=\"text\" name=\"city\" value=\"\" /></li>
+						        <li><input type=\"text\" name=\"emergcity\" value=\"\" /></li>
 					        </ul>
 					        <ul>
 						        <li><p>Country:</p></li>
-						        <li><input type=\"text\" name=\"country\" value=\"\" /></li>
+						        <li><input type=\"text\" name=\"emergcountry\" value=\"\" /></li>
 					        </ul>";
 					        }else{
 					        echo "<ul>
 						        <li><p>Address line 1:</p></li>
-						        <li><input type=\"text\" name=\"addressLine1\" value=\"".$substrings[0]."\" /></li>
+						        <li><input type=\"text\" name=\"emergaddressLine1\" value=\"".$substrings[0]."\" /></li>
 					        </ul>
 					        <ul>
 						        <li><p>Address line 2:</p></li>
-						        <li><input type=\"text\" name=\"addressLine2\" value=\"".$substrings[1]."\" /></li>
+						        <li><input type=\"text\" name=\"emergaddressLine2\" value=\"".$substrings[1]."\" /></li>
 					        </ul>
 					        <ul>
 						        <li><p>City:</p></li>
-						        <li><input type=\"text\" name=\"city\" value=\"".$substrings[2]."\" /></li>
+						        <li><input type=\"text\" name=\"emergcity\" value=\"".$substrings[2]."\" /></li>
 					        </ul>
 					        <ul>
 						        <li><p>Country:</p></li>
-						        <li><input type=\"text\" name=\"country\" value=\"".$substrings[3]."\" /></li>
+						        <li><input type=\"text\" name=\"emergcountry\" value=\"".$substrings[3]."\" /></li>
 					        </ul>";
 					        }
                         
@@ -287,12 +287,12 @@
                                 <div class=\"form-container\">
                                   <ul>
                                     <li><p>Name:</p></li>
-                                    <li><input type=\"text\" name=\"emergName\" /></li>
+                                    <li><input type=\"text\" name=\"emergname\" /></li>
                                   </ul>
                                   <ul class=\"birthday\">
                                     <li><p>Birthday:</p></li>
                                     <li><p>Day:
-                                      <select name=\"emergBirthday\">
+                                      <select name=\"emergbirthday\">
                                         <option value=\"1\">1</option>
                                         <option value=\"2\">2</option>
                                         <option value=\"3\">3</option>
@@ -327,7 +327,7 @@
                                       </select>
                                     </p>
                                     <p>Month:
-                                      <select name=\"emergBirthmonth\">
+                                      <select name=\"emergbirthmonth\">
                                         <option value=\"january\">January</option>
                                         <option value=\"february\">February</option>
                                         <option value=\"march\">March</option>
@@ -342,39 +342,39 @@
                                         <option value=\"december\">December</option>
                                       </select>
                                     </p>
-                                    <p>Year: <input type=\"text\" name=\"emergYear\" /></p>
+                                    <p>Year: <input type=\"text\" name=\"emergyear\" /></p>
                                   </li>
                                 </ul>
                                 <ul class=\"gender\">
                                   <li><p>Gender:</p></li>
                                   <li>
-                                    <p><input type=\"radio\" name=\"emergGender\" checked=\"checked\" /> Male</p>
-                                    <p><input type=\"radio\" name=\"emergGender\" /> Female</p>
+                                    <p><input type=\"radio\" name=\"emerggender\" checked=\"checked\" /> Male</p>
+                                    <p><input type=\"radio\" name=\"emerggender\" /> Female</p>
                                   </li>
                                 </ul>
                                 <ul>
                                   <li><p>Address line 1:</p></li>
-                                  <li><input type=\"text\" name=\"emergAddressLine1\" /></li>
+                                  <li><input type=\"text\" name=\"emergaddressLine1\" /></li>
                                 </ul>
                                 <ul>
                                   <li><p>Address line 2:</p></li>
-                                  <li><input type=\"text\" name=\"emergAddressLine2\" /></li>
+                                  <li><input type=\"text\" name=\"emergaddressLine2\" /></li>
                                 </ul>
                                 <ul>
                                   <li><p>City:</p></li>
-                                  <li><input type=\"text\" name=\"emergCity\" /></li>
+                                  <li><input type=\"text\" name=\"emergcity\" /></li>
                                 </ul>
                                 <ul>
                                   <li><p>Country:</p></li>
-                                  <li><input type=\"text\" name=\"emergCountry\" /></li>
+                                  <li><input type=\"text\" name=\"emergcountry\" /></li>
                                 </ul>
                                 <ul>
                                   <li><p>Phone number:</p></li>
-                                  <li><input type=\"text\" name=\"emergPhone\" /></li>
+                                  <li><input type=\"text\" name=\"emergphone\" /></li>
                                 </ul>
                                 <ul>
                                   <li><p>Email:</p></li>
-                                  <li><input type=\"text\" name=\"emergEmail\" /></li>
+                                  <li><input type=\"text\" name=\"emergemail\" /></li>
                                 </ul>
                               </div>
                               <div class=\"clearfix\"></div>
