@@ -38,7 +38,7 @@
             <?php ShowPasswordMessage(); ?>
             <form action="login.php" method="post">
               <ul>
-                <li><p>User name:</p></li>
+                <li><p>Username:</p></li>
                 <li><input type="text" name="username" id="txtUser" value="<?php printUserName(); ?>" /></li>
               </ul>
               <ul>

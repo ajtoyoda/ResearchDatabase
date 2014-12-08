@@ -1,6 +1,8 @@
 <?php
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
+  require_once("../php/success-failure-functions.php");
+  
 
   verifyLoggedIn();
 ?>
@@ -61,6 +63,7 @@
             </div>
             <div class="clearfix"></div>
 			<a href="/patients.php">&lt; Patients</a>
+			<?php successMessage("Patient Successfully Updated", "success"); ?>
              <table class = "std">
               <tr id="header">
 				<th></th>

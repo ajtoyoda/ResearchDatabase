@@ -334,7 +334,7 @@
 					editEmergencyContact($userID);
 				}
 				if($place == 'self'){
-					header("Location: /account.php?userID=".$userID);
+					header("Location: /account.php?userID=".$userID."&success");
 				}else{
 					header("Location: /users.php?successfulEditUser");
 				}
