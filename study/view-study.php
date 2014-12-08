@@ -2,6 +2,7 @@
   require_once("../php/user-permissions.php");
   require_once("../php/login-functions.php");
   require_once("../php/view-study-functions.php");
+  require_once("../php/success-failure-functions.php");
   require_once("../php/index-functions.php");
   require_once("../php/gf.php");
   verifyLoggedIn();
@@ -132,6 +133,9 @@
 				</ul>
             </div>
             <div class="clearfix"></div>
+            <?php successMessage("The result was successfully updated.", "successfulEditResult"); ?>
+            <?php successMessage("The result was successfully created.", "successfulAddResult"); ?>
+            <?php successMessage("The result was successfully deleted.", "successfulDeleteResult"); ?>
             <table>
               <tr id="header">
                 <th><p>Patient</p></th>

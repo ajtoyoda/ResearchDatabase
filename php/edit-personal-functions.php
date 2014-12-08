@@ -102,7 +102,7 @@
 			if($place == 'self'){
 				header("Location: /account.php?userID=".$userID);
 			}else{
-				header("Location: /patient/view-personal.php?ID=".$_GET['ID']."&amp;successfulEditPersonal");
+				header("Location: /patient/view-personal.php?ID=".$_GET['ID']."&successfulEditPersonal");
 			}
 		}
 	}

@@ -138,6 +138,6 @@
 			$query = "UPDATE patient_medications SET medications = '".$medsArray[$count]."' WHERE medications = '".$medData['medications']."' AND id = ".$id;
 			queryNoReturn($mysqli, $query);
 		}
-		header('Location: /patient/view-medical.php?ID='.$id.'&successfulEdi');
+		header('Location: /patient/view-medical.php?ID='.$id.'&successfulEdit');
 	}
 ?>

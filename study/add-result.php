@@ -4,6 +4,7 @@
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
   require_once("../php/add-results-functions.php");
+  require_once("../php/success-failure-functions.php");
   verifyLoggedIn();
   addResult();
 ?>
@@ -55,10 +56,11 @@
         <div id="content-inner">
           <div class="padding">
             <h1>Create a result</h1>
-            <!-- Jamie: This link should go back to the study, so it needs the same url args as this page. -->
-            <!--        Replace $whatever-s with actual data. -->
 			<?php
 				echo "<p><a href=\"/study/view-study.php?studyname=".$_GET['studyname']."\">&lt; ".$_GET['studyname']."</a></p>";
+        errorMessage("All fields must be filled in.", "failureNotSet");
+        errorMessage("The specified patient does not exist.", "failureInvalidPatient");
+        errorMessage("The result could not be created.", "failure");
 				echo "<form action=\"/study/add-result.php?studyname=".$_GET['studyname']."&numTypes=".$_GET['numTypes']."&addResultAttempt\" method=\"post\">";
 			?>
               <div class="form-container">

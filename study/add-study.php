@@ -61,6 +61,7 @@
             <p><a href="/">&lt; My studies</a></p>
             <?php errorMessage("The study could not be created.", "failure"); ?>
             <?php errorMessage("The budget must be numeric.", "failureNotNumeric"); ?>
+            <?php errorMessage("A study with the same name already exists.", "failureDuplicateName"); ?>
             <?php errorMessage("The supervisor specified does not exist.", "failureInvalidSupervisor"); ?>
             <!-- Jamie: As usual, change the action to fit what you need to do. -->
             <form action="/study/add-study.php?addStudyAttempt" method="post">

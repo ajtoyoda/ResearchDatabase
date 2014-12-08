@@ -3,6 +3,7 @@
   require_once("../php/login-functions.php");
   require_once("../php/patient-functions.php");
   require_once("../php/edit-user-functions.php");
+  require_once("../php/success-failure-functions.php");
   require_once("../php/gf.php");
   require_once("../php/edit-medical-functions.php");
   // Check URL arguments.
@@ -69,6 +70,7 @@
               </ul>
             </div>
             <div class="clearfix"></div>
+            <?php errorMessage("All fields must be filled.", "failureNotSet"); ?>
 			      <a href="/patient/view-medical.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Medical information</a>
             <form action="/patient/edit-medical.php?ID=<?php echo $_GET["ID"]."&amp;numIssues=".$_GET['numIssues']."&amp;numMeds=".$_GET['numMeds']; ?>&editAttempt&setNumTypes" method="post">
               <div class="form-container">

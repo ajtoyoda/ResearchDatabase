@@ -6,6 +6,6 @@
 		queryNoReturn($mysqli, $query);
 		$query = "DELETE FROM results WHERE id=$resultID";
 		queryNoReturn($mysqli, $query);
-		header("Location: /study/view-study.php?studyname=".$_GET['studyname']);
+		header("Location: /study/view-study.php?studyname=".$_GET['studyname']."&successfulDeleteResult");
 	}
 ?>

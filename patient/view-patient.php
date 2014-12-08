@@ -63,7 +63,7 @@
             </div>
             <div class="clearfix"></div>
 			<a href="/patients.php">&lt; Patients</a>
-			<?php successMessage("Patient Successfully Updated", "success"); ?>
+			<?php successMessage("The patient's information was successfully updated.", "success"); ?>
              <table class = "std">
               <tr id="header">
 				<th></th>

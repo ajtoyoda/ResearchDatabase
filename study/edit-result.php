@@ -4,6 +4,7 @@
   require_once("../php/view-study-functions.php");
   require_once("../php/index-functions.php");
   require_once("../php/edit-results-functions.php");
+  require_once("../php/success-failure-functions.php");
   verifyLoggedIn();
   editResult();
   checkNumType();
@@ -60,6 +61,8 @@
 			<?php
 				$studyName = getStudyFromResult($_GET['id']);
 				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt; ".$studyName." </a></p>";
+        errorMessage("All fields must be filled.", "failureNotSet");
+        errorMessage("The specified patient does not exist.", "failureInvalidPatient");
 				echo "<form action=\"/study/edit-result.php?id=".$_GET['id']."&numTypes=".$_GET['numTypes']."&studyname=".$_GET['studyname']."&editResultsAttempt\" method=\"post\">";
 			?>
               <div class="form-container">
