@@ -125,8 +125,6 @@
 
       return implode("", $validatedPhone);
   }
-  
-?>
 
 	//This function checks if users has canRead permissions for given study
 	function canView($studyname, $userID){
