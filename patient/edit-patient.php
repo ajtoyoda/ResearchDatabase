@@ -66,7 +66,7 @@
             </div>
             <div class="clearfix"></div>
 			      <a href="/patient/view-patient.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Patient information</a>
-			      <form action="/patients/edit-patient.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
+			      <form action="/patient/edit-patient.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
 				      <div class="form-container">
 					      <ul>
 					        <li><p>Healthcare no.:</p></li>
