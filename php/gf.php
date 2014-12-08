@@ -86,4 +86,43 @@
 		}
 		return date('Y-m-d', $time);
 	}
+  
+  // Checks whether the specified phone number is valid.  Valid phone numbers consist
+  // 10 digits and two separator characters.
+  //   phone: The phone number to check.
+  //
+  // Returns: The phone number passed to this function if the phone number was valid,
+  //          or an empty string if the phone number was invalid.
+  //
+  function validatePhoneNumber($phone)
+  {
+      // Strip separator characters.
+      $phoneNumeric = array();
+      for ($i = 0; $i < strlen($phone); ++$i)
+          if (is_numeric($phone[$i]))
+              array_push($phoneNumeric, $phone[$i]);
+
+      // Check length.  There should only be 10 characters.
+      if (strlen(implode("", $phoneNumeric)) != 10)
+          return "";
+          
+      // Phone number is valid.  Add the separator characters back.
+      $validatedPhone = array();
+      $iNext          = 0;
+      
+      for ($i = 0; $i < 10; ++$i)
+      {
+          array_push($validatedPhone, $phoneNumeric[$i]);
+          ++$iNext;
+          
+          if ($i == 2 || $i == 5)
+          {
+              array_push($validatedPhone, '-');
+              ++$iNext;
+          }
+      }
+
+      return implode("", $validatedPhone);
+  }
+  
 ?>
