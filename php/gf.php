@@ -42,7 +42,8 @@
 			die("Failed query check assoc");
 		}
 		if($result->num_rows < 1){
-			header('Location = '.$errorLocation);
+			header('Location: '.$errorLocation.'');
+			die("Shouldn't get here");
 		}
 		return $result->fetch_assoc();
 	}
@@ -85,5 +86,26 @@
 			header("Location: /?failure");
 		}
 		return date('Y-m-d', $time);
+	}
+	//This function checks if users has canRead permissions for given study
+	function canView($studyname, $userID){
+		$mysqli = mysqliInit();
+		$query = "SELECT canRead, canWrite FROM view_edit WHERE user_id = $userID AND study_name = '$studyname'";
+		$data = queryAssoc($mysqli, $query);
+		if($data['canRead'] == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function canWrite($studyname, $userID){
+		$mysqli = mysqliInit();
+		$query = "SELECT canRead, canWrite FROM view_edit WHERE user_id = $userID AND study_name = '$studyname'";
+		$data = queryAssoc($mysqli, $query);
+		if($data['canWrite'] == 1){
+			return true;
+		}else{
+			return false;
+		}		
 	}
 ?>

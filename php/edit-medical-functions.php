@@ -1,5 +1,7 @@
 <?php
 	require_once("gf.php");
+	//This function checks how many the given patient already has for medications and health issues and 
+	//sets the get values
 	function setNum(){
 		if(isset($_GET['setNumTypes'])){
 			return;
@@ -27,6 +29,8 @@
 			header('Location: /patient/edit-medical.php?ID='.$_GET['ID'].'&numIssues='.$numIssues.'&numMeds='.$numMeds.'&setNumTypes');
 		}
 	}
+
+	//This function deletes the issue specified by the get
 	function deleteIssue(){
 		if(!isset($_GET['deleteIssueAttempt'])){
 			return;
@@ -36,6 +40,8 @@
 		queryNoReturn($mysqli, $query);
 		header("Location: /patient/edit-medical.php?ID=" . $_GET['ID'] . "&numIssues=".$_GET['numIssues']."&numMeds=".$_GET['numMeds']."&setNumTypes");
 	}
+
+	//This function deletes the medication specified by the get
 	function deleteMed(){
 		if(!isset($_GET['deleteMedsAttempt'])){
 			return;
@@ -45,6 +51,8 @@
 		queryNoReturn($mysqli, $query);
 		header("Location: /patient/edit-medical.php?ID=" . $_GET['ID'] . "&numIssues=".$_GET['numIssues']."&numMeds=".$_GET['numMeds']."&setNumTypes");
 	}
+
+	//This function updates medication and issue
 	function edit(){
 		$mysqli = mysqliInit();
 		$id = $_GET['ID'];

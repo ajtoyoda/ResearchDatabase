@@ -5,7 +5,11 @@
   require_once("../php/index-functions.php");
   require_once("../php/edit-results-functions.php");
   require_once("../php/success-failure-functions.php");
-  verifyLoggedIn();
+  require_once("../php/gf.php");
+  isLoggedOn();
+  if(!canWrite($_GET['studyname'], $_SESSION['userid'])){
+	header('Location: /');
+  }
   editResult();
   checkNumType();
   deleteType();
@@ -152,7 +156,8 @@
 					<li><p></p></li>
 					<li>
                     <input type=\"text\" name=\"type".($numTypes-1)."\" value=\"".$types[$numTypes-1]."\"/>
-                    <input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".++$numTypes."&studyname=".$_GET['studyname']."&setNumTypes';\" />
+                    <input type=\"button\" name=\"addType\" value=\"Remove\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".($numTypes-1)."&studyname=".$_GET['studyname']."&setNumTypes&deleteTypeAttempt=".$types[$numTypes-1]."';\" />
+					<input type=\"button\" name=\"addType\" value=\"Add\" onclick=\"window.location='/study/edit-result.php?id=".$_GET['id']."&numTypes=".++$numTypes."&studyname=".$_GET['studyname']."&setNumTypes';\" />
 					</li>
 					</ul>";
 				}

@@ -38,6 +38,7 @@
 	
 		$studyName = $_GET['studyname'];
 		$patient = $_POST['patient'];
+		
 		$birthmonthString = $_POST['resultMonth'];
 		$date = formatDate((int)$_POST['resultDay'], $birthmonthString, (int)$_POST['resultYear']);
 		$description = $_POST['description'];
@@ -45,6 +46,10 @@
 		$data = queryCheckAssoc($mysqli, $query, "/study/edit-result.php?failureInvalidPatient&id=".$_GET['id']."&studyname=".$_GET['studyname']."&numTypes=".$_GET['numTypes']);
 		$patientID = $data['id'];
 		$resultID = $_GET['id'];
+		$patient = $mysqli->real_escape_string($patient);
+		$description = $mysqli->real_escape_string($description);
+		
+		
 		$query = "UPDATE results SET study_name ='$studyName', patient_number = '$patientID', date ='$date', description='$description' WHERE id=".$resultID;
 		queryNoReturn($mysqli, $query);
 		$query = "SELECT result_id, count(result_id) as numTypes

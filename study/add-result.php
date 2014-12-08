@@ -6,6 +6,9 @@
   require_once("../php/add-results-functions.php");
   require_once("../php/success-failure-functions.php");
   verifyLoggedIn();
+  if(!canWrite($_GET['studyname'], $_SESSION['userid'])){
+	header('Location: /');
+  }
   addResult();
 ?>
 
