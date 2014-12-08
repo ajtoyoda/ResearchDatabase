@@ -7,7 +7,7 @@
 			|| empty($_POST['emerggender']) || empty($_POST['emergaddressLine1']) ||!isset($_POST['emergaddressLine2'])
 			||empty($_POST['emergcity'])||empty($_POST['emergcountry'])
 			||empty($_POST['emergphone'])||empty($_POST['emergemail'])){
-				header("Location: /user/add-user.php?failure&emergencyContact");
+				header("Location: /user/edit-user.php?failureEmergencyContactNotSet&emergencyContact");
 		}
 		//Check if person already has emergency contact
 		if(!($result =$mysqli->query("SELECT emergency_id FROM person WHERE id = $ID"))){
