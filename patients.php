@@ -91,7 +91,7 @@
 					$query = "SELECT id FROM patient";
 				}
 				else{
-					$query = "SELECT id FROM patient INNER JOIN person ON patient.id = person.id INNER JOIN results ON person.id = results.patient_number WHERE results.study_name = '".$_POST['studySelect']."'"; 
+					$query = "SELECT DISTINCT person.id AS id FROM patient INNER JOIN person ON patient.id = person.id INNER JOIN results ON person.id = results.patient_number WHERE results.study_name = '".$_POST['studySelect']."'"; 
 				}
 				$key="id";
 				

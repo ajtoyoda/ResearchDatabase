@@ -102,7 +102,7 @@
 					  </table>";
 			//EMERGENCY CONTACT
 				if(!empty($dataArray['Emergency_ID'])){
-					$query = "Select * FROM person INNER JOIN patient ON patient.id = person.id WHERE person.id = \"".$dataArray['Emergency_ID']."\"";
+					$query = "Select * FROM person WHERE id = \"".$dataArray['Emergency_ID']."\"";
 					$dataArray = queryAssoc($mysqli, $query);
 					echo
 						"<h2><p>Emergency Contact</p></h2>
