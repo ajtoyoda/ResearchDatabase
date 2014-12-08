@@ -55,7 +55,13 @@
           <div class="padding">
             <div class="add-header" id="top">
               <ul>
-                <li style="width: 440px;"><h1>Patient Name</h1></li>
+				<?php
+				$mysqli = mysqliInit();
+				$query = "SELECT name FROM person WHERE id = ".$_GET['ID'];
+				$data = queryAssoc($mysqli, $query);
+				$name = $data['name'];
+                echo "<li style=\"width: 440px;\"><h1>$name</h1></li>";
+				?>
 				        <li><h2 style="padding-right: 10px;">Personal Information</h2></li>
                 <li><input type="button" name="editPersonal" value="Edit" onclick="window.location = '/patient/edit-personal.php?ID=<?php echo $_GET["ID"]; ?>';" /></li>
 				      </ul>
