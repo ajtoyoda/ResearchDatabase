@@ -54,8 +54,8 @@
         <div id="content-inner">
           <div class="padding">
             <h1>Add a patient</h1>
-            <a href="/patient/view-personal.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Personal information</a>
-            <form action="/patient/edit-personal.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
+            <a href="/patients.php">&lt; Patients</a>
+            <form action="/patient/add-patient.php?createAttempt" method="post">
               <h2>Personal information</h2>
               <div class="form-container">
                 <ul>

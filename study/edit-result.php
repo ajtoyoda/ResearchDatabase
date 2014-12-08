@@ -59,7 +59,7 @@
             <h1>Edit a result</h1>
 			<?php
 				$studyName = getStudyFromResult($_GET['id']);
-				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt;".$studyName." </a></p>";
+				echo "<p><a href=\"/study/view-study.php?studyname=".$studyName."\">&lt; ".$studyName." </a></p>";
 				echo "<form action=\"/study/edit-result.php?id=".$_GET['id']."&numTypes=".$_GET['numTypes']."&studyname=".$_GET['studyname']."&editResultsAttempt\" method=\"post\">";
 			?>
               <div class="form-container">

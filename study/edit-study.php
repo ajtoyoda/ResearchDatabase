@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/nav.css" />
   </head>
-  <body onload="document.getElementById('name').focus();">
+  <body onload="document.getElementById('super').focus();">
     <noscript>
       <div id="js-banner">
         <div class="container">
@@ -74,7 +74,7 @@
                   <li><p>Study name:</p></li>
 				  <?php
 					$studyName = $_GET['studyname'];
-				    echo "<li><input type=\"text\" name=\"name\" id=\"name\" value=\"".$studyName."\" readonly=\"readonly\"/></li>";
+				    echo "<li><input type=\"text\" name=\"name\" value=\"".$studyName."\" readonly=\"readonly\"/></li>";
 				  ?>
 				  </ul>
 				<ul class="supervisor">
@@ -92,9 +92,9 @@
 					if($result->num_rows >0){
 					$data = $result->fetch_assoc();
 					$supervisorName =$data['name'];
-						echo "<li><input type=\"text\" name=\"supervisorName\" value=\"".$supervisorName."\"/></li>";
+						echo "<li><input id=\"super\" type=\"text\" name=\"supervisorName\" value=\"".$supervisorName."\"/></li>";
 					}else{
-						echo "<li><input type=\"text\" name=\"supervisorName\"/></li>";
+						echo "<li><input id=\"super\" type=\"text\" name=\"supervisorName\"/></li>";
 					}
 				  ?>
 				  </ul>
@@ -139,7 +139,7 @@
                   </li> 
                 </ul>
                 <ul class="birthday">
-                  <li><p>Start date:</p></li>
+                  <li><p>End date:</p></li>
                   <li>
                     <p>Day:
                       <select name="endDateDay">
@@ -173,7 +173,7 @@
                 <div class="clearfix"></div>
               </div>
               <div class="form-buttons">
-                <input type="submit" name="submit" value="Create" />
+                <input type="submit" name="submit" value="Update" />
                 <input type="button" name="cancel" value="Cancel" onclick="window.location='/';" />
               </div>
             </form>

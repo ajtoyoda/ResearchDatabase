@@ -11,7 +11,7 @@
 	//This function reads posts values and updates study
 	function editStudy(){
 		$studyName = $_GET['studyname'];
-		if(!isset($_GET['editStudyAttemp'])){
+		if(!isset($_GET['editStudyAttempt'])){
 			return;
 		}
 		$mysqli= mysqliInit();
