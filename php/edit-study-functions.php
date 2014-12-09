@@ -36,14 +36,14 @@
 		
 		//Make sure inputs are valid
 		if(!is_numeric($budget)){
-			header('Location: /study/edit-study.php?studyname=".$studyName."&failureNotNumeric');
+			header("Location: /study/edit-study.php?studyname=".$studyName."&failureNotNumeric");
 		}
 		$name = $mysqli->real_escape_string($name);
 		$supervisorName = $mysqli->real_escape_string($supervisorName);
 		
 		//Have supervisorName need supervisorID
 		$query="SELECT user.id FROM person INNER JOIN user ON person.id = user.id WHERE name = '$supervisorName' and type_flag = 'M'";
-		$data = queryAssoc($mysqli, $query);
+		$data = queryCheckAssoc($mysqli, $query, '/study/edit-study.php?studyname='.$studyName.'&failureInvalidSupervisor');
 		$supervisor_id = $data['id'];
 		
 		//actual query

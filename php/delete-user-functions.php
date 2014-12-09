@@ -7,7 +7,6 @@
 			die("Failed to use database");
 		}
 		// Don't allow the user to delete themselves.
-		session_start();
 		if ($_SESSION["userid"] == $userID)
 		{
 			header("Location: /users.php?failureLoggedIn");
@@ -26,9 +25,6 @@
 		}
 		
 		$query = "DELETE FROM view_edit WHERE user_id = $userID";
-		queryNoReturn($mysqli, $query);
-		
-		$query = "DELETE FROM works_on WHERE assistant_id = $userID";
 		queryNoReturn($mysqli, $query);
 		
 		$query = "DELETE FROM user WHERE id = $userID";
