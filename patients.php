@@ -75,7 +75,7 @@
 				  </select>
 				  </li>
 				<li class="button"><input type="submit" name="filterButton" value="Filter"/></li>
-                <li class="button"><input type="button" name="addPatient" value="New" onclick="window.location = '/patient/add-patient.php';" /></li>
+                <li class="button"><input type="button" name="addPatient" value="New" onclick="window.location='/patient/add-patient.php?emergencyContact';" /></li>
 				</form>
               </ul>
             </div>

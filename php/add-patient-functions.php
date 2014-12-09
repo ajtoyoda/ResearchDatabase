@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	require_once("gf.php");
 	
 	//Given person id adds another person to the database and sets $ID's emergencyContact to be them
@@ -16,19 +16,12 @@
 		$birthday = formatDate((int)$_POST['emergbirthday'], $birthmonthString, (int)$_POST['emergbirthyear']);
 		$gender= $_POST['emerggender'];
 		$address = $_POST['emergaddressLine1'] ."|". $_POST['emergaddressLine2'] ."|". $_POST['emergcity'] ."|". $_POST['emergcountry'];
-		$phone = validatePhoneNumber($_POST['emergphone']);
+		$phone = $_POST['emergphone'];
 		$email = $_POST['emergemail'];
 		$name = $mysqli->real_escape_string($name);
 		$address = $mysqli->real_escape_string($address);
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
-    
-    if ($phone == "")
-    {
-        header("Location: /user/add-user.php?failureBadPhone");
-        return;
-    }
-        
 		$query = "INSERT INTO person VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
 		if(!$result = $mysqli->query($query)){
 			echo $query;
@@ -45,82 +38,63 @@
 			}
 		}
 	}
-	//Add users to database, including person and user. DOES NOT DO EMERGENCY CONTACTS YET
-	function add_user(){
-		if(!isset($_GET['createAttempt'])){
-			return;
-		}
-		$mysqli= mysqliInit();
-		if(empty($_POST['username'])||empty($_POST['password']) 
-			||empty($_POST['confirm'])|| empty($_POST['type'])|| empty($_POST['name']) 
-			||empty($_POST['birthmonth'])|| empty($_POST['birthday'])|| empty($_POST['birthyear'])
-			||empty($_POST['gender']) || empty($_POST['addressLine1']) ||!isset($_POST['addressLine2'])
-			||empty($_POST['city'])||empty($_POST['country'])
-			||empty($_POST['phone'])||empty($_POST['email'])){
-			if(isset($_GET['emergencyContact'])){
-				header("Location: /user/add-user.php?failure&emergencyContact");
-			}
-			else{
-				header("Location: /user/add-user.php?failure");
-			}
+	
+	//Add patient to database, including person and patient. DOES NOT DO EMERGE SIMULTANEOUSLY
+	function addPatient(){
+		if (!isset($_GET['createAttempt'])){
 			return;
 		}
 		
+		$mysqli = mysqliInit();
+		if(empty($_POST['name'])||empty($_POST['birthday'])||empty($_POST['birthmonth'])||empty($_POST['birthyear'])||empty($_POST['gender'])||empty($_POST['addressLine1'])||empty($_POST['addressLine2'])||empty($_POST['city'])||empty($_POST['country'])||empty($_POST['phone'])||empty($_POST['email'])||empty($_POST['healthcareNumber'])||empty($_POST['hieght'])||empty($_POST['weight']))
+		{
+			if(isset($_GET['emergencyContact']))
+			{
+				header("Location: /patient/add-patient.php?failure&emergencyContact");
+			}
+			else{
+				header("Location: /patient/add-patient.php?failure");
+			}
+		}
+		
 		//Get info from post
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$confirm = $_POST['confirm'];
 		$name = $_POST['name'];
-		$birthmonthString = $_POST['birthmonth'];
-		$birthday = formatDate((int)$_POST['birthday'], $birthmonthString, (int)$_POST['birthyear']);
-		$type = $_POST['type'];
-		$gender= $_POST['gender'];
+		$birthdmonthString = $_POST['birthmonth'];
+		$birthday = formatDate((int)$_POST['birthday'], $birthdmonthString, (int)$_POST['birthyear']);
+		$gender = $_POST['gender'];
 		$address = $_POST['addressLine1'] ."|". $_POST['addressLine2'] ."|". $_POST['city'] ."|". $_POST['country'];
 		$phone = validatePhoneNumber($_POST['phone']);
 		$email = $_POST['email'];
-    
-    if ($phone == "")
-    {
-        header("Location: /user/add-user.php?failureBadPhone");
-        return;
-    }
-	
+		$hcN = $_POST['healthcareNumber'];
+		$height = (int)$_POST['height'];
+		$weight = (int)$_POST['weight'];
+
+		if($phone == ""){
+			header("Location: /patient/add-patient.php?failureBadPhone");
+			return;
+			
+		}
+		
 		//Escape strings
-		$username = $mysqli->real_escape_string($username);
-		$password = $mysqli->real_escape_string($password);
-		$confirm = $mysqli->real_escape_string($confirm);
 		$name = $mysqli->real_escape_string($name);
 		$address = $mysqli->real_escape_string($address);
 		$phone = $mysqli->real_escape_string($phone);
 		$email = $mysqli->real_escape_string($email);
-	
-		//Check passwords match
-		if($confirm != $password){
-			echo "Invalid Password";
-			if(isset($_GET['emergencyContact'])){
-				header("Location: /user/add-user.php?failureInvalidPassword&emergencyContact");
-			}
-			else{
-				header("Location: /user/add-user.php?failureInvalidPassword");
-			}
-			return;
-		}
-		$password = password_hash($password, PASSWORD_DEFAULT);
-	
+		$hcN = $mysqli -> real_escape_string($hcN);
+		
 		$query = 	"INSERT INTO person
-				VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
+					VALUES(DEFAULT, '$birthday', '$gender', '$name', '$phone', '$address', '$email', NULL)";
 		if(!$result = $mysqli->query($query)){
 			echo $query;
 			die("Failure query outside");
 		}
-		else
-		{
+		else{
 			//Newest user will have max id
 			$query = "SELECT max(id) AS id FROM person";
 			$data = queryAssoc($mysqli, $query);
 			$userID = $data['id'];
-			$query = "INSERT INTO user
-				VALUES($userID,'$username', '$password', '$type')";
+			$query = 	"INSERT INTO patient
+						VALUES($userID, '$hcN', '$weight', '$height')";
 			$result = $mysqli->query($query);
 			if(!$result){
 				$mysqli->query("DELETE FROM person WHERE id = $userID");
@@ -130,9 +104,9 @@
 				if(isset($_GET['emergencyContact'])){
 					addEmergencyContact($userID);
 				}
-				header('Location: /users.php?successfulAddUser');
-			
-			}
+				header('Location: /patients.php?successfulAddUser');
+						
 		}
 	}
-?>
+	}
+	

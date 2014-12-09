@@ -3,8 +3,10 @@
   require_once("../php/login-functions.php");
   require_once("../php/edit-user-functions.php");
   require_once("../php/gf.php");
+  require_once("../php/add-patient-functions.php");
  
   verifyLoggedIn();
+  addPatient();
 ?>
 
 <!DOCTYPE html>
@@ -168,11 +170,8 @@
                 </ul>
                 <div class="clearfix"></div>
               </div>
-              <h2>Medical information</h2>
-              <div class="form-container">
-                <!-- Jaimie: Here's where the messy add medical condition and add medication buttons go. -->
-                <div class="clearfix"></div>
-              </div>
+             
+              
               <?php
                 // Emergency contact.
                 if (isset($_GET["emergencyContact"]))

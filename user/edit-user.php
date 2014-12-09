@@ -66,6 +66,7 @@
             errorMessage("No emergency contact is available for this user.", "failureEmergencyContactNotSet");
 			errorMessage("The user could not be updated because the passwords do not match.", "failureInvalidPassword");
       errorMessage("The user could not be updated because they are the only MD. Add a new MD before changing this user's type.", "failureCannotEditOnlyMD");
+      errorMessage("The specified phone number is invalid.", "failureBadPhone");
 			?>
 			<?php
 				$userID = $_GET['userID'];

@@ -73,7 +73,7 @@
             <div class="clearfix"></div>
 			      <a href="/patient/view-personal.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Personal information</a>
             <?php errorMessage("The patient's personal information could not be updated.", "failure"); ?>
-            
+            <?php errorMessage("The specified phone number is invalid.", "failureBadPhone"); ?>
             <form action="/patient/edit-personal.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
               <div class="form-container">
                 <ul>
