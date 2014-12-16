@@ -2,7 +2,7 @@
     margin: 0px;
     padding: 0px;
     font-family: sans-serif;
-    font-size: 400%;
+    font-size: 12pt;
 }
 
 html {
@@ -41,11 +41,14 @@ header {
 }
 
 h1 {
+    font-family: sans-serif;
+    font-size: 400%;
     font-weight: bold;
     color: #EEEEEE;
 }
 
 h2 {
+    font-family: "Palatino Linotype", serif;
     font-size: 16pt;
     font-weight: bold;
     color: #4C5952;
@@ -65,6 +68,8 @@ ul li {
 }
 
 p {
+    font-family: sans-serif;
+    font-size: 400%;
     color: #EEEEEE;
 }
 
@@ -90,6 +95,8 @@ input[type="submit"], input[type="button"] {
     -webkit-transition: background-color 0.25s linear 0s;
     width: 100%;
     padding: 6%;
+    font-size: 400%;
+    font-family: sans-serif;
 }
 
 a, a:visited, a:focus {
