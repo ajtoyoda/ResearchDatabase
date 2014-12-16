@@ -1,0 +1,392 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 12pt;
+}
+
+body {
+    background-color: #4C5952;
+}
+
+header {
+    background-color: #4C5952;
+}
+
+nav {
+    background: -o-linear-gradient(#8FA69B, #BAD3D9);
+    background: -moz-linear-gradient(#8FA69B, #BAD3D9);
+    background: -webkit-linear-gradient(#8FA69B, #BAD3D9);
+    background: linear-gradient(#8FA69B, #BAD3D9);
+}
+
+footer {
+    background-color: #4C5952;
+}
+
+footer .padding {
+    padding: 10px 20px 10px 20px;
+}
+
+footer p {
+    color: #BAD3D9;
+    font-size: 10pt;
+}
+
+.container {
+    width: 800px;
+    margin: auto;
+}
+
+#content-outer {
+    background-color: #BAD3D9;
+}
+#content-inner {
+    background-color: #EEEEEE;
+}
+
+.padding {
+    padding: 20px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+h1 {
+    font-family: "Palatino Linotype", serif;
+    font-size: 20pt;
+    font-weight: bold;
+    color: #4C5952;
+}
+
+h2 {
+    font-family: "Palatino Linotype", serif;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #4C5952;
+    margin-top: 20px;
+}
+
+header h1 a, header h1 a:visited, header h1 a:focus {
+    color: #EEEEEE;
+    border-bottom: 0px;
+}
+
+header h1 a:hover, header h1 a:active {
+    color: #BAD3D9;
+}
+
+p {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 12pt;
+    color: #4C5952;
+    margin-bottom: 10px;
+}
+
+input, select , input[readonly = "readonly"], input[readonly = "readonly"]:hover, input[readonly = "readonly"]:active, input[readonly = "readonly"]:focus {
+    padding: 5px;
+    border: 1px solid #8FA69B;
+    background-color: #EEEEEE;
+    color: #4C5952;
+    border-radius: 5px;
+    transition: background-color 0.25s linear 0s, border-color 0.25s linear 0s, box-shadow 0.25s linear 0s;
+    -webkit-transition: background-color 0.25s linear 0s, border-color 0.25s linear 0s, box-shadow 0.25s linear 0s;
+}
+
+input:hover, input:focus, select:hover, select:focus {
+    border-color: #4C5952;
+    background-color: #FFFFFF;
+}
+
+input:focus, select:focus{
+    box-shadow: 0px 0px 7px #8FA69B;
+}
+
+
+
+input[type="button"] {
+    margin: 0px;
+    width: 100px;
+}
+
+input[type="submit"], input[type="button"] {
+    cursor: pointer;
+    background: -o-linear-gradient(#8FA69B, #4C5952);
+    background: -moz-linear-gradient(#8FA69B, #4C5952);
+    background: -webkit-linear-gradient(#8FA69B, #4C5952);
+    background: linear-gradient(#8FA69B, #4C5952);
+    color: #EEEEEE;
+    border-color: #EEEEEE;
+    transition: background-color 0.25s linear 0s, border-color 0.25s linear 0s;
+    -webkit-transition: background-color 0.25s linear 0s, border-color 0.25s linear 0s;
+}
+
+input[type="submit"]:hover, input[type="submit"]:focus,
+input[type="button"]:hover, input[type="button"]:focus {
+    border-color: #4C5952;
+}
+
+input[type="submit"]:focus, input[type="button"]:focus {
+    box-shadow: none;
+}
+
+input[type="submit"]:active, input[type="button"]:active {
+    background: -o-linear-gradient(#4C5952, #8FA69B);
+    background: -moz-linear-gradient(#4C5952, #8FA69B);
+    background: -webkit-linear-gradient(#4C5952, #8FA69B);
+    background: linear-gradient(#4C5952, #8FA69B);
+    box-shadow: none;
+}
+
+a, a:visited, a:focus {
+    font-family: inherit;
+    font-size: inherit;
+    color: #4C5952;
+    text-decoration: none;
+    border-bottom: 1px dotted #4C5952;
+    transition: color 0.25s linear 0s;
+    -webkit-tranisition: color 0.25s linear 0s;
+}
+
+a:hover, a:active {
+    color: #000000;
+    border-bottom: 0px;
+}
+
+#logout-tab {
+    position: relative;
+    right: 20px;
+    top: 0px;
+    float: right;
+    margin-top: 10px;
+}
+
+#logout-tab p {
+    margin: 0px;
+}
+
+#logout-tab a, #logout-tab a:visited, #logout-tab a:focus {
+    color: #4C5952;
+    background-color: #BAD3D9;
+    padding: 10px 20px 10px 20px;
+    border-bottom: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
+    -webkit-transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
+}
+
+#logout-tab a:hover {
+    background-color: #EEEEEE;
+    color: #4C5952;
+}
+
+footer a, footer a:visited, footer a:focus {
+    color: #BAD3D9;
+    border-bottom-color: #BAD3D9;
+}
+
+footer a:hover {
+    color: #FFFFFF;
+}
+
+.add-header, .filter-header {
+    margin-top: 20px;
+}
+
+#top {
+    margin-top: 0px !important;
+}
+
+.add-header ul, .filter-header ul {
+    list-style-type: none;
+}
+
+.add-header ul li, .filter-header ul li {
+    float: left;
+}
+
+.filter-header ul li select {
+    width: 150px;
+}
+
+.filter-header ul li {
+    width: 150px;
+    margin-left: 10px;
+}
+    
+.filter-header ul li:first-child {
+    margin-left: 0px;
+}
+
+.add-header ul li:first-child {
+    width: 660px;
+}
+
+.add-header ul li:last-child, .filter-header ul li.button {
+    width: 100px;
+}
+
+.add-header input, .filter-header input {
+    width: 100px;
+}
+
+.add-header h2, .filter-header h2 {
+    margin: 0px;
+}
+
+.add-header h1 {
+    margin: 0px;
+}
+
+.form-container {
+    margin-top: 5px;
+}
+
+.form-container ul {
+    list-style-type: none;
+    clear: both;
+    padding-top: 5px;
+}
+
+.form-container ul li {
+    float: left;
+}
+
+.form-container ul li:first-child {
+    width: 150px;
+}
+
+.form-container ul li:last-child {
+    width: 610px;
+}
+
+.form-container ul li p {
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+.form-container ul li input {
+    width: 600px;
+}
+
+.fonr-container ul li input[type="radio"] {
+    width: 16px;
+}
+
+.form-container ul.birthday li:last-child p {
+    float: left;
+    margin-left: 40px;
+    margin-top: 0px;
+    font-weight: normal;
+}
+
+.form-container ul.birthday li:first-child p {
+    margin-top: 7px;
+}
+
+.form-container ul.birthday li:last-child p:first-child {
+    margin-left: 0px;
+}
+
+.form-container ul.birthday li:last-child input[type="text"] {
+    width: 100px;
+}
+
+.form-container ul.gender li:last-child p, .form-container ul.type li:last-child p {
+    font-weight: normal;
+    float: left;
+    margin-left: 40px;
+    margin-top: 0px;
+}
+
+.form-container ul.gender li:last-child p:first-child, .form-container ul.type li:last-child p:first-child {
+    margin-left: 0px;
+}
+
+.form-container ul.gender li:last-child input[type="radio"], .form-container ul.type li:last-child input[type="radio"] {
+    width: 16px;
+}
+
+.form-container ul.result-type li:last-child input[type="text"] {
+    width: 488px;
+}
+
+.form-container ul.result-type li:last-child input[type="button"] {
+    width: 100px;
+    margin-left: 5px;
+}
+
+.form-buttons {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.form-buttons input {
+    width: 100px;
+}
+
+
+.form-container ul.budget li:last-child p {
+    font-weight: normal;
+}
+
+.form-container ul.budget li:last-child {
+    text-align: right;
+}
+
+.form-container ul.budget li:last-child input {
+    width: 583px;
+}
+
+.form-container ul.wide-select select {
+    width: 610px;
+}
+
+#js-banner {
+    border: 1px solid #FF4444;
+    background-color: #FFDDDD;
+    text-align: center;
+}
+
+#js-banner .padding {
+    padding: 10px;
+}
+
+#js-banner p {
+    color: #FF4444;
+    font-size: 10pt;
+    margin: 0px;
+}
+
+.red-box {
+    border: 1px solid #FF4444;
+    background-color: #FFDDDD;
+}
+
+.green-box {
+    border: 1px solid #449944;
+    background-color: #DDFFDD;
+}
+
+.red-box, .green-box {
+    margin-top: 10px;
+}
+
+.red-box .padding, .green-box .padding {
+    padding: 10px;
+}
+
+.red-box p, .green-box p {
+    font-size: 10pt;
+    margin: 0px;
+}
+
+.red-box p {
+    color: #FF4444;
+}
+
+.green-box p {
+    color: #449944;
+}

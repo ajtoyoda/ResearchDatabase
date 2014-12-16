@@ -1,10 +1,11 @@
 ﻿<?php
-  require_once("php/login-functions.php");
+  require_once("/php/login-functions.php");
   logIn();
   $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-  if(stripos($ua,'android') !== false) { // && stripos($ua,'mobile') !== false) {
-		header('Location:/m/login.php');
+  if(!(stripos($ua,'android') !== false)) { // && stripos($ua,'mobile') !== false) {
+		header('Location:/login.php');
   }
+  echo "Mobile";
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +17,9 @@
 
     <title>Log in :: Medical Research Database</title>
 
-    <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/login.css" />
-    <script src="js/login.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/m/css/layout.css" />
+    <link rel="stylesheet" href="/m/css/login.css" />
+    <script src="/js/login.js" type="text/javascript"></script>
   </head>
   <body onLoad="FocusUserName();">
     <noscript>

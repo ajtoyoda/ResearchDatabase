@@ -1,0 +1,151 @@
+/* Styling for tables. */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #4C5952;
+    padding: 5px;
+	vertical-align: top;
+}
+
+table th {
+    background-color: #4C5952;
+    padding: 5px;
+}
+
+table th p {
+    color: #EEEEEE;
+    font-weight: bold;
+}
+
+table p {
+    margin: 0px;
+}
+
+table tr:hover {
+    background-color: #FFFFFF;
+}
+
+table td.subtable {
+    padding: 0px;
+}
+
+table td.subtable p {
+    border-bottom: 1px solid #4C5952;
+    padding: 2px 5px 2px 5px;
+}
+
+table td.subtable p:last-child {
+    border-bottom: 0px;
+}
+
+/* Edit link stuff. */
+table td:last-child {
+    padding: 0px;
+    width: 120px;
+    text-align: center;
+    background-color: #4C5952;
+}
+
+table td:last-child a, table td:last-child a:visited, table td:last-child a:focus {
+    display: block;
+    background-color: #4C5952;
+    padding: 5px;
+    color: #EEEEEE;
+    border-bottom: 0px;
+    width: 50px;
+    float: left;
+    transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
+}
+
+table td:last-child a:hover {
+    color: #4C5952;
+    background-color: #EEEEEE;
+}
+
+
+table.edit-only td:last-child a, table.edit-only td:last-child a:visited, table.edit-only td:last-child a:focus {
+	width: 110px;
+}
+
+table.no-modify td:last-child {
+    background-color: #EEEEEE;
+    padding: 5px;
+}
+
+table.no-modify tr:hover td:last-child {
+    background-color: #FFFFFF;
+}
+
+table.no-modify td {
+    text-align: center;
+}
+
+table.no-modify td:first-child {
+    text-align: left;
+}
+
+table.patient-table td{
+	padding: 0px;
+	width:210px;
+	margin: 0px;
+	background-color: #4C5952;
+	text-align: center;
+	
+}
+
+table.patient-table td a, table.patient-table td a:focus, table.patient-table td a:visited, table.patient-table td:last-child a, table.patient-table td:last-child a:focus, table.patient-tabletd:last-child a:visited{
+	display: block;
+    background-color: #4C5952;
+    padding: 5px;
+	margin: 0px!important;
+	text-align:center!important;
+    color: #EEEEEE;
+    border-bottom: 0px;
+	width: 200px;
+    transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
+}
+
+table.patient-table td a:hover{
+	color: #4C5952;
+    background-color: #EEEEEE;
+}
+table.patient-table td:first-child{
+	border: 1px solid #4C5952;
+    padding: 5px;
+	vertical-align: top;
+	text-align: left;
+	width: 190px;
+	background-color: #EEEEEE
+}
+
+table.std td:last-child{
+	border: 1px solid #4C5952;
+	vertical-align: top;
+	background-color: #EEEEEE;
+}
+
+table.std td a, table.std td a:focus,table.std td a:visited{
+	
+	display: block;
+    background-color: #4C5952;
+    padding: 5px;
+	margin: 0px!important;
+    color: #EEEEEE;
+    border-bottom: 0px;
+	width: 200px;
+    transition: color 0.25s linear 0s, background-color 0.25s linear 0s;
+	
+}
+
+table.std td a:hover,table.std td:last-child:hover{
+	color: #4C5952;
+    background-color: #EEEEEE;
+}
+
+
