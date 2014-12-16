@@ -1,77 +1,37 @@
 /* Styles specific to the login page. */
 
-html {
-    height: 100%;
-}
-
-body {
-    background: -o-radial-gradient(#8FA69B, #4C5952);
-    background: -moz-radial-gradient(#8FA69B, #4C5952);
-    background: -webkit-radial-gradient(#8FA69B, #4C5952);
-    background: radial-gradient(#8FA69B, #4C5952);
-    height: 100%;
-}
-
-.container {
-    width: 35%;
-    height: 100%;
-}
-
-#login-container-outer {
-    width: 35%;
-    top: 25%;
-    position: absolute;
-}
-
-#login-container-inner {
-    width: 80%;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    background-color: #EEEEEE;
-    border-radius: 20px;
-    box-shadow: 0px 0px 20px #000000;
-}
-
-#login-container-inner header {
-    background-color: #4C5952;
-    color: #EEEEEE;
-     /* Slightly smaller border-radius prevents an ugly clipping issue. */
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
-}
-
-#login-container-inner ul {
-    list-style-type: none;
-    width: 100%;
-    clear: both;
-    float: left;
-    margin-bottom: 5px;
-}
-
-#login-container-inner ul li {
-    float: left;
-    width: 75%;
-}
-
-#login-container-inner ul li:first-child {
-    width: 100px;
-}
-
-#login-container-inner ul li p {
-    margin-top: 5px;
-}
-
 input[type="text"], input[type="password"] {
     width: 100%;
+    height: 100%;
+    font-size: 400%;
+    font-family: sans-serif;
+    background-color: #060707;
+    border: 2px solid #3C4045;
+    color: #EEEEEE;
 }
 
-#login-container-inner #submit-button {
-    text-align: right;
-    margin-top: 15px;
+input[type="text"]:focus, input[type="text"]:active, input[type="password"]:focus, input[type="password"]:active {
+    border: 2px solid #2681A3;
+    background-color: #060707 !important;
+    color: #EEEEEE;
 }
 
-input[type="submit"] {
-    width: 50%;
+.input-field-container {
+    width: 100%;
+    height: 100%;
+}
+
+.input-field-container .input-field {
+    width: 60%;
+    margin-left: 6%;
+    float: left;
+    height: 100%;
+}
+
+.input-field-container .input-field:first-child {
+    width: 33%;
+    margin-left: 0px;
+    height: 100%;
 }
 
 #bad-password {
@@ -87,33 +47,4 @@ input[type="submit"] {
 #bad-password p {
     color: #FF4444;
     font-size: 10pt;
-}
-
-footer {
-    background: none;
-    width: 400px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-p {
-    margin: 0px;
-}
-
-footer p {
-    color: #BAD3D9;
-    font-size: 10pt;
-}
-
-h1 {
-    color: #EEEEEE;
-}
-
-#js-banner {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    border-left: 0px;
-    border-right: 0px;
 }
