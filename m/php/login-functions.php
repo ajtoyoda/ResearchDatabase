@@ -1,18 +1,7 @@
 <?php
 	require_once("gf.php");
-	// Displays an incorrect password message if the URL bar
-	// contains bad-password.
-	function ShowPasswordMessage(){
-		if (isset($_GET["bad-password"])){
-			echo "<div id=\"bad-password\">\n";
-			echo "  <div class=\"padding\">\n";
-			echo "    <p>Incorrect user name or password. Please try again.</p>\n";
-			echo "  </div>\n";
-			echo "</div>\n";
-		}
-	}
-
-	// Prints the username specified in the address bar, if one is present.
+	
+  // Prints the username specified in the address bar, if one is present.
 	function printUserName(){
 		if (isset($_GET["username"]))
 			echo $_GET["username"];
@@ -22,7 +11,7 @@
 	function logIn(){
 		// Redirect to index if already logged in.
 		if (isLoggedOn())
-			header("Location: /");
+			header("Location: /m/");
 		
 		$mysqli= mysqliInit();
 		if(!(isset($_POST['username'])&&isset($_POST['password']))){
@@ -35,7 +24,7 @@
 				FROM user
 				WHERE username = '$username'";
 		$result = $mysqli->query($query);
-		$userdata = queryCheckAssoc($mysqli, $query, '/login.php?bad-password&username=' . $username); 
+		$userdata = queryCheckAssoc($mysqli, $query, '/m/login.php?bad-password&username=' . $username); 
 		if(!password_verify($password, $userdata['password'])){
 			header('Location: /m/login.php?bad-password&username=' . $username);
 		}
