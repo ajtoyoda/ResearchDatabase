@@ -59,7 +59,7 @@
 		$result = $mysqli->query($query);
 		if(!$result){
 			echo $query;
-			die("Invalid query 1");
+			die("Invalid oustide query");
 		}
 		if($result->num_rows ==0){
 			if($_GET['numTypes']==0){
@@ -68,7 +68,8 @@
 			else{
 				$data=array('numTypes'=>0);
 			}
-		}else{
+		}
+		else{
 			$data = $result->fetch_assoc();
 		}
 		$query = "SELECT type FROM type WHERE result_id = $resultID";
@@ -79,10 +80,13 @@
 				queryNoReturn($mysqli, $query);
 			}
 		}
-		queryCheckAssoc($mysqli, $query, '/study/view-study.php?studyname='.$studyName.'&successfulEditResult');
+		if(!$result){
+			echo $query;
+			die("invalid query outside");
+		}
 		for($count = 0; $count < $data['numTypes']; $count++){
 			$typeData = $result->fetch_assoc();
-			$query = "UPDATE type SET type = '".$typeArray[$count]."' WHERE type = '".$typeData['type']."'";
+			$query = "UPDATE type SET type = '".$typeArray[$count]."' WHERE type = '".$typeData['type']."' AND result_id = ".$resultID;
 			queryNoReturn($mysqli, $query);
 		}
 		header('Location: /study/view-study.php?studyname='.$studyName.'&successfulEditResult');

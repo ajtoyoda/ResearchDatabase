@@ -103,7 +103,7 @@
 					  </tr>
 					  <tr>
 						<td><p>Address</p></td>			  
-						<td><p>".$dataArray['Address']."</p></td>
+						<td><p>".str_replace('|', ' ', $dataArray['Address'])."</p></td>
 					  </tr>
 					  </table>";
 			//EMERGENCY CONTACT
@@ -139,7 +139,7 @@
 						  </tr>
 						  <tr>
 							<td><p>Address</p></td>			  
-							<td><p>".$dataArray['Address']."</p></td>
+							<td><p>".str_replace('|', ' ', $dataArray['Address'])."</p></td>
 						  </tr>
 						  </table>";
 				}

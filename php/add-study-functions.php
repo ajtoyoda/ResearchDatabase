@@ -43,9 +43,9 @@
 				header('Location: /study/add-study.php?failureDuplicateName');
 			}
 		}
-		/*$query = "INSERT INTO study VALUES('$name', $budget, '$endDate', '$startDate', $supervisor_id)";
+		$query = "INSERT INTO study VALUES('$name', $budget, '$endDate', '$startDate', $supervisor_id)";
 		queryNoReturn($mysqli, $query);
 		header('Location: /index.php?successfulAddStudy');
-		*/
+		
 	}
 ?>

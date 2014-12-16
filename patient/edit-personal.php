@@ -73,9 +73,15 @@
             <div class="clearfix"></div>
 			      <a href="/patient/view-personal.php?ID=<?php echo $_GET["ID"]; ?>">&lt; Personal information</a>
             <?php errorMessage("The patient's personal information could not be updated.", "failure"); ?>
-            <?php errorMessage("The specified phone number is invalid.", "failureBadPhone"); ?>
-            <form action="/patient/edit-personal.php?ID=<?php echo $_GET["ID"]; ?>&amp;editAttempt" method="post">
-              <div class="form-container">
+            <?php errorMessage("The specified phone number is invalid.", "failureBadPhone"); 
+            if(!isset($_GET['emergencyContact'])){
+				echo "<form action=\"/patient/edit-personal.php?ID=".$_GET["ID"]."&amp;editAttempt\" method=\"post\">";
+            }
+			else{
+				echo "<form action=\"/patient/edit-personal.php?ID=".$_GET["ID"]."&amp;editAttempt&amp;emergencyContact\" method=\"post\">";
+			}
+			?>  
+			  <div class="form-container">
                 <ul>
                   <li><p>Name:</p></li>
                   <li><input type="text" name="name" value="<?php echo getPerson($_GET["ID"])["name"]; ?>" /></li>

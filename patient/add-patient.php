@@ -57,7 +57,14 @@
           <div class="padding">
             <h1>Add a patient</h1>
             <a href="/patients.php">&lt; Patients</a>
-            <form action="/patient/add-patient.php?createAttempt" method="post">
+			<?php	
+				if(!isset($_GET['emergencyContact'])){
+					echo "<form action=\"/patient/add-patient.php?createAttempt\" method=\"post\">";
+				}
+				else{
+					echo "<form action=\"/patient/add-patient.php?createAttempt&emergencyContact\" method=\"post\">";
+				}
+			?>
               <h2>Personal information</h2>
               <div class="form-container">
                 <ul>
@@ -237,7 +244,7 @@
                               </select>
                             </p>
                             <p>Year:
-                              <input type=\"text\" name=\"emergyear\" />
+                              <input type=\"text\" name=\"emergbirthyear\" />
                             </p>
                           </li> 
                         </ul>
